@@ -1,0 +1,87 @@
+.container.content-home {
+  display: flex;
+  padding: 2rem;
+}
+
+.left-section {
+  flex: 2;
+  padding-right: 1rem; /* Space between left and right section */
+}
+
+.right-section {
+  flex: 2;  /* This will take up twice as much space as the left section */
+  padding-left: 1rem; /* Space between right and left section */
+}
+
+.student-info-card {
+  max-width: 800px;
+  width: 100%;
+  margin-bottom: 1rem; /* Space at the bottom of the student info card */
+}
+
+.field-infor {
+  font-weight: 700;
+  color: #0E4A92;
+  margin-left: 10px;
+}
+.label {
+  display: inline-block;
+  width: 120px;
+  background-color: #F0F0F0;
+}
+
+mat-card-header mat-card-title {
+  color: #0E4A92;
+
+}
+.center-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+
+mat-card-actions {
+  justify-content: center;
+}
+
+.tile-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+mat-grid-tile img {
+  width: 15%;
+  margin-bottom: 10px;
+}
+
+mat-grid-tile span {
+  display: block;
+  text-align: center;
+  color: black;
+  border-radius: 3px;
+}
+mat-grid-tile {
+  box-sizing: border-box;
+  box-shadow: 0 0 5px rgba(217, 215, 215, 0.6); /* Tạo bóng mờ màu cam */
+}
+
+.container.content-home {
+  display: flex;
+  padding: 2rem;
+  flex-direction: column; /* Thay đổi định dạng cột */
+}
+
+@media (min-width: 964px) {
+  .container.content-home {
+    flex-direction: row; /* Trở lại định dạng hàng khi màn hình đủ lớn */
+  }
+}
+
+
+
+

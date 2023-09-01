@@ -1,0 +1,52 @@
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0px;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+
+}
+mat-form-field {
+  background: white; /* Màu nền trắng */
+}
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Khoảng cách từ trên xuống */
+  font-size: 30px; /* Kích thước chữ mới */
+}
+mat-card {
+  width: 400px; /* Độ rộng mới của mat-card */
+
+}
+
+.error {
+  padding: 7px;
+  width: 330px;
+  color: red;
+  font-size: 13px;
+  text-align: center;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.login-full-width {
+  width: 100%;
+}
+
+

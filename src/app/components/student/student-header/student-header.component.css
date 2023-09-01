@@ -1,0 +1,31 @@
+.student-header {
+  flex: 1 1 auto;
+}
+.toolbar-buttons {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container img {
+  width: 40px; /* Adjust the width as needed */
+  height: auto;
+  margin-right: 10px; /* Add spacing between the logo and text */
+}
+
+.logo-container span {
+  font-size: 18px; /* Adjust the font size as needed */
+  color: white;
+}
+.mat-header{
+ background-color: #724AE8;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 80px; /* Add equal left and right padding of 50px */
+}
+
+

@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-title>Đăng nhập</mat-card-title>
+  <mat-card-content>
+    <form class="login-form" *ngIf="!isLoggedIn"
+    name="form"
+    (ngSubmit)="f.form.valid && submit()"
+    #f="ngForm"
+    novalidate>
+      <p>
+      <mat-form-field class="login-full-width">
+        <mat-label>Tên đăng nhập</mat-label>
+        <input
+            matInput
+            type="text"
+            name="username"
+            [(ngModel)]="form.username"
+            required
+            #username="ngModel"
+            [ngClass]="{ 'mat-invalid': f.submitted && username.invalid }"
+          />
+          <mat-error *ngIf="username.invalid && f.submitted">
+            Tên đăng nhập không được trống!
+          </mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="login-full-width">
+        <mat-label>Mật khẩu</mat-label>
+        <input
+            matInput
+            type="password"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            #password="ngModel"
+            [ngClass]="{ 'mat-invalid': f.submitted && password.invalid }"
+          />
+          <mat-error *ngIf="password.invalid && f.submitted">
+            Mật khẩu không được trống!
+          </mat-error>
+      </mat-form-field>
+      <p *ngIf="isLoginFailed" class="error" [innerHTML]="errorMessage">
+      </p>
+      <p>
+        <div class="button">
+          <button type="submit" mat-raised-button color="warn">Đăng nhập</button>
+        </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+

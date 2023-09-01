@@ -1,0 +1,27 @@
+<button #toggler class="chatbot-toggler" (click)="toggleChatbot()">
+  <span class="material-symbols-rounded">mode_comment</span>
+  <span class="material-symbols-outlined">close</span>
+</button>
+<div *ngIf="showChatbot" class="chatbot" #chatbot>
+  <header>
+    <h2>Chatbot</h2>
+    <span class="chatbot-toggler material-symbols-outlined" (click)="toggleChatbot()">close</span>
+  </header>
+  <ul class="chatbox">
+    <li class="chat" *ngFor="let message of combinedMessages" [ngClass]="{'outgoing': message.isOutgoing, 'incoming': !message.isOutgoing}">
+      <ng-container *ngIf="message.isOutgoing; else incomingMessage">
+        <p class="outgoing-message">{{ message.content }}</p>
+      </ng-container>
+      <ng-template #incomingMessage>
+        <span class="material-symbols-outlined">smart_toy</span>
+        <p class="incoming-message">{{ message.content }}</p>
+      </ng-template>
+    </li>
+  </ul>
+  <div class="chat-input">
+    <textarea placeholder="Enter a message..." [(ngModel)]="userMessage" (keydown.enter)="sendMessage($event)" spellcheck="false" required></textarea>
+    <button mat-raised-button color="purple" (click)="sendMessage($event)">
+      Gửi
+    </button>
+  </div>
+</div>
