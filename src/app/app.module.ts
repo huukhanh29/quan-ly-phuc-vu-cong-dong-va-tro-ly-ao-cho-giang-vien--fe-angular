@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatComponent } from './components/student/chat/chat.component';
 import { MaterialModule } from './material.module';
@@ -23,6 +23,7 @@ import { StudentHeaderComponent } from './components/student/student-header/stud
 import { StudentFooterComponent } from './components/student/student-footer/student-footer.component';
 import { PhanHoiChatComponent } from './components/student/phan-hoi-chat/phan-hoi-chat.component';
 import { RootComponent } from './root.component';
+import { LogoutComponent } from './components/auth/logout/logout.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { RootComponent } from './root.component';
     RootComponent,
     ChatComponent,
     LoginComponent,
+    LogoutComponent,
     AdminComponent,
     SidebarComponent,
     AdminHomeComponent,
@@ -51,6 +53,7 @@ import { RootComponent } from './root.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 1500,
       progressBar: true

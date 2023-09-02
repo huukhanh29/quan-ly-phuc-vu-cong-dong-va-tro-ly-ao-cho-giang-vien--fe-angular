@@ -53,6 +53,5 @@ export class StorageService {
 
   public signOut(): void {
     this.cookieService.deleteAll();
-    this.router.navigate(['/dang-nhap']);
   }
 }

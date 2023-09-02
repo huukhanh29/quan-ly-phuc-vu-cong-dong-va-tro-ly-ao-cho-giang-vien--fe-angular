@@ -15,23 +15,21 @@ export class PhanHoiService {
   }
 
   getAllPhanHoi(
-    page: number,
-    size: number,
-    sortBy: string,
-    sortDir: string,
-    searchTerm: string,
-    tenDangNhap?: string
+    page: number=0,
+    size: number=10,
+    sortBy: string='',
+    sortDir: string ='',
+    searchTerm: string='',
+    tenDangNhap: string=''
   ): Observable<any> {
     const params: any = {
-      page: page.toString(),
-      size: size.toString(),
+      page,
+      size,
       sortBy,
       sortDir,
       searchTerm,
       tenDangNhap
     };
-
-
     return this.http.get<any>(`${this.apiUrl}/lay-danh-sach`, { params });
   }
 

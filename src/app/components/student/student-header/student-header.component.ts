@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { StorageService } from 'src/app/services/storage.service';
+import { LogoutComponent } from '../../auth/logout/logout.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-student-header',
@@ -6,15 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./student-header.component.css']
 })
 export class StudentHeaderComponent {
-  loggedIn: boolean = false; // Initially, user is not logged in
-
-  home() {
-    // Implement your login logic here
-    this.loggedIn = true;
-  }
-
-  logout() {
-    // Implement your logout logic here
-    this.loggedIn = false;
-  }
+  constructor( private dialog: MatDialog,
+    ) {}
+    dangXuat(): void {
+      this.dialog.open(LogoutComponent, {
+        width: '350px',
+        enterAnimationDuration: '300ms',
+        exitAnimationDuration: '300ms',
+      });
+    }
 }

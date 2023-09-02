@@ -44,6 +44,7 @@ export class AuthService {
     );
   }
   logout(): Observable<any> {
+    this.storageService.signOut();
     return this.http.post(
       `/api/tai-khoan/dang-xuat`,
       httpOptions
