@@ -76,7 +76,7 @@ mat-grid-tile {
   flex-direction: column; /* Thay đổi định dạng cột */
 }
 
-@media (min-width: 964px) {
+@media (min-width: 900px) {
   .container.content-home {
     flex-direction: row; /* Trở lại định dạng hàng khi màn hình đủ lớn */
   }

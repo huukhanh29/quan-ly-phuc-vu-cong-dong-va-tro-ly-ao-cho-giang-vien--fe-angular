@@ -1,16 +1,40 @@
 <mat-toolbar color="header">
-  <div class="logo-container">
-    <img src="../../../../assets/images/graduation-cap.png" alt="Logo">
-    <span >Hệ thống quản lý</span>
-  </div>
-  <span class="student-header"></span>
-
-  <div class="toolbar-buttons">
-    <button mat-raised-button routerLink="/sinh-vien" aria-label="Trang chủ">
-      <mat-icon>home</mat-icon>Trang chủ
+  <mat-toolbar-row>
+    <div class="logo-container">
+      <img src="../../../../assets/images/graduation-cap.png" alt="Logo" />
+      <span class="text-logo">Hệ thống quản lý</span>
+    </div>
+    <div class="button-text">
+      <button mat-raised-button routerLink="/sinh-vien">
+        <span>Trang chủ</span>
+      </button>
+      <button mat-raised-button (click)="dangXuat()">
+        <mat-icon>exit_to_app</mat-icon><span>Đăng xuất</span>
+      </button>
+      <div class="demo-section">
+        <mat-icon routerLink="/sinh-vien/thong-bao" matBadge={{soThongBao}} matBadgeColor="warn" matBadgeSize="small" aria-hidden="false">notifications</mat-icon>
+      </div>
+    </div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="button-menu">
+      <mat-icon>menu</mat-icon>
     </button>
-    <button mat-raised-button (click)="dangXuat()" aria-label="Đăng xuất">
-      <mat-icon>exit_to_app</mat-icon>Đăng xuất
+  </mat-toolbar-row>
+  <mat-menu #menu="matMenu">
+    <button
+      mat-menu-item
+      class="example-icon"
+      aria-label="Example"
+      routerLink="/sinh-vien"
+    >
+      <mat-icon>home</mat-icon> Trang chủ
     </button>
-  </div>
+    <button
+      mat-menu-item
+      class="example-icon"
+      aria-label="Exampma"
+      (click)="dangXuat()"
+    >
+      <mat-icon>logout</mat-icon> Đăng xuất
+    </button>
+  </mat-menu>
 </mat-toolbar>

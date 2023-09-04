@@ -39,11 +39,11 @@
   margin-top: 16px;
 }
 
-th.mat-header-cell, td.mat-cell {
+mat-header-cell, mat-cell {
   padding: 16px;
   text-align: left;
 }
-table{
+mat-table{
   margin-bottom: 20px;
 }
 .search-container {

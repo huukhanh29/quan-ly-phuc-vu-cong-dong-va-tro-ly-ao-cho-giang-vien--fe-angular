@@ -11,6 +11,7 @@ import { PhanHoiChatComponent } from './components/student/phan-hoi-chat/phan-ho
 import { StudentComponent } from './components/student/student.component';
 import { TestComponent } from './components/student/test/test.component';
 import { RootComponent } from './root.component';
+import { ThongBaoComponent } from './components/thong-bao/thong-bao.component';
 
 const routes: Routes = [
   {
@@ -35,7 +36,7 @@ const routes: Routes = [
       { path: '', component: StudentHomeComponent },
       { path: 'trang-chu', component: StudentHomeComponent },
       { path: 'phan-hoi-chat', component: PhanHoiChatComponent },
-      { path: 'test', component: TestComponent },
+      { path: 'thong-bao', component: ThongBaoComponent },
 
     ],
   },

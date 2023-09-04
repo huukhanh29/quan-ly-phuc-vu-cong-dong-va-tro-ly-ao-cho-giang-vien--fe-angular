@@ -24,6 +24,8 @@ import { StudentFooterComponent } from './components/student/student-footer/stud
 import { PhanHoiChatComponent } from './components/student/phan-hoi-chat/phan-hoi-chat.component';
 import { RootComponent } from './root.component';
 import { LogoutComponent } from './components/auth/logout/logout.component';
+import { ThongBaoComponent } from './components/thong-bao/thong-bao.component';
+import { ThongBaoDialogComponent } from './components/thong-bao/thong-bao-dialog/thong-bao-dialog.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { LogoutComponent } from './components/auth/logout/logout.component';
     TestlComponent,
     StudentHeaderComponent,
     StudentFooterComponent,
-    PhanHoiChatComponent
+    PhanHoiChatComponent,
+    ThongBaoComponent,
+    ThongBaoDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,13 @@
+
+<h1 mat-dialog-title>Chi tiết thông báo<hr></h1>
+
+<div mat-dialog-content>
+  <p>{{ data.notification.noiDung }}</p>
+  <p>{{ data.notification.ngayTao | date }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="closePopup()">Đóng</button>
+  <button mat-button color="warn" (click)="handleDelete()">
+    Xóa
+  </button>
+</div>

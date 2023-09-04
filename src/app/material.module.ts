@@ -30,7 +30,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 /** ================== */
-
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatRippleModule} from '@angular/material/core';
 @NgModule({
   declarations: [],
   imports: [
@@ -57,7 +58,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSelectModule,
     ScrollingModule,
     MatProgressSpinnerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatBadgeModule,
+    MatRippleModule
   ],
   exports: [
     MatToolbarModule,
@@ -82,7 +85,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSelectModule,
     ScrollingModule,
     MatProgressSpinnerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatBadgeModule,
+    MatRippleModule
   ]
 })
 export class MaterialModule { }
