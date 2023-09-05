@@ -4,6 +4,8 @@ import { ThongBaoService } from 'src/app/services/thong-bao.service';
 import { ThongBao } from 'src/app/models//ThongBao';
 import { MatDialog } from '@angular/material/dialog';
 import { ThongBaoDialogComponent } from './thong-bao-dialog/thong-bao-dialog.component';
+import { WebSocketService } from 'src/app/services/web-socket.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-thong-bao',
@@ -11,19 +13,24 @@ import { ThongBaoDialogComponent } from './thong-bao-dialog/thong-bao-dialog.com
   styleUrls: ['./thong-bao.component.css'],
 })
 export class ThongBaoComponent implements OnInit {
-  ThongBaos: MatTableDataSource<any> = new MatTableDataSource();
+  ThongBaos: ThongBao[] = [];
   TBChuaDoc: MatTableDataSource<any> = new MatTableDataSource();
   TBDaDoc: MatTableDataSource<any> = new MatTableDataSource();
   selectedNotification!: ThongBao | null;
   displayedColumns: string[] = ['tieuDe'];
   constructor(
     private thongBaoService: ThongBaoService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private webSocketService: WebSocketService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit(): void {
     this.loadNotifications();
+    const user = this.storageService.getUser()
+    this.webSocketService.connect("sinhvien1")
   }
+
 
   loadNotifications(): void {
     this.thongBaoService.layThongBaoTheoNguoiDungId().subscribe({

@@ -14,7 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "crypto-js"
+              "crypto-js", "sockjs-client"
            ],
             "outputPath": "dist/hoatdongcongdong-fe",
             "index": "src/index.html",

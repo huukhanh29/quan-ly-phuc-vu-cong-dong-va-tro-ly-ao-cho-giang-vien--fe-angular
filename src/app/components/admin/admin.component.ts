@@ -6,7 +6,7 @@ import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-admin',
-  template: '<app-sidebar></app-sidebar>',
+  template: '<app-admin-home></app-admin-home>',
   styles: [
     `
       .mat-toolbar.mat-dark {
