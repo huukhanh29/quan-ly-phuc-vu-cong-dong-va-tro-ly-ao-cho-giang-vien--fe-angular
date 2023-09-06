@@ -1,0 +1,42 @@
+
+.table-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+
+.table-box {
+  min-height: 400px;
+}
+
+.mat-search{
+  color: #724AE8;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+
+mat-header-cell, mat-cell {
+  padding: 16px;
+  text-align: left;
+}
+mat-table{
+  margin-bottom: 20px;
+}
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 120px;
+  max-width: 900px;
+  width: 100%;
+}
+
+
+

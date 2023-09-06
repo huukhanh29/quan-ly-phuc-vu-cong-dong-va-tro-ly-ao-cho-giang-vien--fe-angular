@@ -12,6 +12,7 @@ import { StudentComponent } from './components/student/student.component';
 import { TestComponent } from './components/student/test/test.component';
 import { RootComponent } from './root.component';
 import { ThongBaoComponent } from './components/thong-bao/thong-bao.component';
+import { ListStudentComponent } from './components/admin/list-student/list-student.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,11 @@ const routes: Routes = [
       {
         path: 'trang-chu',
         component: AdminHomeComponent,
-      }
+      },
+      {
+        path: 'danh-sach-sinh-vien',
+        component: ListStudentComponent,
+      },
     ],
   },
   {
@@ -37,7 +42,6 @@ const routes: Routes = [
       { path: 'trang-chu', component: StudentHomeComponent },
       { path: 'phan-hoi-chat', component: PhanHoiChatComponent },
       { path: 'thong-bao', component: ThongBaoComponent },
-
     ],
   },
   {
@@ -46,17 +50,16 @@ const routes: Routes = [
     children: [
       { path: '', component: LecturerHomeComponent },
       { path: 'trang-chu', component: LecturerHomeComponent },
-
     ],
   },
   {
     path: 'dang-nhap',
     component: LoginComponent,
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

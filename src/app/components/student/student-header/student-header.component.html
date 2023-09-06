@@ -5,19 +5,20 @@
       <span class="text-logo">Hệ thống quản lý</span>
     </div>
     <div class="button-text">
-      <button mat-raised-button routerLink="/sinh-vien">
+      <button class="widen" mat-raised-button routerLink="/sinh-vien">
         <span>Trang chủ</span>
       </button>
-      <button mat-raised-button (click)="dangXuat()">
+      <button class="widen" mat-raised-button (click)="dangXuat()">
         <mat-icon>exit_to_app</mat-icon><span>Đăng xuất</span>
+      </button>
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="button-menu">
+        <mat-icon>menu</mat-icon>
       </button>
       <div class="demo-section">
         <mat-icon routerLink="/sinh-vien/thong-bao" matBadge={{soThongBao}} matBadgeColor="warn" matBadgeSize="small" aria-hidden="false">notifications</mat-icon>
       </div>
     </div>
-    <button mat-icon-button [matMenuTriggerFor]="menu" class="button-menu">
-      <mat-icon>menu</mat-icon>
-    </button>
+
   </mat-toolbar-row>
   <mat-menu #menu="matMenu">
     <button

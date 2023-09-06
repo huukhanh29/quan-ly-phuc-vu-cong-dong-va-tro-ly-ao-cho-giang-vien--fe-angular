@@ -26,6 +26,7 @@ import { RootComponent } from './root.component';
 import { LogoutComponent } from './components/auth/logout/logout.component';
 import { ThongBaoComponent } from './components/thong-bao/thong-bao.component';
 import { ThongBaoDialogComponent } from './components/thong-bao/thong-bao-dialog/thong-bao-dialog.component';
+import { ListStudentComponent } from './components/admin/list-student/list-student.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ThongBaoDialogComponent } from './components/thong-bao/thong-bao-dialog
     StudentFooterComponent,
     PhanHoiChatComponent,
     ThongBaoComponent,
-    ThongBaoDialogComponent
+    ThongBaoDialogComponent,
+    ListStudentComponent
   ],
   imports: [
     BrowserModule,

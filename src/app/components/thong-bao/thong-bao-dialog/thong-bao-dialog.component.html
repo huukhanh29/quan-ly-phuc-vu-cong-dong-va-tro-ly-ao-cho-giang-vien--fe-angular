@@ -3,7 +3,7 @@
 
 <div mat-dialog-content>
   <p>{{ data.notification.noiDung }}</p>
-  <p>{{ data.notification.ngayTao | date }}</p>
+  <p>{{ data.notification.ngayTao | date : "HH:mm:ss dd/MM/yyyy" }}</p>
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button color="warn" (click)="closePopup()">Đóng</button>

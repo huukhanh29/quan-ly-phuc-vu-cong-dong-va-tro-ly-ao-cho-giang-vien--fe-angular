@@ -69,7 +69,7 @@ mat-toolbar{
 }
 /* Ẩn chữ và chỉ hiển thị icon khi màn hình nhỏ hơn 964px */
 @media (max-width: 900px) {
-  .button-text {
+  .button-text .widen {
     display: none; /* Ẩn chữ đi */
   }
   .logo-container {

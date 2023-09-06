@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
+import { PhanHoi } from 'src/app/models/PhanHoi';
 import { PhanHoiService } from 'src/app/services/phan-hoi.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -15,7 +16,7 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class PhanHoiChatComponent implements OnInit {
   phanHoiForm!: FormGroup;
-  danhSachPhanHoi: MatTableDataSource<any> = new MatTableDataSource();
+  danhSachPhanHoi: MatTableDataSource<PhanHoi> = new MatTableDataSource();
   displayedColumns: string[] = ['stt', 'noiDung', 'cauHoi'];
   length: number = 0;
   searchTerm: string = '';

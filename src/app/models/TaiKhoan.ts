@@ -11,11 +11,7 @@ export interface TaiKhoan {
   trangthai: string;
   ngayTao: string;
   ngayCapNhat: string;
-  anhdaidien: string;
+  anhDaiDien: string;
 }
 
-export interface ThongTinSinhVien {
-  maTaiKhoan: number;
-  namNhapHoc: string;
-  taiKhoan: TaiKhoan;
-}
+

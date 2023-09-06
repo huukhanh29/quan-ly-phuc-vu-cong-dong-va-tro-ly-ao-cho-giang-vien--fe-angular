@@ -13,13 +13,24 @@
           <mat-header-cell *matHeaderCellDef>Chưa đọc</mat-header-cell>
           <mat-cell
             (click)="handleNotificationClick(thongBao)"
-            mat-cell
             *matCellDef="let thongBao"
           >
             {{ thongBao.tieuDe }}
           </mat-cell>
         </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: 'header-1'"></mat-header-row>
+        <ng-container matColumnDef="ngayTao">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell
+            (click)="handleNotificationClick(thongBao)"
+            *matCellDef="let thongBao"
+          >
+            {{ thongBao.ngayTao | date : "dd/MM/yyyy" }}
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: 'header-1'"
+        ></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
       </mat-table>
     </mat-card>
@@ -35,14 +46,28 @@
             {{ thongBao.tieuDe }}
           </mat-cell>
         </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: 'header-1'"></mat-header-row>
-        <mat-row matRipple *matRowDef="let row; columns: displayedColumns"></mat-row>
+        <ng-container matColumnDef="ngayTao">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell
+            (click)="handleNotificationClick(thongBao)"
+            *matCellDef="let thongBao"
+          >
+            {{ thongBao.ngayTao | date : "dd/MM/yyyy" }}
+          </mat-cell>
+        </ng-container>
+        <mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: 'header-1'"
+        ></mat-header-row>
+        <mat-row
+          matRipple
+          *matRowDef="let row; columns: displayedColumns"
+        ></mat-row>
       </mat-table>
     </mat-card>
   </div>
   <div class="button-container">
     <button mat-button color="warn" (click)="handleDeleteAll()">
-      Xóa tất cả
+      Xóa tất cả thông báo đã đọc
     </button>
   </div>
 </ng-template>
