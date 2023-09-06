@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ThongBaoDialogComponent } from './thong-bao-dialog/thong-bao-dialog.component';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-thong-bao',
@@ -22,15 +23,24 @@ export class ThongBaoComponent implements OnInit {
     private thongBaoService: ThongBaoService,
     private dialog: MatDialog,
     private webSocketService: WebSocketService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.loadNotifications();
-    const user = this.storageService.getUser()
-    this.webSocketService.connect("sinhvien1")
+    this.connectWebsocket()
   }
+  connectWebsocket(){
+    const user = this.storageService.getUser();
+    this.webSocketService.connect(user.tenTaiKhoan, user.token);
 
+    this.webSocketService.messageEvent.subscribe((data) => {
+      if(data==='reply-feedback'){
+        this.loadNotifications();
+      }
+    });
+  }
 
   loadNotifications(): void {
     this.thongBaoService.layThongBaoTheoNguoiDungId().subscribe({
@@ -44,7 +54,6 @@ export class ThongBaoComponent implements OnInit {
         );
         // Cập nhật số thông báo chưa đọc
         const chuaDoc = data.filter((item: { trangThai: string; }) => item.trangThai === 'ChuaDoc');
-        this.thongBaoService.capNhatSoThongBaoChuaDoc(chuaDoc.length);
       },
       error: (error) => {
         console.error('Error:', error);
@@ -56,11 +65,12 @@ export class ThongBaoComponent implements OnInit {
     this.thongBaoService.xoaTatCaThongBaoTheoNguoiDungId().subscribe({
       next: (data) => {
         this.loadNotifications();
-        console.log(data);
-        this.selectedNotification = null;
+        this.toastr.success("Đã xóa tất cả thông báo đã đọc!")
       },
       error: (error) => {
-        console.error('Error:', error);
+        if(error.error.message === 'Not_Found'){
+          this.toastr.warning("Không có thông báo đã đọc!")
+        }
       },
     });
   }

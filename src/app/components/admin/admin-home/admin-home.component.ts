@@ -37,14 +37,15 @@ export class AdminHomeComponent implements OnInit{
   ngOnInit(): void {
     this.initPhanHoiForm();
     this.loadDanhSachPhanHoi();
-    this.w.connect("hihi")
+    const user = this.storageService.getUser()
+    this.w.connect(user.tenTaiKhoan, user.token )
   }
   ok(): void{
     const cauHoi: any = {
-      cauHoi: "Nộsis d ssdưss",
-      traLoi: "Nội dungstrảs lời 2"
+      cauHoi: "Nộsgsissdsjdajdds",
+      traLoi: "Nội dungstrảs lờij 2"
     };
-    this.phanHoiService.replyToPhanHoi(cauHoi,1).subscribe({
+    this.phanHoiService.replyToPhanHoi(cauHoi,4).subscribe({
       next: data=>{ console.log("ok")
 
     },

@@ -9,12 +9,8 @@ export class ThongBaoService {
   private apiUrl = '/api/thong-bao'; // Đường dẫn API của Spring Boot
 
   constructor(private http: HttpClient) { }
-  //bắt sự sự khi thay đổi số thông báo chưa đọc
-  private soThongBaoChuaDoc = new Subject<number>();
-  soThongBaoChuaDocObservable = this.soThongBaoChuaDoc.asObservable();
-  capNhatSoThongBaoChuaDoc(moiSoThongBaoChuaDoc: number): void {
-    this.soThongBaoChuaDoc.next(moiSoThongBaoChuaDoc);
-  }
+
+
   // Lấy danh sách thông báo theo người dùng ID
   layThongBaoTheoNguoiDungId(): Observable<any> {
     return this.http.get(`${this.apiUrl}`, { responseType: 'json' });
