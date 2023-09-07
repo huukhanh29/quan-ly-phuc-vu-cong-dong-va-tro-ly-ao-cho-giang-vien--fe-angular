@@ -42,10 +42,11 @@ export class AdminHomeComponent implements OnInit{
   }
   ok(): void{
     const cauHoi: any = {
-      cauHoi: "Nộsgsissddsjdajdds",
+
+      cauHoi: "Nộsgsissdsjdajdds",
       traLoi: "Nội dungstrảs lờij 2"
     };
-    this.phanHoiService.replyToPhanHoi(cauHoi,5).subscribe({
+    this.phanHoiService.replyToPhanHoi(cauHoi,4).subscribe({
       next: data=>{ console.log("ok")
 
     },
