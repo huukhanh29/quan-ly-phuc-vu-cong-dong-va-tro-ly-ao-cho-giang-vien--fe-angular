@@ -3,6 +3,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {  ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { TaiKhoanService } from 'src/app/services/tai-khoan.service';
 
 @Component({
   selector: 'app-logout',
@@ -12,15 +14,28 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LogoutComponent {
   constructor(
     public dialogRef: MatDialogRef<LogoutComponent>,
-        private auth: AuthService,
-        private router: Router, private toastr: ToastrService
+        private taiKhoanService: TaiKhoanService,
+        private router: Router, private toastr: ToastrService,
+        private storageService:StorageService
   ) {}
   closedialog() {
     this.dialogRef.close('Closed using function');
   }
   accept() {
-    this.auth.logout();
-    this.router.navigate(['/dang-nhap']);
-    this.toastr.success("Bạn đã đăng xuất!")
+    const user =this.storageService.getUser();
+    const body = {
+      refreshToken: user.refreshToken
+    };
+    this.taiKhoanService.xoaRefreshToken(body).subscribe({
+      next: data=>{
+        this.storageService.xoaCookie();
+        this.router.navigate(['/dang-nhap']);
+        this.toastr.success("Bạn đã đăng xuất!!!")
+      },
+      error: err=>{
+        console.error(err)
+      }
+    })
+
   }
 }

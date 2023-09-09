@@ -16,9 +16,7 @@ export class RootComponent {
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
-
     if (this.isLoggedIn) {
-
       const user = this.storageService.getUser();
       this.role = user.quyen;
       console.log(this.role)
@@ -33,13 +31,7 @@ export class RootComponent {
         this.router.navigate(['/giang-vien']);
       }
     } else {
-      this.router.navigate(['/dang-nhap']);
+      this.router.navigate(['dang-nhap']);
     }
   }
-
-  logout(): void {
-    this.storageService.signOut();
-    window.location.reload();
-  }
-
 }

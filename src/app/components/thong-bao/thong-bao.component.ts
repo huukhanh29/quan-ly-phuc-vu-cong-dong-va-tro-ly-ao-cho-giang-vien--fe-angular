@@ -29,11 +29,10 @@ export class ThongBaoComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadNotifications();
-    this.connectWebsocket()
   }
   connectWebsocket(){
     const user = this.storageService.getUser();
-    this.webSocketService.connect(user.tenTaiKhoan, user.token);
+    this.webSocketService.connect(user.tenTaiKhoan);
 
     this.webSocketService.messageEvent.subscribe((data) => {
       if(data==='reply-feedback'){
@@ -45,6 +44,7 @@ export class ThongBaoComponent implements OnInit {
   loadNotifications(): void {
     this.thongBaoService.layThongBaoTheoNguoiDungId().subscribe({
       next: (data) => {
+        this.connectWebsocket();
         this.ThongBaos = data;
         this.TBChuaDoc = data.filter(
           (item: { trangThai: string }) => item.trangThai === 'ChuaDoc'

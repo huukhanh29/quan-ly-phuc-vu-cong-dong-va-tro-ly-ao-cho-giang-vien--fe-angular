@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
+import { LogoutComponent } from '../../auth/logout/logout.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,6 +11,7 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class SidebarComponent {
   constructor(
+    private dialog: MatDialog,
     private storageService: StorageService,
     private router: Router
   ) {}
@@ -18,7 +21,10 @@ export class SidebarComponent {
   }
 
   logout(): void {
-    this.storageService.signOut();
-    window.location.reload();
+    this.dialog.open(LogoutComponent, {
+      width: '350px',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+    });
   }
 }

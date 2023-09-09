@@ -33,7 +33,9 @@ export class TaiKhoanService {
   doiMatKhau(matKhauMoiRequest: any): Observable<any> {
     return this.http.put<any>(`/api/tai-khoan/doi-mat-khau`, matKhauMoiRequest);
   }
-
+  xoaRefreshToken(rftoken:any): Observable<any> {
+    return this.http.post<any>(`/api/tai-khoan/dang-xuat`, rftoken);
+  }
   getAcademicYearsByUser(): Observable<any> {
     return this.http.get<any>(`/api/tai-khoan/danh-sach-nam-dang-ky-hoat-dong`);
   }

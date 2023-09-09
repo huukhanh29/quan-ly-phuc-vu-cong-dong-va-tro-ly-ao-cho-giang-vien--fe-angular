@@ -27,6 +27,9 @@ import { LogoutComponent } from './components/auth/logout/logout.component';
 import { ThongBaoComponent } from './components/thong-bao/thong-bao.component';
 import { ThongBaoDialogComponent } from './components/thong-bao/thong-bao-dialog/thong-bao-dialog.component';
 import { ListStudentComponent } from './components/admin/list-student/list-student.component';
+import { Page0Component } from './components/error-page/page0/page0.component';
+import { Page404Component } from './components/error-page/page404/page404.component';
+import { Page403Component } from './components/error-page/page403/page403.component';
 
 
 @NgModule({
@@ -51,7 +54,10 @@ import { ListStudentComponent } from './components/admin/list-student/list-stude
     PhanHoiChatComponent,
     ThongBaoComponent,
     ThongBaoDialogComponent,
-    ListStudentComponent
+    ListStudentComponent,
+    Page0Component,
+    Page404Component,
+    Page403Component
   ],
   imports: [
     BrowserModule,

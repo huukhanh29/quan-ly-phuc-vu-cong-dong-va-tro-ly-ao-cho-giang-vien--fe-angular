@@ -13,6 +13,9 @@ import { TestComponent } from './components/student/test/test.component';
 import { RootComponent } from './root.component';
 import { ThongBaoComponent } from './components/thong-bao/thong-bao.component';
 import { ListStudentComponent } from './components/admin/list-student/list-student.component';
+import { Page404Component } from './components/error-page/page404/page404.component';
+import { Page0Component } from './components/error-page/page0/page0.component';
+import { Page403Component } from './components/error-page/page403/page403.component';
 
 const routes: Routes = [
   {
@@ -56,6 +59,10 @@ const routes: Routes = [
     path: 'dang-nhap',
     component: LoginComponent,
   },
+  { path: 'bao-tri', component: Page0Component },
+  { path: '403', component: Page403Component },
+  { path: '**', component: Page404Component },
+
 ];
 
 @NgModule({

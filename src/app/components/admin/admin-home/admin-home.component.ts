@@ -38,7 +38,7 @@ export class AdminHomeComponent implements OnInit{
     this.initPhanHoiForm();
     this.loadDanhSachPhanHoi();
     const user = this.storageService.getUser()
-    this.w.connect(user.tenTaiKhoan, user.token )
+    this.w.connect(user.tenTaiKhoan)
   }
   ok(): void{
     const cauHoi: any = {

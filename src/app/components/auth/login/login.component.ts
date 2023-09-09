@@ -36,26 +36,36 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['']);
     }
   }
-
   submit() {
     const { username, password } = this.form;
     this.authService.login(username, password).subscribe({
-      next: data => {
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.router.navigate(['']);
-        this.toastr.success('Đăng nhập thành công');
-      },
-      error: err => {
-        if (err.status === 0) {
-          this.errorMessage = 'Lỗi server!';
+      next: (data) => {
+        console.log(data);
+        if (data.message === "info-warning") {
+          this.errorMessage =
+            'Sai thông tin tài khoản hoặc mật khẩu!<br>Vui lòng kiểm tra lại!';
           this.isLoginFailed = true;
+          this.router.navigate(['/dang-nhap']);
+        } else if (data.message === "account-block") {
+          this.errorMessage = 'Tài khoản bị khóa!!!';
+          this.isLoginFailed = true;
+          this.router.navigate(['/dang-nhap']);
         } else {
-          this.errorMessage = 'Sai thông tin tài khoản hoặc mật khẩu!<br>Vui lòng kiểm tra lại!';
-          this.isLoginFailed = true;
+          this.storageService.saveUser(data);
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+          this.router.navigate(['']);
+          this.toastr.success('Đăng nhập thành công');
         }
-        this.router.navigate(['/dang-nhap']);
-      }
+      },
+      error: (err) => {
+        if(err.status===504){
+          this.router.navigate(['/bao-tri'])
+        }else{
+          console.log(err)
+        }
+      },
     });
   }
+
 }

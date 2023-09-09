@@ -26,8 +26,8 @@ export class AdminComponent {
     const user = this.storageService.getUser();
     this.roles = user.quyen;
     if (!this.isLoggedIn || this.roles !== 'QuanTriVien') {
-      console.log(user)
-       this.router.navigate(['/dang-nhap']);
+      //console.log(user)
+       this.router.navigate(['/403']);
     }
   }
 }

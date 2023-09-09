@@ -36,7 +36,7 @@ export class StudentHeaderComponent implements OnInit{
     }
     connectWebsocket(){
       const user = this.storageService.getUser();
-      this.webSocketService.connect(user.tenTaiKhoan, user.token);
+      this.webSocketService.connect(user.tenTaiKhoan);
 
       this.webSocketService.messageEvent.subscribe((data) => {
         if(data==="update-status" || data==="reply-feedback"){
@@ -57,6 +57,4 @@ export class StudentHeaderComponent implements OnInit{
         exitAnimationDuration: '300ms',
       });
     }
-
-
 }

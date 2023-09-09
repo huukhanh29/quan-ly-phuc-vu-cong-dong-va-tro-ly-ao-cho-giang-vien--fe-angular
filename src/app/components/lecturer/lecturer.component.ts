@@ -17,8 +17,8 @@ export class LecturerComponent {
     const user = this.storageService.getUser();
     this.roles = user.quyen;
     if (!this.isLoggedIn || this.roles !== 'GiangVien') {
-      console.log(user)
-       this.router.navigate(['/dang-nhap']);
+      //console.log(user)
+      this.router.navigate(['/403']);
     }
   }
 }
