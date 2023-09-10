@@ -55,7 +55,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       catchError((error) => {
         console.error('Có lỗi xãy ra:', error);
         //this.storageService.xoaCookie();
-        return throwError(() => new Error(error));
+        return throwError(() => error);
       })
     );
   }

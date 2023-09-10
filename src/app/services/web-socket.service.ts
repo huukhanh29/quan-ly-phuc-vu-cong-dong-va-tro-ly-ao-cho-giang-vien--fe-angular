@@ -37,14 +37,16 @@ export class WebSocketService {
     if (user) {
       const currentTime = Math.floor(new Date().getTime() / 1000);
       const expirationWithGracePeriod = user.ngayHetHan - 30;
-      if (currentTime >= expirationWithGracePeriod) {
-        //window.location.reload();
+      if (currentTime < expirationWithGracePeriod) {
+        this.stompClient.connectHeaders = {
+          username: username,
+          Authorization: `Bearer ${user.token}`,
+        };
+        this.stompClient.activate();
+      }else{
+        window.location.reload()
       }
-      this.stompClient.connectHeaders = {
-        username: username,
-        Authorization: `Bearer ${user.token}`,
-      };
-      this.stompClient.activate();
+
     }
   }
 

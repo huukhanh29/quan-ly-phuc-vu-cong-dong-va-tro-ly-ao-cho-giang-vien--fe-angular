@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
         }
       },
       error: (err) => {
+        console.log(err.error)
         if(err.status===504){
           this.router.navigate(['/bao-tri'])
         }else{

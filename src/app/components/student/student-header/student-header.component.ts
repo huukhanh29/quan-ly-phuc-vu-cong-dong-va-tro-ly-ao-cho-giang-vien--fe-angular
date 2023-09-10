@@ -27,6 +27,7 @@ export class StudentHeaderComponent implements OnInit{
     laySoThongBao(){
       this.thongBaoService.laySoThongBaoChuaDocTheoNguoiDungId().subscribe({
         next: data =>{
+
           this.soThongBao = data;
         },
         error: error =>{
@@ -43,7 +44,6 @@ export class StudentHeaderComponent implements OnInit{
           this.laySoThongBao();
           console.log("cap nhat")
         }
-
       });
     }
 

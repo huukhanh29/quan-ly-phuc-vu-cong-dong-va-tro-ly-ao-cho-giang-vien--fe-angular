@@ -1,0 +1,72 @@
+<div class="table-box mat-elevation-z4">
+  <mat-form-field appearance="outline" class="search-container">
+    <mat-label>Tìm kiếm</mat-label>
+    <input
+      matInput
+      placeholder="Nhập nội dung tìm kiếm..."
+      [(ngModel)]="searchTerm"
+      class="example-full-width"
+    />
+    <mat-icon (click)="onSearch()" matSuffix color="search">search</mat-icon>
+    <mat-icon (click)="refresh()" matSuffix color="search">refresh</mat-icon>
+  </mat-form-field>
+  <mat-table
+    [dataSource]="danhSachCauHoi"
+    matSort
+    class="demo-table mat-elevation-z8"
+  >
+    <ng-container matColumnDef="stt">
+      <mat-header-cell *matHeaderCellDef>STT</mat-header-cell>
+      <mat-cell *matCellDef="let i = index">{{ i + 1 }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cauHoi">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Từ Khóa</mat-header-cell
+      >
+      <mat-cell *matCellDef="let cauHoi">
+        {{
+          cauHoi.cauHoi?.length > 50
+            ? cauHoi.cauHoi.slice(0, 50) + "..."
+            : cauHoi.cauHoi
+        }}</mat-cell
+      >
+    </ng-container>
+    <ng-container matColumnDef="traLoi">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Trả Lời</mat-header-cell
+      >
+      <mat-cell *matCellDef="let cauHoi">
+        {{
+          cauHoi.traLoi?.length > 50
+            ? cauHoi.traLoi.slice(0, 50) + "..."
+            : cauHoi.traLoi
+        }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="soLuongDaHoi">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Lượt hỏi</mat-header-cell
+      >
+      <mat-cell *matCellDef="let cauHoi">
+        {{
+          cauHoi?.soLuongDaHoi
+        }}
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      (click)="detail(row.maCauHoi)"
+      matRipple
+      class="element-row"
+      *matRowDef="let row; columns: displayedColumns"
+    ></mat-row>
+  </mat-table>
+  <mat-paginator
+    [length]="length || 0"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>

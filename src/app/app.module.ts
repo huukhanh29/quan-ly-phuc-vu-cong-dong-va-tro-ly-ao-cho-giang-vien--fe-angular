@@ -30,6 +30,13 @@ import { ListStudentComponent } from './components/admin/list-student/list-stude
 import { Page0Component } from './components/error-page/page0/page0.component';
 import { Page404Component } from './components/error-page/page404/page404.component';
 import { Page403Component } from './components/error-page/page403/page403.component';
+import { ListLecturerComponent } from './components/admin/list-lecturer/list-lecturer.component';
+import { DetailLecturerComponent } from './components/admin/list-lecturer/detail-lecturer/detail-lecturer.component';
+import { DetailStudentComponent } from './components/admin/list-student/detail-student/detail-student.component';
+import { ListFaqComponent } from './components/admin/list-faq/list-faq.component';
+import { DetailFaqComponent } from './components/admin/list-faq/detail-faq/detail-faq.component';
+import { ListFeedbackComponent } from './components/admin/list-feedback/list-feedback.component';
+import { DetailFeedbackComponent } from './components/admin/list-feedback/detail-feedback/detail-feedback.component';
 
 
 @NgModule({
@@ -57,7 +64,14 @@ import { Page403Component } from './components/error-page/page403/page403.compon
     ListStudentComponent,
     Page0Component,
     Page404Component,
-    Page403Component
+    Page403Component,
+    ListLecturerComponent,
+    DetailLecturerComponent,
+    DetailStudentComponent,
+    ListFaqComponent,
+    DetailFaqComponent,
+    ListFeedbackComponent,
+    DetailFeedbackComponent
   ],
   imports: [
     BrowserModule,

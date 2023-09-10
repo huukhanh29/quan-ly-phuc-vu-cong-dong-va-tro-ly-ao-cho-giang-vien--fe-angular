@@ -2,7 +2,7 @@
 .table-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   margin: 16px;
   padding: 16px;
   border-radius: 8px;
@@ -33,10 +33,15 @@ mat-table{
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  justify-content: flex-end;
   min-width: 120px;
-  max-width: 900px;
+  max-width: 300px;
   width: 100%;
 }
-
-
+.mat-column-stt{
+  max-width: 64px;
+}
+.element-row:hover {
+  background: whitesmoke;
+}
 

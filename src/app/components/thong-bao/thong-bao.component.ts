@@ -29,6 +29,7 @@ export class ThongBaoComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadNotifications();
+    this.connectWebsocket();
   }
   connectWebsocket(){
     const user = this.storageService.getUser();
@@ -44,7 +45,7 @@ export class ThongBaoComponent implements OnInit {
   loadNotifications(): void {
     this.thongBaoService.layThongBaoTheoNguoiDungId().subscribe({
       next: (data) => {
-        this.connectWebsocket();
+
         this.ThongBaos = data;
         this.TBChuaDoc = data.filter(
           (item: { trangThai: string }) => item.trangThai === 'ChuaDoc'

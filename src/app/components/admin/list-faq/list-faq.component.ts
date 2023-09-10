@@ -1,22 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
-import { SinhVien } from 'src/app/models/SinhVien';
+import { CauHoi } from 'src/app/models/CauHoi';
+import { CauHoiService } from 'src/app/services/cau-hoi.service';
 import { StorageService } from 'src/app/services/storage.service';
-import { TaiKhoanService } from 'src/app/services/tai-khoan.service';
-import { DetailStudentComponent } from './detail-student/detail-student.component';
-import { MatDialog } from '@angular/material/dialog';
+import { DetailFaqComponent } from './detail-faq/detail-faq.component';
 
 @Component({
-  selector: 'app-list-student',
-  templateUrl: './list-student.component.html',
-  styleUrls: ['./list-student.component.css']
+  selector: 'app-list-faq',
+  templateUrl: './list-faq.component.html',
+  styleUrls: ['./list-faq.component.css']
 })
-export class ListStudentComponent implements OnInit{
-  danhSachSinhVien: MatTableDataSource<SinhVien> = new MatTableDataSource();
-  displayedColumns: string[] = ['stt', 'maTaiKhoan', 'taiKhoan.email'];
+export class ListFaqComponent implements OnInit{
+  danhSachCauHoi: MatTableDataSource<CauHoi> = new MatTableDataSource();
+  displayedColumns: string[] = ['stt', 'cauHoi', 'traLoi', 'soLuongDaHoi'];
   length: number = 0;
   searchTerm: string = '';
 
@@ -24,7 +24,7 @@ export class ListStudentComponent implements OnInit{
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
 
-    private taiKhoanService: TaiKhoanService,
+    private cauHoiService: CauHoiService,
     private storageService: StorageService,
     private toastr: ToastrService,
     private dialog: MatDialog
@@ -32,14 +32,14 @@ export class ListStudentComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.loadDanhSachSinhVien();
+    this.loadDanhSachCauHoi();
   }
 
   ngAfterViewInit() {
-    this.danhSachSinhVien.paginator = this.paginator;
-    this.danhSachSinhVien.sort = this.sort;
+    this.danhSachCauHoi.paginator = this.paginator;
+    this.danhSachCauHoi.sort = this.sort;
     this.paginator.page.subscribe(() => {
-      this.loadDanhSachSinhVien(
+      this.loadDanhSachCauHoi(
         this.paginator.pageIndex,
         this.paginator.pageSize,
         this.sort.active,
@@ -48,7 +48,7 @@ export class ListStudentComponent implements OnInit{
     });
 
     this.sort.sortChange.subscribe(() => {
-      this.loadDanhSachSinhVien(
+      this.loadDanhSachCauHoi(
         this.paginator.pageIndex,
         this.paginator.pageSize,
         this.sort.active,
@@ -57,49 +57,48 @@ export class ListStudentComponent implements OnInit{
     });
   }
 
-  loadDanhSachSinhVien(
+  loadDanhSachCauHoi(
     page: number = 0,
     size: number = 5,
-    sortBy: string = 'taiKhoan.ngayTao',
+    sortBy: string = 'cauHoi',
     sortDir: string = 'DESC'
   ) {
 
-    this.taiKhoanService
-      .getAllUsersByRole(
+    this.cauHoiService
+      .getAllCauHoi(
         page,
         size,
         sortBy,
         sortDir,
         this.searchTerm,
-        'SinhVien'
       )
       .subscribe((data) => {
-        this.danhSachSinhVien = new MatTableDataSource<any>(data.content);
+        this.danhSachCauHoi = new MatTableDataSource<any>(data.content);
         this.paginator.length = data.totalElements;
         this.length = data.totalElements;
       });
   }
   onSearch() {
-    this.loadDanhSachSinhVien();
+    this.loadDanhSachCauHoi();
   }
   refresh() {
     this.searchTerm = '';
     if (this.paginator) {
       this.paginator.firstPage();
     }
-    this.loadDanhSachSinhVien();
+    this.loadDanhSachCauHoi();
   }
-  detail(student: any | null): void {
-    // Bước 4: Mở dialog thay vì đặt selectedNotification
-    if (student) {
-      var popup = this.dialog.open(DetailStudentComponent, {
+  detail(id: any | null): void {
+    console.log(id)
+    if (id) {
+      var popup = this.dialog.open(DetailFaqComponent, {
         data: {
-          student: student,
+          id: id,
         },
         width: '40%',
         enterAnimationDuration: '300ms',
         exitAnimationDuration: '300ms',
       });
     }
-  }
+   }
 }

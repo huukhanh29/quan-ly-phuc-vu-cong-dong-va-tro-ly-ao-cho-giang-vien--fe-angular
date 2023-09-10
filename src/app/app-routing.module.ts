@@ -16,6 +16,9 @@ import { ListStudentComponent } from './components/admin/list-student/list-stude
 import { Page404Component } from './components/error-page/page404/page404.component';
 import { Page0Component } from './components/error-page/page0/page0.component';
 import { Page403Component } from './components/error-page/page403/page403.component';
+import { ListLecturerComponent } from './components/admin/list-lecturer/list-lecturer.component';
+import { ListFaqComponent } from './components/admin/list-faq/list-faq.component';
+import { ListFeedbackComponent } from './components/admin/list-feedback/list-feedback.component';
 
 const routes: Routes = [
   {
@@ -34,6 +37,18 @@ const routes: Routes = [
       {
         path: 'danh-sach-sinh-vien',
         component: ListStudentComponent,
+      },
+      {
+        path: 'danh-sach-giang-vien',
+        component: ListLecturerComponent,
+      },
+      {
+        path: 'danh-sach-cau-hoi',
+        component: ListFaqComponent,
+      },
+      {
+        path: 'danh-sach-phan-hoi',
+        component: ListFeedbackComponent,
       },
     ],
   },

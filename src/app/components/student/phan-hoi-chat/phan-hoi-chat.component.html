@@ -4,7 +4,7 @@
       <form [formGroup]="phanHoiForm" (ngSubmit)="onSubmit()" class="form">
         <mat-form-field class="example-full-width" appearance="outline">
           <textarea
-            matInput
+            matInput class="input-content"
             placeholder="Nhập thắc mắc của bạn ở đây..."
             formControlName="noiDung"
           ></textarea>
@@ -56,7 +56,7 @@
           </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row class="element-row" matRipple *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
       <mat-paginator
         [length]="length || 0"

@@ -1,0 +1,17 @@
+<div class="detail-faq">
+  <h1 mat-dialog-title>
+    Thông tin chi tiết
+    <hr />
+  </h1>
+  <mat-form-field appearance="outline">
+    <textarea disabled="true" class="cau-hoi" matInput>{{
+      cauHoi?.cauHoi
+    }}</textarea>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <textarea disabled="true" matInput class="tra-loi">{{
+      cauHoi?.traLoi
+    }}</textarea>
+  </mat-form-field>
+  <button mat-raised-button color="warn" (click)="closePopup()">Đóng</button>
+</div>

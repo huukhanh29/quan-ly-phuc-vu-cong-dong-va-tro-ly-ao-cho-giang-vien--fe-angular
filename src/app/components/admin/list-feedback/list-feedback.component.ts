@@ -1,22 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
-import { SinhVien } from 'src/app/models/SinhVien';
+import { GiangVien } from 'src/app/models/GiangVien';
 import { StorageService } from 'src/app/services/storage.service';
 import { TaiKhoanService } from 'src/app/services/tai-khoan.service';
-import { DetailStudentComponent } from './detail-student/detail-student.component';
 import { MatDialog } from '@angular/material/dialog';
-
+import { PhanHoiService } from 'src/app/services/phan-hoi.service';
+import { DetailFeedbackComponent } from './detail-feedback/detail-feedback.component';
+import { PhanHoi } from 'src/app/models/PhanHoi';
 @Component({
-  selector: 'app-list-student',
-  templateUrl: './list-student.component.html',
-  styleUrls: ['./list-student.component.css']
+  selector: 'app-list-feedback',
+  templateUrl: './list-feedback.component.html',
+  styleUrls: ['./list-feedback.component.css']
 })
-export class ListStudentComponent implements OnInit{
-  danhSachSinhVien: MatTableDataSource<SinhVien> = new MatTableDataSource();
-  displayedColumns: string[] = ['stt', 'maTaiKhoan', 'taiKhoan.email'];
+export class ListFeedbackComponent {
+  danhSachPhanHoi: MatTableDataSource<PhanHoi> = new MatTableDataSource();
+  displayedColumns: string[] = ['stt', 'noiDung', 'cauHoi.cauHoi'];
   length: number = 0;
   searchTerm: string = '';
 
@@ -24,7 +25,7 @@ export class ListStudentComponent implements OnInit{
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
 
-    private taiKhoanService: TaiKhoanService,
+    private phanHoiService: PhanHoiService,
     private storageService: StorageService,
     private toastr: ToastrService,
     private dialog: MatDialog
@@ -32,14 +33,14 @@ export class ListStudentComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.loadDanhSachSinhVien();
+    this.loadDanhSachPhanHoi();
   }
 
   ngAfterViewInit() {
-    this.danhSachSinhVien.paginator = this.paginator;
-    this.danhSachSinhVien.sort = this.sort;
+    this.danhSachPhanHoi.paginator = this.paginator;
+    this.danhSachPhanHoi.sort = this.sort;
     this.paginator.page.subscribe(() => {
-      this.loadDanhSachSinhVien(
+      this.loadDanhSachPhanHoi(
         this.paginator.pageIndex,
         this.paginator.pageSize,
         this.sort.active,
@@ -48,7 +49,7 @@ export class ListStudentComponent implements OnInit{
     });
 
     this.sort.sortChange.subscribe(() => {
-      this.loadDanhSachSinhVien(
+      this.loadDanhSachPhanHoi(
         this.paginator.pageIndex,
         this.paginator.pageSize,
         this.sort.active,
@@ -57,44 +58,45 @@ export class ListStudentComponent implements OnInit{
     });
   }
 
-  loadDanhSachSinhVien(
+  loadDanhSachPhanHoi(
     page: number = 0,
     size: number = 5,
-    sortBy: string = 'taiKhoan.ngayTao',
+    sortBy: string = 'ngayTao',
     sortDir: string = 'DESC'
   ) {
 
-    this.taiKhoanService
-      .getAllUsersByRole(
+    this.phanHoiService
+      .getAllPhanHoi(
         page,
         size,
         sortBy,
         sortDir,
         this.searchTerm,
-        'SinhVien'
+        ''
       )
       .subscribe((data) => {
-        this.danhSachSinhVien = new MatTableDataSource<any>(data.content);
+        console.log(data)
+        this.danhSachPhanHoi = new MatTableDataSource<any>(data.content);
         this.paginator.length = data.totalElements;
         this.length = data.totalElements;
       });
   }
   onSearch() {
-    this.loadDanhSachSinhVien();
+    this.loadDanhSachPhanHoi();
   }
   refresh() {
     this.searchTerm = '';
     if (this.paginator) {
       this.paginator.firstPage();
     }
-    this.loadDanhSachSinhVien();
+    this.loadDanhSachPhanHoi();
   }
-  detail(student: any | null): void {
+  detail(phanHoi: any | null): void {
     // Bước 4: Mở dialog thay vì đặt selectedNotification
-    if (student) {
-      var popup = this.dialog.open(DetailStudentComponent, {
+    if (phanHoi) {
+      var popup = this.dialog.open(DetailFeedbackComponent, {
         data: {
-          student: student,
+          phanHoi: phanHoi,
         },
         width: '40%',
         enterAnimationDuration: '300ms',

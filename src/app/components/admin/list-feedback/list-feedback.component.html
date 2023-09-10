@@ -10,24 +10,24 @@
     <mat-icon (click)="onSearch()" matSuffix color="search">search</mat-icon>
     <mat-icon (click)="refresh()" matSuffix color="search">refresh</mat-icon>
   </mat-form-field>
-  <mat-table [dataSource]="danhSachSinhVien" matSort class="mat-elevation-z8">
+  <mat-table [dataSource]="danhSachPhanHoi" matSort class="mat-elevation-z8">
     <ng-container matColumnDef="stt">
       <mat-header-cell *matHeaderCellDef>STT</mat-header-cell>
       <mat-cell *matCellDef="let i = index">{{ i + 1 }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="maTaiKhoan">
+    <ng-container matColumnDef="noiDung">
       <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Mã Sinh Viên</mat-header-cell
+        >Nội dung</mat-header-cell
       >
-      <mat-cell *matCellDef="let sinhVien">{{
-        sinhVien.taiKhoan?.tenDangNhap
+      <mat-cell *matCellDef="let item">{{
+        item?.noiDung
       }}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="taiKhoan.email">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-      <mat-cell *matCellDef="let sinhVien">
-        {{ sinhVien.taiKhoan?.email }}
+    <ng-container matColumnDef="cauHoi.cauHoi">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Từ Khóa</mat-header-cell>
+      <mat-cell *matCellDef="let item">
+        {{ item?.cauHoi?.cauHoi }}
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

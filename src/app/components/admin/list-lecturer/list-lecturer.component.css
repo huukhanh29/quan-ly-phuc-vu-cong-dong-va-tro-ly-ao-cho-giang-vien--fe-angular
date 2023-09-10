@@ -1,5 +1,5 @@
 
-.form-box, .table-box {
+.table-box {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -8,35 +8,14 @@
   border-radius: 8px;
 }
 
-.form-box {
-  min-height: 200px;
-}
-
-.table-box {
-  min-height: 400px;
-}
-.mat-submit{
-  color: white;
-  background-color: #724AE8;
-}
 .mat-search{
   color: #724AE8;
 }
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 150px;
-  max-width: 1200px;
-  width: 100%;
-}
+
 .example-full-width {
   width: 100%;
 }
 
-.submit-button {
-  margin-top: 16px;
-}
 
 mat-header-cell, mat-cell {
   padding: 16px;
@@ -49,7 +28,6 @@ mat-table{
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: flex-end;
   min-width: 120px;
   max-width: 300px;
   width: 100%;
@@ -57,7 +35,8 @@ mat-table{
 .element-row:hover {
   background: whitesmoke;
 }
-.input-content{
-  min-height: 200px!important;
+.mat-column-stt{
+  max-width: 64px;
 }
+
 

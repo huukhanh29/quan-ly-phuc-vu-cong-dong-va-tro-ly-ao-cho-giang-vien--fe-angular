@@ -14,15 +14,23 @@
 <mat-drawer-container autosize>
   <mat-drawer #drawer opened="true" mode="side" position="start">
     <mat-nav-list class = "drawer">
-      <mat-list-item routerLink="/quan-tri-vien/trang-chu"  routerLinkActive="active-link">
+      <mat-list-item routerLink="/quan-tri-vien/danh-sach-giang-vien" routerLinkActive="active-link">
         <button mat-button disabled>
          <mat-icon>school</mat-icon>
-          <span>hihii</span>
+          <span>Giảng Viên</span>
         </button>
       </mat-list-item>
       <mat-list-item routerLink="/quan-tri-vien/danh-sach-sinh-vien" routerLinkActive="active-link">
         <button  mat-button disabled>
           <mat-icon>people</mat-icon><span>Sinh Viên</span></button>
+      </mat-list-item>
+      <mat-list-item routerLink="/quan-tri-vien/danh-sach-cau-hoi" routerLinkActive="active-link">
+        <button  mat-button disabled>
+          <mat-icon>question_answer</mat-icon><span>Câu hỏi</span></button>
+      </mat-list-item>
+      <mat-list-item routerLink="/quan-tri-vien/danh-sach-phan-hoi" routerLinkActive="active-link">
+        <button  mat-button disabled>
+          <mat-icon>feedback</mat-icon><span>Phản hồi</span></button>
       </mat-list-item>
       <mat-list-item>
         <button routerLink="table" mat-button>

@@ -3,19 +3,19 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
-import { SinhVien } from 'src/app/models/SinhVien';
+import { GiangVien } from 'src/app/models/GiangVien';
 import { StorageService } from 'src/app/services/storage.service';
 import { TaiKhoanService } from 'src/app/services/tai-khoan.service';
-import { DetailStudentComponent } from './detail-student/detail-student.component';
+import { DetailLecturerComponent } from './detail-lecturer/detail-lecturer.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-list-student',
-  templateUrl: './list-student.component.html',
-  styleUrls: ['./list-student.component.css']
+  selector: 'app-list-lecturer',
+  templateUrl: './list-lecturer.component.html',
+  styleUrls: ['./list-lecturer.component.css']
 })
-export class ListStudentComponent implements OnInit{
-  danhSachSinhVien: MatTableDataSource<SinhVien> = new MatTableDataSource();
+export class ListLecturerComponent implements OnInit{
+  danhSachGiangVien: MatTableDataSource<GiangVien> = new MatTableDataSource();
   displayedColumns: string[] = ['stt', 'maTaiKhoan', 'taiKhoan.email'];
   length: number = 0;
   searchTerm: string = '';
@@ -36,8 +36,8 @@ export class ListStudentComponent implements OnInit{
   }
 
   ngAfterViewInit() {
-    this.danhSachSinhVien.paginator = this.paginator;
-    this.danhSachSinhVien.sort = this.sort;
+    this.danhSachGiangVien.paginator = this.paginator;
+    this.danhSachGiangVien.sort = this.sort;
     this.paginator.page.subscribe(() => {
       this.loadDanhSachSinhVien(
         this.paginator.pageIndex,
@@ -71,10 +71,10 @@ export class ListStudentComponent implements OnInit{
         sortBy,
         sortDir,
         this.searchTerm,
-        'SinhVien'
+        'GiangVien'
       )
       .subscribe((data) => {
-        this.danhSachSinhVien = new MatTableDataSource<any>(data.content);
+        this.danhSachGiangVien = new MatTableDataSource<any>(data.content);
         this.paginator.length = data.totalElements;
         this.length = data.totalElements;
       });
@@ -89,12 +89,12 @@ export class ListStudentComponent implements OnInit{
     }
     this.loadDanhSachSinhVien();
   }
-  detail(student: any | null): void {
+  detail(lecturer: any | null): void {
     // Bước 4: Mở dialog thay vì đặt selectedNotification
-    if (student) {
-      var popup = this.dialog.open(DetailStudentComponent, {
+    if (lecturer) {
+      var popup = this.dialog.open(DetailLecturerComponent, {
         data: {
-          student: student,
+          lecturer: lecturer,
         },
         width: '40%',
         enterAnimationDuration: '300ms',
@@ -103,3 +103,4 @@ export class ListStudentComponent implements OnInit{
     }
   }
 }
+

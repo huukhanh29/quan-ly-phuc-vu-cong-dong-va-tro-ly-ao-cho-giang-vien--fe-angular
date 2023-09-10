@@ -11,7 +11,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private storageService: StorageService) {}
+  constructor(private http: HttpClient) {}
 
   login(taiKhoan: any, matKhau: any): Observable<any> {
     const body = {
