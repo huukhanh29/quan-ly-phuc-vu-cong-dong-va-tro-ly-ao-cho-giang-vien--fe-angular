@@ -1,0 +1,138 @@
+<mat-card>
+  <div class="search-container">
+    <button
+      mat-icon-button
+      color="add"
+      (click)="addHoatDong()"
+      class="icon-add"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Tìm kiếm</mat-label>
+      <input
+        matInput
+        placeholder="Nhập nội dung tìm kiếm..."
+        [(ngModel)]="searchTerm"
+        class="example-full-width"
+      />
+      <mat-icon (click)="onSearch()" matSuffix color="search">search</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="filter">
+    <button mat-icon-button (click)="toggleFilter()">
+      <mat-icon>{{ filterVisible ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+    <button mat-icon-button (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+  <div [ngClass]="{ hidden: !filterVisible }" class="date-range-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Ngày bắt đầu</mat-label>
+      <input matInput [matDatepicker]="startPicker"
+      [(ngModel)]="startTime"
+      (ngModelChange)="filter()"  />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="startPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ngày kết thúc</mat-label>
+      <input matInput
+      [matDatepicker]="endPicker"
+      [(ngModel)]="endTime"
+      (ngModelChange)="filter()"  />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="endPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Loại hoạt động</mat-label>
+      <mat-select   [(value)]="type"
+      (valueChange)="filter()" >
+        <mat-option
+          *ngFor="let loaiHoatDong of loaiHoatDongs"
+          [value]="loaiHoatDong.tenLoaiHoatDong"
+        >
+          {{ loaiHoatDong.tenLoaiHoatDong }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Trạng thái</mat-label>
+      <mat-select [(value)]="status"
+      (valueChange)="filter()" >
+        <mat-option value="SAP_DIEN_RA">Sắp diễn ra</mat-option>
+        <mat-option value="DANG_DIEN_RA">Đang diễn ra</mat-option>
+        <mat-option value="DA_DIEN_RA">Đã diễn ra</mat-option>
+        <!-- thêm các option khác nếu cần -->
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="mat-elevation-z4">
+    <mat-table
+      [dataSource]="danhSachHoatDong"
+      matSort
+      class="demo-table mat-elevation-z8"
+    >
+      <ng-container matColumnDef="stt">
+        <mat-header-cell *matHeaderCellDef>STT</mat-header-cell>
+        <mat-cell *matCellDef="let i = index">{{ i + 1 }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tenHoatDong">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Tên hoạt động</mat-header-cell
+        >
+        <mat-cell *matCellDef="let item"> {{ item.tenHoatDong }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="thoiGianBatDau">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Bắt đầu</mat-header-cell
+        >
+        <mat-cell *matCellDef="let item">
+          {{ item.thoiGianBatDau | date : "HH:mm:ss dd/MM/yyyy" }}</mat-cell
+        >
+      </ng-container>
+      <ng-container matColumnDef="thoiGianKetThuc">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Kết thúc</mat-header-cell
+        >
+        <mat-cell *matCellDef="let item">
+          {{ item.thoiGianKetThuc | date : "HH:mm:ss dd/MM/yyyy" }}</mat-cell
+        >
+      </ng-container>
+      <ng-container matColumnDef="hanhdong">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let item">
+          <mat-icon color="primary" (click)="detail(item)"
+            >infor</mat-icon
+          >
+          <mat-icon color="accent" (click)="deleteHoatDong(item.maCauHoi)"
+            >delete
+          </mat-icon>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row
+        matRipple
+        class="element-row"
+        *matRowDef="let row; columns: displayedColumns"
+      ></mat-row>
+    </mat-table>
+    <mat-paginator
+      [length]="length || 0"
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    >
+    </mat-paginator>
+  </div>
+</mat-card>

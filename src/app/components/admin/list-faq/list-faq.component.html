@@ -1,15 +1,35 @@
-<div class="table-box mat-elevation-z4">
-  <mat-form-field appearance="outline" class="search-container">
-    <mat-label>Tìm kiếm</mat-label>
-    <input
-      matInput
-      placeholder="Nhập nội dung tìm kiếm..."
-      [(ngModel)]="searchTerm"
-      class="example-full-width"
-    />
-    <mat-icon (click)="onSearch()" matSuffix color="search">search</mat-icon>
-    <mat-icon (click)="refresh()" matSuffix color="search">refresh</mat-icon>
-  </mat-form-field>
+<mat-card>
+
+  <div class="search-container">
+
+    <button mat-icon-button color="add" (click)="addFaq()" class="icon-add">
+      <mat-icon>add</mat-icon>
+    </button>
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Tìm kiếm</mat-label>
+      <input
+        matInput
+        placeholder="Nhập nội dung tìm kiếm..."
+        [(ngModel)]="searchTerm"
+        class="example-full-width"
+      />
+      <mat-icon (click)="onSearch()" matSuffix color="search">search</mat-icon>
+      <mat-icon (click)="refresh()" matSuffix color="search">refresh</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="filter">
+    <input type="file" (change)="onUploadFile($event)" hidden #fileInput>
+    <button mat-icon-button (click)="fileInput.click()">
+      <mat-icon>upload</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="filter()">
+      <mat-icon>filter_2</mat-icon>
+    </button>
+  </div>
+
+  <div class="mat-elevation-z4">
   <mat-table
     [dataSource]="danhSachCauHoi"
     matSort
@@ -54,9 +74,19 @@
         }}
       </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="hanhdong">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let item" >
+        <mat-icon color="primary" (click)="detail(item.maCauHoi)">infor</mat-icon>
+        <mat-icon color="accent" (click)="deleteFaq(item.maCauHoi)">delete </mat-icon>
+      </mat-cell>
+
+
+
+    </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row
-      (click)="detail(row.maCauHoi)"
+
       matRipple
       class="element-row"
       *matRowDef="let row; columns: displayedColumns"
@@ -70,3 +100,5 @@
   >
   </mat-paginator>
 </div>
+</mat-card>
+

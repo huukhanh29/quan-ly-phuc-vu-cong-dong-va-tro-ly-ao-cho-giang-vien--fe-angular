@@ -30,8 +30,23 @@
         {{ item?.cauHoi?.cauHoi }}
       </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="sinhVien.taiKhoan.tenDayDu">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Người gửi</mat-header-cell>
+      <mat-cell *matCellDef="let item">
+        {{ item?.sinhVien?.taiKhoan.tenDayDu }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="hanhdong">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let item">
+          <mat-icon class="icon-detail" (click)="detail(item)">info</mat-icon>
+          <mat-icon class="icon-delete" (click)="deleteFeedback(item.maPhanHoi)">delete</mat-icon>
+          <mat-icon class="icon-reply" (click)="replyFeedback(item)">reply</mat-icon>
+      </mat-cell>
+
+    </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row (click)="detail(row)"
+    <mat-row
       matRipple class="element-row"
       *matRowDef="let row; columns: displayedColumns"
     ></mat-row>

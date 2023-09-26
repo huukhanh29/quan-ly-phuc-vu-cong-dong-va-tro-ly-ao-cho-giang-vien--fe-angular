@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -60,4 +60,13 @@ export class CauHoiService {
   countCauHoi(): Observable<any> {
     return this.http.get(`/api/cau-hoi/tong-cau-hoi`);
   }
+  uploadWordFile(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(`/api/cau-hoi/them-file`, formData).pipe(
+      catchError(error => of({ error: true, message: `Upload Error: ${error.message}` }))
+    );
+  }
+
 }

@@ -41,7 +41,7 @@ export class PhanHoiService {
     return this.http.delete(`${this.apiUrl}/xoa-tat-ca`);
   }
 
-  replyToPhanHoi(cauHoi: any, id: number): Observable<any> {
+  replyToPhanHoi(cauHoi: any, id: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/tra-loi/${id}`, cauHoi);
   }
 }

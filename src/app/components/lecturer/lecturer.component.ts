@@ -18,6 +18,7 @@ export class LecturerComponent {
     this.roles = user.quyen;
     if (!this.isLoggedIn || this.roles !== 'GiangVien') {
       //console.log(user)
+      this.storageService.xoaCookie()
       this.router.navigate(['/403']);
     }
   }

@@ -10,14 +10,16 @@ import { Observable, throwError, timer } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { StorageService } from './storage.service';
 import { AuthService } from './auth.service';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { TaiKhoanService } from './tai-khoan.service';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private taiKhoanService: TaiKhoanService
   ) {}
 
   intercept(
@@ -27,25 +29,28 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     const user = this.storageService.getUser();
     const currentTime = Math.floor(new Date().getTime() / 1000);
 
-    const excludedUrls = ['/api/tai-khoan/dang-nhap',
-    '/api/tai-khoan/cap-lai-token'];
+    const excludedUrls = [
+      '/api/tai-khoan/dang-nhap',
+      '/api/tai-khoan/cap-lai-token',
+      '/api/tai-khoan/kiem-tra-dang-nhap'
+    ];
 
-    if (user != null && !excludedUrls.some(url => req.url.includes(url))) {
+    if (user.token != null && !excludedUrls.some((url) => req.url.includes(url))) {
       // Thêm một khoảng thời gian dự phòng 30 giây cho thời gian hết hạn của token
       const expirationWithGracePeriod = user.ngayHetHan - 30;
-     // console.log(user)
-      if (currentTime < expirationWithGracePeriod) {
+      if (user.ngayHetHan && currentTime < expirationWithGracePeriod) {
         req = this.addTokenHeader(req, user.token);
       } else {
         return this.authService.refreshAccessToken(user.refreshToken).pipe(
           switchMap((response: any) => {
-            this.authService.xoaRefreshToken();
+            console.log("ref ok")
             const newReq = this.addTokenHeader(req, response.token);
             this.storageService.saveUser(response);
             return next.handle(newReq);
           }),
           catchError((error: any) => {
             this.storageService.xoaCookie();
+            this.router.navigate(['/dang-nhap']);
             return throwError(() => error);
           })
         );
@@ -54,7 +59,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error) => {
         console.error('Có lỗi xãy ra:', error);
-        //this.storageService.xoaCookie();
         return throwError(() => error);
       })
     );

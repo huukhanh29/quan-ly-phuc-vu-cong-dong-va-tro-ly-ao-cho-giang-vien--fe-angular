@@ -25,9 +25,12 @@ export class AdminComponent {
     this.isLoggedIn = this.storageService.isLoggedIn();
     const user = this.storageService.getUser();
     this.roles = user.quyen;
-    if (!this.isLoggedIn || this.roles !== 'QuanTriVien') {
-      //console.log(user)
+    if(!this.isLoggedIn){
+      this.router.navigate(['/dang-nhap']);
+    }else if (this.roles !== 'QuanTriVien') {
+      this.storageService.xoaCookie()
        this.router.navigate(['/403']);
     }
+
   }
 }

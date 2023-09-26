@@ -15,7 +15,7 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./phan-hoi-chat.component.css'],
 })
 export class PhanHoiChatComponent implements OnInit {
-  phanHoiForm!: FormGroup;
+  phanHoiForm!: any;
   danhSachPhanHoi: MatTableDataSource<PhanHoi> = new MatTableDataSource();
   displayedColumns: string[] = ['stt', 'noiDung', 'cauHoi'];
   length: number = 0;
@@ -36,7 +36,9 @@ export class PhanHoiChatComponent implements OnInit {
     this.loadDanhSachPhanHoi();
 
   }
-
+  get formControls() {
+    return this.phanHoiForm.controls;
+  }
   initPhanHoiForm() {
     this.phanHoiForm = this.formBuilder.group({
       noiDung: ['', Validators.required],
@@ -51,6 +53,7 @@ export class PhanHoiChatComponent implements OnInit {
             this.toastr.warning('Phản hồi đã tồn tại!');
           } else {
             this.loadDanhSachPhanHoi();
+            this.phanHoiForm.reset();
             this.toastr.success('Gửi phản hồi thành công!');
           }
         },

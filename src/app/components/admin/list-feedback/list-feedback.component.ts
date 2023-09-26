@@ -10,6 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { PhanHoiService } from 'src/app/services/phan-hoi.service';
 import { DetailFeedbackComponent } from './detail-feedback/detail-feedback.component';
 import { PhanHoi } from 'src/app/models/PhanHoi';
+import { DeleteFeedbackComponent } from './delete-feedback/delete-feedback.component';
+import { ReplyFeedbackComponent } from './reply-feedback/reply-feedback.component';
 @Component({
   selector: 'app-list-feedback',
   templateUrl: './list-feedback.component.html',
@@ -17,7 +19,7 @@ import { PhanHoi } from 'src/app/models/PhanHoi';
 })
 export class ListFeedbackComponent {
   danhSachPhanHoi: MatTableDataSource<PhanHoi> = new MatTableDataSource();
-  displayedColumns: string[] = ['stt', 'noiDung', 'cauHoi.cauHoi'];
+  displayedColumns: string[] = ['stt', 'noiDung', 'cauHoi.cauHoi','sinhVien.taiKhoan.tenDayDu', 'hanhdong'];
   length: number = 0;
   searchTerm: string = '';
 
@@ -103,5 +105,39 @@ export class ListFeedbackComponent {
         exitAnimationDuration: '300ms',
       });
     }
+  }
+  deleteFeedback(id: any): void {
+    var popup = this.dialog.open(DeleteFeedbackComponent, {
+      width: '50%',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+    });
+    popup.afterClosed().subscribe((item) => {
+      if (item === 'accept') {
+        this.phanHoiService.deletePhanHoi(id).subscribe({
+          next: (data) => {
+              this.toastr.success('Xóa thành công!');
+              this.loadDanhSachPhanHoi();
+          },
+          error: (err) => {
+            this.toastr.warning('Xóa không thành công!');
+            console.log(err)
+          },
+        });
+      }
+    });
+  }
+  replyFeedback(phanHoi: any): void {
+    var popup = this.dialog.open(ReplyFeedbackComponent, {
+      data: {
+        phanHoi: phanHoi,
+      },
+      width: '50%',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+    });
+    popup.afterClosed().subscribe((item) => {
+      this.loadDanhSachPhanHoi();
+    });
   }
 }

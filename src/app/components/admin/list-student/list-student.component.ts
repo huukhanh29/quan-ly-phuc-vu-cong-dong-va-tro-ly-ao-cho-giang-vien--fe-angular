@@ -8,27 +8,26 @@ import { StorageService } from 'src/app/services/storage.service';
 import { TaiKhoanService } from 'src/app/services/tai-khoan.service';
 import { DetailStudentComponent } from './detail-student/detail-student.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AddStudentComponent } from './add-student/add-student.component';
 
 @Component({
   selector: 'app-list-student',
   templateUrl: './list-student.component.html',
-  styleUrls: ['./list-student.component.css']
+  styleUrls: ['./list-student.component.css'],
 })
-export class ListStudentComponent implements OnInit{
+export class ListStudentComponent implements OnInit {
   danhSachSinhVien: MatTableDataSource<SinhVien> = new MatTableDataSource();
-  displayedColumns: string[] = ['stt', 'maTaiKhoan', 'taiKhoan.email'];
-  length: number = 0;
+  displayedColumns: string[] = ['stt', 'maTaiKhoan',  'taiKhoan.tenDayDu', 'taiKhoan.email', 'taiKhoan.trangThai', 'hanhdong'];
+  length: number = 0;   
   searchTerm: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
-
     private taiKhoanService: TaiKhoanService,
     private storageService: StorageService,
     private toastr: ToastrService,
     private dialog: MatDialog
-
   ) {}
 
   ngOnInit(): void {
@@ -63,7 +62,6 @@ export class ListStudentComponent implements OnInit{
     sortBy: string = 'taiKhoan.ngayTao',
     sortDir: string = 'DESC'
   ) {
-
     this.taiKhoanService
       .getAllUsersByRole(
         page,
@@ -101,5 +99,37 @@ export class ListStudentComponent implements OnInit{
         exitAnimationDuration: '300ms',
       });
     }
+  }
+
+  addStudent(): void {
+    var popup = this.dialog.open(AddStudentComponent, {
+      width: '50%',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+    });
+    popup.afterClosed().subscribe((item) => {
+      this.loadDanhSachSinhVien();
+    });
+  }
+  updateUserStatus(status: string, tenDangNhap: string): void {
+    const body = {
+      tenDangNhap: tenDangNhap,
+      trangThai: status,
+    };
+
+    this.taiKhoanService.updateStatus(body).subscribe({
+      next: (data) => {
+        if (data.message && data.message === 'NO_CHANGE') {
+          this.toastr.warning('Không thay đổi!');
+        } else {
+          this.toastr.success('Cập nhật thành công!');
+          this.loadDanhSachSinhVien();
+        }
+      },
+      error: (error) => {
+        this.toastr.error('Có lỗi xảy ra!');
+        console.error('Error updating status:', error);
+      },
+    });
   }
 }

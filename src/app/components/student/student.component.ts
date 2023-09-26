@@ -19,6 +19,7 @@ export class StudentComponent {
     const user = this.storageService.getUser();
     this.roles = user.quyen;
     if (!this.isLoggedIn || this.roles !== 'SinhVien') {
+      this.storageService.xoaCookie()
       this.router.navigate(['/403']);
     }
   }

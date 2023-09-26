@@ -23,7 +23,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 //show dialog
 import {MatDialogModule} from "@angular/material/dialog"
 import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 
 /** Back-to-top + MatIconModule + MatButtonModule*/
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -32,6 +32,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 /** ================== */
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDatetimepickerModule, MatNativeDatetimeModule } from '@mat-datetimepicker/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 @NgModule({
   declarations: [],
   imports: [
@@ -60,7 +66,15 @@ import {MatRippleModule} from '@angular/material/core';
     MatProgressSpinnerModule,
     MatTabsModule,
     MatBadgeModule,
-    MatRippleModule
+    MatRippleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatDatetimepickerModule,
+    MatNativeDatetimeModule,
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   exports: [
     MatToolbarModule,
@@ -87,7 +101,15 @@ import {MatRippleModule} from '@angular/material/core';
     MatProgressSpinnerModule,
     MatTabsModule,
     MatBadgeModule,
-    MatRippleModule
+    MatRippleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatDatetimepickerModule,
+    MatNativeDatetimeModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
   ]
 })
 export class MaterialModule { }

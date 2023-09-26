@@ -1,4 +1,30 @@
 
+.icon-detail:hover {
+  color: rgb(8, 8, 184);
+  cursor: pointer;
+}
+
+.icon-delete:hover {
+  color: rgb(186, 8, 8);
+  cursor: pointer;
+}
+.icon-reply:hover {
+  color: rgb(5, 79, 5);
+  cursor: pointer;
+}
+.icon-detail {
+  color: blue;
+  cursor: pointer;
+}
+
+.icon-delete {
+  color: red;
+  cursor: pointer;
+}
+.icon-reply {
+  color: green;
+  cursor: pointer;
+}
 .table-box {
   display: flex;
   flex-direction: column;

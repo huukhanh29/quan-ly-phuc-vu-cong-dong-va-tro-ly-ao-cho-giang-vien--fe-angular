@@ -4,11 +4,14 @@
       <form [formGroup]="phanHoiForm" (ngSubmit)="onSubmit()" class="form">
         <mat-form-field class="example-full-width" appearance="outline">
           <textarea
-            matInput class="input-content"
+            matInput
+            class="input-content"
             placeholder="Nhập thắc mắc của bạn ở đây..."
             formControlName="noiDung"
           ></textarea>
-          <mat-error> Bạn chưa điền nội dung kìa!!! </mat-error>
+          <mat-error *ngIf="formControls.noiDung.errors?.['required'] && formControls.noiDung.touched"
+            >Bạn chưa điền nội dung kìa!!!
+          </mat-error>
         </mat-form-field>
         <div class="submit-button">
           <button mat-raised-button type="submit" color="submit">
@@ -46,17 +49,25 @@
         </ng-container>
 
         <ng-container matColumnDef="noiDung">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Nội Dung</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Nội Dung</mat-header-cell
+          >
           <mat-cell *matCellDef="let phanHoi">{{ phanHoi.noiDung }}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="cauHoi">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Từ Khóa</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Từ Khóa</mat-header-cell
+          >
           <mat-cell *matCellDef="let phanHoi">
             {{ phanHoi.cauHoi?.cauHoi }}
           </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row class="element-row" matRipple *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row
+          class="element-row"
+          matRipple
+          *matRowDef="let row; columns: displayedColumns"
+        ></mat-row>
       </mat-table>
       <mat-paginator
         [length]="length || 0"

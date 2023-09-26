@@ -19,23 +19,23 @@ export class LogoutComponent {
         private storageService:StorageService
   ) {}
   closedialog() {
-    this.dialogRef.close('Closed using function');
+    this.dialogRef.close('Closed');
   }
   accept() {
-    const user =this.storageService.getUser();
-    const body = {
-      refreshToken: user.refreshToken
-    };
-    this.taiKhoanService.xoaRefreshToken(body).subscribe({
-      next: data=>{
-        this.storageService.xoaCookie();
-        this.router.navigate(['/dang-nhap']);
-        this.toastr.success("Bạn đã đăng xuất!!!")
-      },
-      error: err=>{
-        console.error(err)
-      }
-    })
-
+    this.dialogRef.close('accept');
+    const user = this.storageService.getUser();
+        const body = {
+          refreshToken: user.refreshToken,
+        };
+        this.taiKhoanService.xoaRefreshToken(body).subscribe({
+          next: (data) => {
+            this.storageService.xoaCookie();
+            this.router.navigate(['dang-nhap']);
+            this.toastr.success('Bạn đã đăng xuất!!!');
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
   }
 }

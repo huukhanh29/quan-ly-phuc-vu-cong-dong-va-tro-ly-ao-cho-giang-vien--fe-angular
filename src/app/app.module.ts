@@ -37,7 +37,16 @@ import { ListFaqComponent } from './components/admin/list-faq/list-faq.component
 import { DetailFaqComponent } from './components/admin/list-faq/detail-faq/detail-faq.component';
 import { ListFeedbackComponent } from './components/admin/list-feedback/list-feedback.component';
 import { DetailFeedbackComponent } from './components/admin/list-feedback/detail-feedback/detail-feedback.component';
-
+import { AddLecturerComponent } from './components/admin/list-lecturer/add-lecturer/add-lecturer.component';
+import { CookieService } from 'ngx-cookie-service';
+import { AddStudentComponent } from './components/admin/list-student/add-student/add-student.component';
+import { AddFaqComponent } from './components/admin/list-faq/add-faq/add-faq.component';
+import { DeleteFaqComponent } from './components/admin/list-faq/delete-faq/delete-faq.component';
+import { DeleteFeedbackComponent } from './components/admin/list-feedback/delete-feedback/delete-feedback.component';
+import { ReplyFeedbackComponent } from './components/admin/list-feedback/reply-feedback/reply-feedback.component';
+import { ListActivitiesComponent } from './components/admin/list-activities/list-activities.component';
+import { DetailActivityComponent } from './components/admin/list-activities/detail-activity/detail-activity.component';
+import { AddActivityComponent } from './components/admin/list-activities/add-activity/add-activity.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +80,16 @@ import { DetailFeedbackComponent } from './components/admin/list-feedback/detail
     ListFaqComponent,
     DetailFaqComponent,
     ListFeedbackComponent,
-    DetailFeedbackComponent
+    DetailFeedbackComponent,
+    AddLecturerComponent,
+    AddStudentComponent,
+    AddFaqComponent,
+    DeleteFaqComponent,
+    DeleteFeedbackComponent,
+    ReplyFeedbackComponent,
+    ListActivitiesComponent,
+    DetailActivityComponent,
+    AddActivityComponent
   ],
   imports: [
     BrowserModule,
@@ -82,10 +100,10 @@ import { DetailFeedbackComponent } from './components/admin/list-feedback/detail
     ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 1500,
-      progressBar: true
+      progressBar: true,
     }),
   ],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

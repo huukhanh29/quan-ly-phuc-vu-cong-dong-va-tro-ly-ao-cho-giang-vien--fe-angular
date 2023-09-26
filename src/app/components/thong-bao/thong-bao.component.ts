@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ThongBaoService } from 'src/app/services/thong-bao.service';
 import { ThongBao } from 'src/app/models//ThongBao';
@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './thong-bao.component.html',
   styleUrls: ['./thong-bao.component.css'],
 })
-export class ThongBaoComponent implements OnInit {
+export class ThongBaoComponent implements OnInit, OnDestroy {
   ThongBaos: ThongBao[] = [];
   TBChuaDoc: ThongBao[] = [];
   TBDaDoc: ThongBao[] = [];
@@ -117,5 +117,11 @@ export class ThongBaoComponent implements OnInit {
           });
       }
     }
+  }
+  disconnectWebSocket(): void {
+    this.webSocketService.disconnect(); 
+  }
+  ngOnDestroy(): void {
+    this.disconnectWebSocket();
   }
 }

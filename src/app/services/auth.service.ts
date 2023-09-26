@@ -35,11 +35,6 @@ export class AuthService {
       httpOptions
     );
   }
-  xoaRefreshToken(): Observable<any> {
-    return this.http.post(
-      `/api/tai-khoan/dang-xuat`,
-      httpOptions
-    );
-  }
+
 
 }

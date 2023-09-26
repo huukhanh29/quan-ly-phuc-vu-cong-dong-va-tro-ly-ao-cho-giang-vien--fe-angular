@@ -1,0 +1,73 @@
+<h1 mat-dialog-title>Thông tin chi tiết<hr></h1>
+
+<div mat-dialog-content class="table-container">
+  <mat-card class="table">
+    <div class="table-row">
+      <div class="table-cell"><strong>Tên Hoạt Động:</strong></div>
+      <div class="table-cell">{{ data.item.tenHoatDong }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Mô Tả:</strong></div>
+      <div class="table-cell">{{ data.item.moTa }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Địa Điểm:</strong></div>
+      <div class="table-cell">{{ data.item.diaDiem }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Giờ Tích Lũy Tham Gia:</strong></div>
+      <div class="table-cell">{{ data.item.gioTichLuyThamGia }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Giờ Tích Lũy Tổ Chức:</strong></div>
+      <div class="table-cell">{{ data.item.gioTichLuyToChuc }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Thời Gian Bắt Đầu:</strong></div>
+      <div class="table-cell">{{ data.item.thoiGianBatDau | date : "HH:mm:ss dd/MM/yyyy" }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Thời Gian Kết Thúc:</strong></div>
+      <div class="table-cell">{{ data.item.thoiGianKetThuc | date : "HH:mm:ss dd/MM/yyyy" }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Tên Quyết Định:</strong></div>
+      <div class="table-cell">{{ data.item.tenQuyetDinh }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Số Quyết Định:</strong></div>
+      <div class="table-cell">{{ data.item.soQuyetDinh }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Người Ký Quyết Định:</strong></div>
+      <div class="table-cell">{{ data.item.nguoiKyQuyetDinh }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>File Quyết Định:</strong></div>
+      <div class="table-cell">{{ data.item.fileQuyetDinh }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Cấp Tổ Chức:</strong></div>
+      <div class="table-cell">{{ data.item.capToChuc }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Loại Hoạt Động:</strong></div>
+      <div class="table-cell">{{ data.item.loaiHoatDong.tenLoaiHoatDong }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Ngày Tạo:</strong></div>
+      <div class="table-cell">{{ data.item.ngayTao | date : "HH:mm:ss dd/MM/yyyy" }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Ngày Cập Nhật:</strong></div>
+      <div class="table-cell">{{ data.item.ngayCapNhat | date : "HH:mm:ss dd/MM/yyyy" }}</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Trạng Thái Hoạt Động:</strong></div>
+      <div class="table-cell">{{ data.item.trangThaiHoatDong }}</div>
+    </div>
+  </mat-card>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="closePopup()">Đóng</button>
+</div>

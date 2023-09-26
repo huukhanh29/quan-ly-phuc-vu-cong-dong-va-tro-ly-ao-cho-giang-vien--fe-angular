@@ -1,0 +1,179 @@
+<form [formGroup]="myForm" (ngSubmit)="saveActivity()">
+  <h1 mat-dialog-title>Thêm hoạt động</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Tên hoạt động</mat-label>
+      <input formControlName="tenHoatDong" matInput required />
+      <mat-error *ngIf="formControls.tenHoatDong.errors?.['required']">
+        Tên hoạt động là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Mô tả</mat-label>
+      <textarea formControlName="moTa" matInput required></textarea>
+      <mat-error *ngIf="formControls.moTa.errors?.['required']">
+        Mô tả là bắt buộc!
+    </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Địa điểm</mat-label>
+      <input formControlName="diaDiem" matInput required />
+      <mat-error *ngIf="formControls.diaDiem.errors?.['required']">
+        Địa điểm là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Giờ Tích Lũy Tham Gia</mat-label>
+      <input formControlName="gioTichLuyThamGia" matInput required  />
+      <mat-error *ngIf="formControls.gioTichLuyThamGia.errors?.['required']">
+        Giờ tích lũy tham gia là bắt buộc!
+    </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Giờ Tích Lũy Tổ Chức</mat-label>
+      <input formControlName="gioTichLuyToChuc" matInput required />
+      <mat-error *ngIf="formControls.gioTichLuyToChuc.errors?.['required']">
+        Giờ tích lũy tổ chức là bắt buộc!
+    </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Thời Gian Bắt Đầu</mat-label>
+      <input
+        formControlName="thoiGianBatDau"
+        matInput
+        [matDatetimepicker]="picker"
+        required
+      />
+      <mat-hint>MM/DD/YYYY HH:mm</mat-hint>
+      <mat-datetimepicker-toggle matIconSuffix [for]="picker"></mat-datetimepicker-toggle>
+      <mat-datetimepicker #picker type="datetime"></mat-datetimepicker>
+      <mat-error *ngIf="formControls.thoiGianBatDau.errors?.['required']">
+        Thời gian bắt đầu là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Thời Gian Kết Thúc</mat-label>
+      <input
+        formControlName="thoiGianKetThuc"
+        matInput
+        [matDatetimepicker]="picker2"
+        required
+      />
+      <mat-hint>MM/DD/YYYY HH:mm</mat-hint>
+      <mat-datetimepicker-toggle matIconSuffix [for]="picker2"></mat-datetimepicker-toggle>
+      <mat-datetimepicker #picker2 type="datetime"></mat-datetimepicker>
+      <mat-error *ngIf="formControls.thoiGianKetThuc.errors?.['required']">
+        Thời gian kết thúc là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Tên Quyết Định</mat-label>
+      <input formControlName="tenQuyetDinh" matInput required />
+      <mat-error *ngIf="formControls.tenQuyetDinh.errors?.['required']">
+        Tên quyết định là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Số Quyết Định</mat-label>
+      <input formControlName="soQuyetDinh" matInput required />
+      <mat-error *ngIf="formControls.soQuyetDinh.errors?.['required']">
+        Số quyết định là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Người Ký Quyết Định</mat-label>
+      <input formControlName="nguoiKyQuyetDinh" matInput required />
+      <mat-error *ngIf="formControls.nguoiKyQuyetDinh.errors?.['required']">
+        Người ký quyết định là bắt buộc!
+    </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>File Quyết Định</mat-label>
+      <input formControlName="fileQuyetDinh" matInput required />
+      <mat-error *ngIf="formControls.fileQuyetDinh.errors?.['required']">
+        File quyết định là bắt buộc!
+    </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Cấp Tổ Chức</mat-label>
+      <mat-select formControlName="capToChuc" required>
+        <mat-option value="TRUONG">Trường</mat-option>
+        <mat-option value="KHOA">Khoa</mat-option>
+        <mat-option value="BOMON">Bộ môn</mat-option>
+        <mat-option value="CANHAN">Cá nhân</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formControls.capToChuc.errors?.['required']">
+        Cấp tổ chức là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+
+
+    <!-- Thêm Đoạn mã sau vào template của bạn -->
+    <mat-form-field class="full-width">
+      <mat-label>Giảng viên tổ chức</mat-label>
+      <mat-chip-grid #chipGrid aria-label="Giảng viên selection">
+        <mat-chip-row
+          *ngFor="let giangVien of selectedGiangVien"
+          (removed)="remove(giangVien)"
+        >
+          {{ giangVien.tenDangNhap }}
+          <button
+            matChipRemove
+            [attr.aria-label]="'remove ' + giangVien.tenDangNhap"
+          >
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      </mat-chip-grid>
+      <input
+        placeholder="Thêm Giảng viên..."
+        #maGiangVienInput
+        [formControl]="maGiangVienCtrl"
+        [matChipInputFor]="chipGrid"
+        [matAutocomplete]="auto"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="true"
+        (matChipInputTokenEnd)="add($event)"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="selected($event)"
+      >
+        <mat-option
+          *ngFor="let gv of filteredGiangVien | async"
+          [value]="gv.tenDangNhap"
+        >
+          {{ gv.tenDangNhap }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Loại hoạt động</mat-label>
+      <mat-select formControlName="maLoaiHoatDong">
+        <mat-option
+          *ngFor="let type of availableLoaiHoatDong"
+          [value]="type.maLoaiHoatDong"
+        >
+          {{ type.tenLoaiHoatDong }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button type="submit" color="primary">Lưu</button>
+    <button (click)="closePopup()" mat-raised-button color="warn">Đóng</button>
+    <button (click)="test()" mat-raised-button color="warn">Tết</button>
+  </div>
+</form>

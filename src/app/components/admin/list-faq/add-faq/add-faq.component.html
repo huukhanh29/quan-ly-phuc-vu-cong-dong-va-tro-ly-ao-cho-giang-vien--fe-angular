@@ -1,0 +1,29 @@
+<form [formGroup]="myform" (ngSubmit)="savelecturer()">
+  <h1 mat-dialog-title>Thêm dữ liệu bộ câu hỏi</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Từ khóa</mat-label>
+      <textarea formControlName="cauHoi" matInput required ></textarea>
+      <mat-error
+        *ngIf="formControls.cauHoi && formControls.cauHoi.errors?.['required']"
+      >
+        Từ khóa là bắt buộc
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Trả lời</mat-label>
+      <textarea formControlName="traLoi" matInput required></textarea>
+      <mat-error
+        *ngIf="formControls.traLoi.errors?.['required'] "
+      >
+        Trả lời là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button type="submit" color="primary">Lưu</button>
+    <button (click)="closePopup()" mat-raised-button color="warn">Đóng</button>
+  </div>
+</form>

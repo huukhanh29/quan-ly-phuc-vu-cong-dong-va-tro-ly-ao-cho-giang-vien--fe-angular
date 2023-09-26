@@ -2,6 +2,6 @@
 
 export interface ChucDanh {
   maChucDanh: number;
-  tenChucdanh: string;
+  tenChucDanh: string;
   gioBatBuoc: number;
 }

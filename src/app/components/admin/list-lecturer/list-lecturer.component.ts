@@ -8,38 +8,47 @@ import { StorageService } from 'src/app/services/storage.service';
 import { TaiKhoanService } from 'src/app/services/tai-khoan.service';
 import { DetailLecturerComponent } from './detail-lecturer/detail-lecturer.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AddLecturerComponent } from './add-lecturer/add-lecturer.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-list-lecturer',
   templateUrl: './list-lecturer.component.html',
-  styleUrls: ['./list-lecturer.component.css']
+  styleUrls: ['./list-lecturer.component.css'],
 })
-export class ListLecturerComponent implements OnInit{
+export class ListLecturerComponent implements OnInit {
   danhSachGiangVien: MatTableDataSource<GiangVien> = new MatTableDataSource();
-  displayedColumns: string[] = ['stt', 'maTaiKhoan', 'taiKhoan.email'];
+  displayedColumns: string[] = [
+    'stt',
+    'maTaiKhoan',
+    'taiKhoan.tenDayDu',
+    'taiKhoan.email',
+    'taiKhoan.trangThai',
+    'hanhdong',
+  ];
   length: number = 0;
   searchTerm: string = '';
-
+  user: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
-
     private taiKhoanService: TaiKhoanService,
     private storageService: StorageService,
     private toastr: ToastrService,
-    private dialog: MatDialog
-
+    private dialog: MatDialog,
+    private cookie: CookieService
   ) {}
 
   ngOnInit(): void {
-    this.loadDanhSachSinhVien();
+    this.user = this.storageService.getUser();
+    this.loadDanhSachGiangVien();
   }
 
   ngAfterViewInit() {
     this.danhSachGiangVien.paginator = this.paginator;
     this.danhSachGiangVien.sort = this.sort;
     this.paginator.page.subscribe(() => {
-      this.loadDanhSachSinhVien(
+      this.loadDanhSachGiangVien(
         this.paginator.pageIndex,
         this.paginator.pageSize,
         this.sort.active,
@@ -48,7 +57,7 @@ export class ListLecturerComponent implements OnInit{
     });
 
     this.sort.sortChange.subscribe(() => {
-      this.loadDanhSachSinhVien(
+      this.loadDanhSachGiangVien(
         this.paginator.pageIndex,
         this.paginator.pageSize,
         this.sort.active,
@@ -57,13 +66,12 @@ export class ListLecturerComponent implements OnInit{
     });
   }
 
-  loadDanhSachSinhVien(
+  loadDanhSachGiangVien(
     page: number = 0,
     size: number = 5,
     sortBy: string = 'taiKhoan.ngayTao',
     sortDir: string = 'DESC'
   ) {
-
     this.taiKhoanService
       .getAllUsersByRole(
         page,
@@ -80,17 +88,16 @@ export class ListLecturerComponent implements OnInit{
       });
   }
   onSearch() {
-    this.loadDanhSachSinhVien();
+    this.loadDanhSachGiangVien();
   }
   refresh() {
     this.searchTerm = '';
     if (this.paginator) {
       this.paginator.firstPage();
     }
-    this.loadDanhSachSinhVien();
+    this.loadDanhSachGiangVien();
   }
   detail(lecturer: any | null): void {
-    // Bước 4: Mở dialog thay vì đặt selectedNotification
     if (lecturer) {
       var popup = this.dialog.open(DetailLecturerComponent, {
         data: {
@@ -102,5 +109,35 @@ export class ListLecturerComponent implements OnInit{
       });
     }
   }
-}
+  updateUserStatus(status: string, tenDangNhap: string): void {
+    const body = {
+      tenDangNhap: tenDangNhap,
+      trangThai: status,
+    };
 
+    this.taiKhoanService.updateStatus(body).subscribe({
+      next: (data) => {
+        if (data.message && data.message === 'NO_CHANGE') {
+          this.toastr.warning('Không thay đổi!');
+        } else {
+          this.toastr.success('Cập nhật thành công!');
+          this.loadDanhSachGiangVien();
+        }
+      },
+      error: (error) => {
+        this.toastr.error('Có lỗi xảy ra!');
+        console.error('Error updating status:', error);
+      },
+    });
+  }
+  addLecturer(): void {
+    var popup = this.dialog.open(AddLecturerComponent, {
+      width: '50%',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+    });
+    popup.afterClosed().subscribe((item) => {
+      this.loadDanhSachGiangVien();
+    });
+  }
+}

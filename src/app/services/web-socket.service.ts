@@ -46,7 +46,6 @@ export class WebSocketService {
       }else{
         window.location.reload()
       }
-
     }
   }
 
@@ -59,6 +58,13 @@ export class WebSocketService {
       });
     } else {
       console.error('Failed to send message due to connection error');
+    }
+  }
+
+  disconnect(): void {
+    if (this.stompClient && this.stompClient.connected) {
+      this.stompClient.deactivate(); // Hủy kết nối socket
+      console.log('Web Socket is disconnected');
     }
   }
 }
