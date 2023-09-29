@@ -47,6 +47,8 @@ import { ReplyFeedbackComponent } from './components/admin/list-feedback/reply-f
 import { ListActivitiesComponent } from './components/admin/list-activities/list-activities.component';
 import { DetailActivityComponent } from './components/admin/list-activities/detail-activity/detail-activity.component';
 import { AddActivityComponent } from './components/admin/list-activities/add-activity/add-activity.component';
+import { ListLecturerJoinComponent } from './components/admin/list-activities/list-lecturer-join/list-lecturer-join.component';
+import { ManageRegisterActivitiesComponent } from './components/admin/manage-register-activities/manage-register-activities.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +91,9 @@ import { AddActivityComponent } from './components/admin/list-activities/add-act
     ReplyFeedbackComponent,
     ListActivitiesComponent,
     DetailActivityComponent,
-    AddActivityComponent
+    AddActivityComponent,
+    ListLecturerJoinComponent,
+    ManageRegisterActivitiesComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +103,7 @@ import { AddActivityComponent } from './components/admin/list-activities/add-act
     MaterialModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
-      timeOut: 1500,
+      timeOut: 2500,
       progressBar: true,
     }),
   ],

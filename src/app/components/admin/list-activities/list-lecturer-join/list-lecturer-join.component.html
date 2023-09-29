@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Danh sách giảng viên<hr></h1>
+
+<div mat-dialog-content class="table-container">
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="tenDangNhap" class="ma">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Mã </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.taiKhoan.tenDangNhap}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tenDayDu">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Tên </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.taiKhoan.tenDayDu}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.taiKhoan.email}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="closePopup()">Đóng</button>
+</div>

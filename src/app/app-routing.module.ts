@@ -20,6 +20,7 @@ import { ListLecturerComponent } from './components/admin/list-lecturer/list-lec
 import { ListFaqComponent } from './components/admin/list-faq/list-faq.component';
 import { ListFeedbackComponent } from './components/admin/list-feedback/list-feedback.component';
 import { ListActivitiesComponent } from './components/admin/list-activities/list-activities.component';
+import { ManageRegisterActivitiesComponent } from './components/admin/manage-register-activities/manage-register-activities.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,10 @@ const routes: Routes = [
       {
         path: 'danh-sach-hoat-dong',
         component: ListActivitiesComponent,
+      },
+      {
+        path: 'quan-ly-dang-ky-hoat-dong',
+        component: ManageRegisterActivitiesComponent,
       },
     ],
   },

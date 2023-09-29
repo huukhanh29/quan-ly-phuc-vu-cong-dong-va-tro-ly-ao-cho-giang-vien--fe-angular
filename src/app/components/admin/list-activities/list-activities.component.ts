@@ -8,6 +8,8 @@ import { HoatDong } from 'src/app/models/HoatDong';
 import { HoatDongService } from 'src/app/services/hoat-dong.service';
 import { DetailActivityComponent } from './detail-activity/detail-activity.component';
 import { AddActivityComponent } from './add-activity/add-activity.component';
+import { GiangVien } from 'src/app/models/GiangVien';
+import { ListLecturerJoinComponent } from './list-lecturer-join/list-lecturer-join.component';
 
 @Component({
   selector: 'app-list-activities',
@@ -24,6 +26,7 @@ export class ListActivitiesComponent implements OnInit{
   public type: string = '';
   public status: any;
   loaiHoatDongs: any[] = [];
+  giangVienToChucs: GiangVien[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -139,7 +142,18 @@ export class ListActivitiesComponent implements OnInit{
       });
     }
   }
-
+  listLecturer(item: any | null): void {
+    if (item) {
+      var popup = this.dialog.open(ListLecturerJoinComponent, {
+        data: {
+          item: item,
+        },
+        width: '50%',
+        enterAnimationDuration: '300ms',
+        exitAnimationDuration: '300ms',
+      });
+    }
+  }
   deleteHoatDong(id: any): void {
 
   }

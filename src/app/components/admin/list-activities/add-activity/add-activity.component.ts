@@ -125,18 +125,7 @@ export class AddActivityComponent implements OnInit {
     maLoaiHoatDong: [''],
     giangVienToChucs: this.formBuilder.array([]),
   });
-  test() {
-    const formData = this.myForm.value;
-    const batDau = new Date(formData.thoiGianBatDau ?? new Date());
-    console.log(batDau);
 
-    const utcTime = new Date(
-      batDau.getTime() + batDau.getTimezoneOffset() * 60000 + 7 * 60 * 60000
-    );
-    const isoUtcTime = utcTime.toISOString().slice(0, 19) + 'Z';
-
-    console.log(isoUtcTime);
-  }
 
   saveActivity() {
     if (this.myForm.valid) {

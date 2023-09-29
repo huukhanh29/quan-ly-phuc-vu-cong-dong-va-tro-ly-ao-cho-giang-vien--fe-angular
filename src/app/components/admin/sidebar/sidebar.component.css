@@ -31,4 +31,5 @@ mat-list-item button {
 
 .content{
   text-align: center;
+  min-height: 450px;
 }

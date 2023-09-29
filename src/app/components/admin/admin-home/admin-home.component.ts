@@ -37,8 +37,6 @@ export class AdminHomeComponent implements OnInit{
     ) { }
 
   ngOnInit(): void {
-    this.initPhanHoiForm();
-    this.loadDanhSachPhanHoi();
     const user = this.storageService.getUser()
     this.w.connect(user.tenTaiKhoan)
   }
@@ -70,63 +68,6 @@ export class AdminHomeComponent implements OnInit{
             console.log(err)
         }
       });
-  }
-  initPhanHoiForm() {
-    this.phanHoiForm = this.formBuilder.group({
-      noiDung: ['', Validators.required]
-    });
-  }
-
-  onSubmit() {
-    if (this.phanHoiForm.valid) {
-      this.phanHoiService.createPhanHoi(this.phanHoiForm.value).subscribe({
-        next: data => {
-          if(data.message == "exist"){
-            this.toastr.warning("Phản hồi đã tồn tại!");
-          }else{
-            this.loadDanhSachPhanHoi();
-            this.toastr.success("Gửi phản hồi thành công!");
-          }
-        },
-        error: err => {
-          this.toastr.error("Lỗi rồi!");
-        }
-      });
-    }
-  }
-
-  ngAfterViewInit() {
-    this.danhSachPhanHoi.paginator = this.paginator;
-    this.danhSachPhanHoi.sort = this.sort;
-    this.paginator.page.subscribe(() => {
-      this.loadDanhSachPhanHoi(this.paginator.pageIndex,
-        this.paginator.pageSize, this.sort.active, this.sort.direction);
-    });
-
-    this.sort.sortChange.subscribe(() => {
-      this.loadDanhSachPhanHoi(this.paginator.pageIndex,
-        this.paginator.pageSize, this.sort.active, this.sort.direction);
-    });
-  }
-
-  loadDanhSachPhanHoi(page: number = 0, size: number = 10, sortBy: string = 'ngayTao', sortDir: string = 'DESC') {
-    const user = this.storageService.getUser();
-    this.phanHoiService.getAllPhanHoi(page, size, sortBy, sortDir, this.searchTerm).subscribe(data => {
-      this.danhSachPhanHoi = new MatTableDataSource<any>(data.content);
-      this.paginator.length = data.totalElements;
-      this.length =data.totalElements;
-    });
-  }
-  onSearch() {
-    this.loadDanhSachPhanHoi();
-  }
-  refresh() {
-    this.searchTerm = '';
-    this.initPhanHoiForm();
-    if (this.paginator) {
-      this.paginator.firstPage();
-    }
-    this.loadDanhSachPhanHoi();
   }
 
 }

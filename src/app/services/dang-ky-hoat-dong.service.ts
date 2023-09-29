@@ -1,0 +1,96 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DangKyHoatDongService {
+  private baseUrl = '/api/dang-ky-hoat-dong';
+
+  constructor(private http: HttpClient) {}
+  getAllHoatDong(
+    page: number = 0,
+    size: number = 10,
+    sortBy: string = 'ngayTao',
+    sortDir: string = 'DESC',
+    searchTerm: string = '',
+    type: string = '',
+    status?: any,
+    startTime?: Date | null,
+    endTime?: Date | null
+  ): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString())
+      .set('sortBy', sortBy)
+      .set('sortDir', sortDir)
+      .set('searchTerm', searchTerm)
+      .set('type', type);
+
+    if (status) {
+      params = params.set('status', status);
+    }
+
+    if (startTime) {
+      let formattedStartTime = startTime.toISOString().split('T')[0];
+      params = params.set('startTime', formattedStartTime);
+    }
+
+    if (endTime) {
+      let formattedEndTime = endTime.toISOString().split('T')[0];
+      params = params.set('endTime', formattedEndTime);
+    }
+
+    return this.http.get<any>(`${this.baseUrl}/lay-danh-sach`, { params: params });
+  }
+  layDanhSachTatCaDangKyHoatDong(
+    page: number,
+    size: number,
+    sortBy: string,
+    sortDir: string,
+    searchTerm: string = '',
+    status?: string,
+    startTime?: Date | null,
+    endTime?: Date | null,
+    year?: string,
+    username?: number
+  ): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('page', page.toString());
+    params = params.append('size', size.toString());
+    params = params.append('sortBy', sortBy);
+    params = params.append('sortDir', sortDir);
+    params = params.append('searchTerm', searchTerm);
+    if (status) {
+      params = params.set('status', status);
+    }
+
+    if (startTime) {
+      let formattedStartTime = startTime.toISOString().split('T')[0];
+      params = params.set('startTime', formattedStartTime);
+    }
+
+    if (endTime) {
+      let formattedEndTime = endTime.toISOString().split('T')[0];
+      params = params.set('endTime', formattedEndTime);
+    }
+    if (year) params = params.append('year', year);
+
+    if (username) params = params.append('username', username.toString());
+
+    return this.http.get(`${this.baseUrl}/lay-danh-sach`, { params });
+  }
+
+  dangKyHoatDong(maHoatDong: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/${maHoatDong}`, {});
+  }
+
+  approveDangKyHoatDong(maDangKy: number): Observable<any> {
+    return this.http.put(`${this.baseUrl}/duyet-dang-ky/${maDangKy}`, {});
+  }
+
+  huyDangKyHoatDong(maDangKy: number, lyDoHuy: string): Observable<any> {
+    return this.http.put(`${this.baseUrl}/huy-hoat-dong/${maDangKy}`, { lyDoHuy });
+  }
+}

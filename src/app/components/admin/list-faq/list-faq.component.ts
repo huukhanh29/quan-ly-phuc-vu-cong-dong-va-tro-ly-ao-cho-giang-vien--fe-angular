@@ -80,16 +80,16 @@ export class ListFaqComponent implements OnInit {
   onSearch() {
     this.loadDanhSachCauHoi();
   }
-  filter() {
-    this.sort.direction = 'desc';
-    this.sort.active = 'soLuongCauHoiTuongTu';
-    this.loadDanhSachCauHoi(
-      this.paginator.pageIndex,
-      this.paginator.pageSize,
-      this.sort.active,
-      this.sort.direction
-    );
-  }
+  // filter() {
+  //   this.sort.direction = 'desc';
+  //   this.sort.active = 'soLuongCauHoiTuongTu';
+  //   this.loadDanhSachCauHoi(
+  //     this.paginator.pageIndex,
+  //     this.paginator.pageSize,
+  //     this.sort.active,
+  //     this.sort.direction
+  //   );
+  // }
 
   refresh() {
     this.searchTerm = '';

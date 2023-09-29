@@ -43,7 +43,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       } else {
         return this.authService.refreshAccessToken(user.refreshToken).pipe(
           switchMap((response: any) => {
-            console.log("ref ok")
+            alert('refresh ok')
             const newReq = this.addTokenHeader(req, response.token);
             this.storageService.saveUser(response);
             return next.handle(newReq);
