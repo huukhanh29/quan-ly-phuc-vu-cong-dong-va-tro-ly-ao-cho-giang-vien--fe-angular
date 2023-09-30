@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -6,21 +6,21 @@ import { DangKyHoatDongService } from 'src/app/services/dang-ky-hoat-dong.servic
 import { DangKyHoatDong } from 'src/app/models/DangKyHoatDong';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
-import { B } from '@angular/cdk/keycodes';
-import { AdminDestroyActivityComponent } from './admin-destroy-activity/admin-destroy-activity.component';
-import { WebSocketService } from 'src/app/services/web-socket.service';
-
+import { StorageService } from './../../../services/storage.service';
+import { DetailActivityComponent } from '../../admin/list-activities/detail-activity/detail-activity.component';
+import { HoatDongService } from './../../../services/hoat-dong.service';
 @Component({
-  selector: 'app-manage-register-activities',
-  templateUrl: './manage-register-activities.component.html',
-  styleUrls: ['./manage-register-activities.component.css'],
+  selector: 'app-manage-activity-lecturer',
+  templateUrl: './manage-activity-lecturer.component.html',
+  styleUrls: ['./manage-activity-lecturer.component.css'],
 })
-export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
+export class ManageActivityLecturerComponent implements OnInit {
   danhSachDangKy: MatTableDataSource<DangKyHoatDong> = new MatTableDataSource();
   displayedColumns: string[] = [
     'stt',
     'hoatDong.tenHoatDong',
-    'giangVien.taiKhoan.tenDayDu',
+    'hoatDong.thoiGianBatDau',
+    'hoatDong.thoiGianKetThuc',
     'hanhdong',
   ];
   length: number = 0;
@@ -28,6 +28,9 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
   public startTime!: Date | null;
   public endTime!: Date | null;
   public status: string = 'Chua_Duyet';
+  username: string = '';
+  years: string[] = [];
+  selectedYear: string | null = null;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -35,7 +38,8 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
     private dangKyHoatDongService: DangKyHoatDongService,
     private toastr: ToastrService,
     private dialog: MatDialog,
-    private webSocketService: WebSocketService,
+    private storageService: StorageService,
+    private hoatDongService: HoatDongService
   ) {}
   public filterVisible: boolean = true;
 
@@ -43,20 +47,12 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
     this.filterVisible = !this.filterVisible;
   }
   ngOnInit(): void {
+    const user = this.storageService.getUser();
+    this.username = user.tenTaiKhoan;
     this.loadDanhSachDangKy();
-    this.connectWebsocket();
+    this.getYears();
   }
 
-  connectWebsocket(){
-    console.log('ManageRegisterActivitiesComponent')
-    this.webSocketService.connect("admin");
-
-    this.webSocketService.messageEvent.subscribe((data) => {
-      if(data==='register-activity'){
-        this.loadDanhSachDangKy()
-      }
-    });
-  }
   ngAfterViewInit() {
     this.danhSachDangKy.paginator = this.paginator;
     this.danhSachDangKy.sort = this.sort;
@@ -78,13 +74,16 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
       );
     });
   }
-
   loadDanhSachDangKy(
     page: number = 0,
     size: number = 5,
     sortBy: string = 'hoatDong.ngayTao',
     sortDir: string = 'DESC',
-    status: any = this.status
+    status: any = this.status,
+    startTime?: Date | null,
+    endTime?: Date | null,
+    username?: string,
+
   ) {
     this.dangKyHoatDongService
       .layDanhSachTatCaDangKyHoatDong(
@@ -94,20 +93,50 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
         sortDir,
         this.searchTerm,
         status,
-        this.startTime,
-        this.endTime
+        startTime,
+        endTime,
+        username,
+        this.selectedYear
       )
       .subscribe((data) => {
-        console.log(data);
         this.danhSachDangKy = new MatTableDataSource<any>(data.content);
         this.paginator.length = data.totalElements;
         this.length = data.totalElements;
       });
   }
 
+  getYears() {
+    this.hoatDongService.getYears().subscribe((data: string[]) => {
+      this.years = data;
+    });
+  }
+  onYearChange() {
+    if (this.paginator) {
+      this.paginator.firstPage();
+    }
+    this.loadDanhSachDangKy(
+      this.paginator.pageIndex,
+      this.paginator.pageSize,
+      this.sort.active,
+      this.sort.direction,
+      this.status,
+      this.startTime,
+      this.endTime,
+      this.username
+    );
+  }
   onSearch() {
     this.status = '';
-    this.loadDanhSachDangKy();
+    this.loadDanhSachDangKy(
+      this.paginator.pageIndex,
+      this.paginator.pageSize,
+      this.sort.active,
+      this.sort.direction,
+      this.status,
+      this.startTime,
+      this.endTime,
+      this.username
+    );
   }
   filter() {
     this.loadDanhSachDangKy(
@@ -128,45 +157,18 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
     }
     this.loadDanhSachDangKy();
   }
-  duyet(id: number) {
-    this.dangKyHoatDongService.approveDangKyHoatDong(id).subscribe({
-      next: (data) => {
-        if (data.message && data.message === 'hoatdong-exist') {
-          this.toastr.warning('Bạn đã duyệt đăng ký hoạt động này rồi!');
-        } else {
-          this.loadDanhSachDangKy()
-          this.toastr.success('Đăng ký thành công!');
-        }
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-  huy(item:any){
-    this.openDialog(item, true);
-    console.log(item)
-  }
 
-  xemChiTiet(item:any){
-    this.openDialog(item, false);
-  }
-
-  openDialog(item: number, isEditable: boolean) {
-    var popup = this.dialog.open(AdminDestroyActivityComponent, {
-      data: {
-        item: item,
-        isEditable: isEditable
-      },
-      width: '50%',
-      enterAnimationDuration: '300ms',
-      exitAnimationDuration: '300ms',
-    });
-    popup.afterClosed().subscribe((item) => {
-      this.loadDanhSachDangKy();
-    });
-  }
-  ngOnDestroy(): void {
-    this.webSocketService.disconnect();
+  detail(item: any | null): void {
+    console.log(item);
+    if (item) {
+      var popup = this.dialog.open(DetailActivityComponent, {
+        data: {
+          item: item,
+        },
+        width: '40%',
+        enterAnimationDuration: '300ms',
+        exitAnimationDuration: '300ms',
+      });
+    }
   }
 }

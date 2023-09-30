@@ -1,0 +1,43 @@
+
+<app-sidebar>
+  <div drawer-content >
+    <mat-nav-list class = "drawer">
+    <mat-list-item routerLink="/quan-tri-vien/danh-sach-giang-vien" routerLinkActive="active-link">
+      <button mat-button disabled>
+       <mat-icon>school</mat-icon>
+        <span>Giảng Viên</span>
+      </button>
+    </mat-list-item>
+    <mat-list-item routerLink="/quan-tri-vien/danh-sach-sinh-vien" routerLinkActive="active-link">
+      <button  mat-button disabled>
+        <mat-icon>people</mat-icon><span>Sinh Viên</span></button>
+    </mat-list-item>
+    <mat-list-item routerLink="/quan-tri-vien/danh-sach-cau-hoi" routerLinkActive="active-link">
+      <button  mat-button disabled>
+        <mat-icon>question_answer</mat-icon><span>Câu hỏi</span></button>
+    </mat-list-item>
+    <mat-list-item routerLink="/quan-tri-vien/danh-sach-phan-hoi" routerLinkActive="active-link">
+      <button  mat-button disabled>
+        <mat-icon>feedback</mat-icon><span>Phản hồi</span></button>
+    </mat-list-item>
+    <mat-list-item routerLink="/quan-tri-vien/danh-sach-hoat-dong" routerLinkActive="active-link">
+      <button  mat-button disabled>
+        <mat-icon>local_activity</mat-icon><span>Hoạt động</span></button>
+    </mat-list-item>
+    <mat-list-item routerLink="/quan-tri-vien/quan-ly-dang-ky-hoat-dong" routerLinkActive="active-link">
+      <button  mat-button disabled>
+        <mat-icon>dns</mat-icon><span>Phê duyệt</span></button>
+    </mat-list-item>
+    <mat-list-item>
+      <button routerLink="table" mat-button>
+        <mat-icon>table</mat-icon> Table
+      </button>
+    </mat-list-item>
+    <mat-list-item>
+      <button routerLink="form" mat-button>
+        <mat-icon>receipt</mat-icon> Form
+      </button>
+    </mat-list-item>
+  </mat-nav-list>
+  </div>
+</app-sidebar>

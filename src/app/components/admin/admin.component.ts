@@ -6,7 +6,7 @@ import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-admin',
-  template: '<app-sidebar></app-sidebar>',
+  template: '<app-sidebar-admin></app-sidebar-admin>',
   styles: [
     `
       .mat-toolbar.mat-dark {
@@ -28,9 +28,7 @@ export class AdminComponent {
     if(!this.isLoggedIn){
       this.router.navigate(['/dang-nhap']);
     }else if (this.roles !== 'QuanTriVien') {
-      this.storageService.xoaCookie()
        this.router.navigate(['/403']);
     }
-
   }
 }

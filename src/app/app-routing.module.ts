@@ -21,6 +21,8 @@ import { ListFaqComponent } from './components/admin/list-faq/list-faq.component
 import { ListFeedbackComponent } from './components/admin/list-feedback/list-feedback.component';
 import { ListActivitiesComponent } from './components/admin/list-activities/list-activities.component';
 import { ManageRegisterActivitiesComponent } from './components/admin/manage-register-activities/manage-register-activities.component';
+import { ActivityLecturerComponent } from './components/lecturer/activity-lecturer/activity-lecturer.component';
+import { ManageActivityLecturerComponent } from './components/lecturer/manage-activity-lecturer/manage-activity-lecturer.component';
 
 const routes: Routes = [
   {
@@ -78,6 +80,15 @@ const routes: Routes = [
     children: [
       { path: '', component: LecturerHomeComponent },
       { path: 'trang-chu', component: LecturerHomeComponent },
+      {
+        path: 'danh-sach-hoat-dong',
+        component: ActivityLecturerComponent,
+      },
+      {
+        path: 'quan-ly-hoat-dong',
+        component: ManageActivityLecturerComponent,
+      },
+      { path: 'thong-bao', component: ThongBaoComponent },
     ],
   },
   {

@@ -1,0 +1,19 @@
+<app-list-activities [showAddButton]="false" [customButton]="customBtnTemplate"
+(activitiesLoaded)="onActivitiesLoaded($event)"></app-list-activities>
+
+<ng-template #customBtnTemplate let-item>
+  <button mat-stroked-button color="primary"
+          [disabled]="registrationStatus[item.maHoatDong] !== 'false' || item.trangThaiHoatDong !== 'SAP_DIEN_RA'"
+          (click)="dangKy(item)">
+    {{ registrationStatus[item.maHoatDong] === 'daduyet' ? 'Đã Duyệt' :
+       registrationStatus[item.maHoatDong] === 'dahuy' ? 'Đã Hủy' :
+       registrationStatus[item.maHoatDong] === 'dadangky' ? 'Đã Đăng Ký' : 'Đăng Ký' }}
+  </button>
+</ng-template>
+
+
+
+
+
+
+

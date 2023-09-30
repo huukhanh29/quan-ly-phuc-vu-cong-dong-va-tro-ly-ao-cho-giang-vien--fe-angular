@@ -1,0 +1,23 @@
+<mat-toolbar color="header" class="mat-elevation-z8">
+  <button (click)="drawer.toggle()" mat-icon-button>
+    <mat-icon color="basic">menu</mat-icon>
+  </button>
+  <span>Material UI Tutorial</span>
+  <span class="example-spacer"></span>
+  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+  <ng-content select="[notification]"></ng-content>
+  <mat-menu #menu="matMenu">
+    <button (click)="logout()" mat-menu-item>Logout</button>
+    <button mat-menu-item>hihi</button>
+  </mat-menu>
+</mat-toolbar>
+<mat-drawer-container autosize>
+  <mat-drawer #drawer opened="true" mode="side" position="start">
+    <ng-content select="[drawer-content]"></ng-content>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

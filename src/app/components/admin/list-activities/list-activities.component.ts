@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -24,11 +24,14 @@ export class ListActivitiesComponent implements OnInit{
   public startTime!: Date | null;
   public endTime!: Date | null;
   public type: string = '';
-  public status: any;
+  public status: string='SAP_DIEN_RA';
   loaiHoatDongs: any[] = [];
   giangVienToChucs: GiangVien[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @Input() showAddButton: boolean = true; // true by default
+  @Input() customButton: TemplateRef<any> | null = null;
+  @Output() activitiesLoaded = new EventEmitter<HoatDong[]>();
 
   constructor(
     private hoatDongService: HoatDongService,
@@ -86,6 +89,7 @@ export class ListActivitiesComponent implements OnInit{
         this.danhSachHoatDong = new MatTableDataSource<any>(data.content);
         this.paginator.length = data.totalElements;
         this.length = data.totalElements;
+        this.activitiesLoaded.emit(data.content);
       });
   }
 
@@ -105,7 +109,7 @@ export class ListActivitiesComponent implements OnInit{
   refresh() {
     this.searchTerm = '';
     this.type = '';
-    this.status = '';
+    this.status = 'SAP_DIEN_RA';
     this.startTime = null;
     this.endTime = null;
     if (this.paginator) {

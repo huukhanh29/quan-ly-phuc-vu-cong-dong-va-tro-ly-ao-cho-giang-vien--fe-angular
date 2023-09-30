@@ -14,10 +14,6 @@ import { ToastrService } from 'ngx-toastr';
 export class SidebarComponent {
   constructor(
     private dialog: MatDialog,
-    private storageService: StorageService,
-    private router: Router,
-    private taiKhoanService: TaiKhoanService,
-    private toastr: ToastrService
   ) {}
   badgevisible = false;
   badgevisibility() {
@@ -30,23 +26,6 @@ export class SidebarComponent {
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'accept') {
-        // const user = this.storageService.getUser();
-        // const body = {
-        //   refreshToken: user.refreshToken,
-        // };
-        // this.taiKhoanService.xoaRefreshToken(body).subscribe({
-        //   next: (data) => {
-        //     this.storageService.xoaCookie();
-        //     this.router.navigate(['dang-nhap']);
-        //     this.toastr.success('Bạn đã đăng xuất!!!');
-        //   },
-        //   error: (err) => {
-        //     console.error(err);
-        //   },
-        // });
-      }
-    });
+
   }
 }

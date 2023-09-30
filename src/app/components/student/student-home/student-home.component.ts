@@ -20,7 +20,7 @@ export class StudentHomeComponent implements OnInit {
           this.dataSV = response; // Gán dữ liệu sinh viên
         },
         error: (error) => {
-          this.router.navigate(["/bao-tri"])
+          //this.router.navigate(["/bao-tri"])
           console.error('Lỗi khi lấy thông tin sinh viên:', error);
         }
       });

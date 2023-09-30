@@ -1,0 +1,20 @@
+<app-sidebar>
+  <div notification class="demo-section">
+    <mat-icon color="noty" routerLink="/giang-vien/thong-bao" matBadge= {{soThongBao}} matBadgeColor="warn" matBadgeSize="small" aria-hidden="false">notifications</mat-icon>
+  </div>
+  <div drawer-content >
+    <mat-nav-list class = "drawer">
+      <mat-list-item routerLink="/giang-vien/danh-sach-hoat-dong" routerLinkActive="active-link">
+        <button mat-button disabled>
+         <mat-icon>local_activity</mat-icon>
+          <span>Hoạt Động</span>
+        </button>
+      </mat-list-item>
+      <mat-list-item routerLink="/giang-vien/quan-ly-hoat-dong" routerLinkActive="active-link">
+        <button  mat-button disabled>
+          <mat-icon>dns</mat-icon><span>Quản Lý Đăng Ký</span></button>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+</app-sidebar>
+

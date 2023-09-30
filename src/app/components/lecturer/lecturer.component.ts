@@ -4,7 +4,7 @@ import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-lecturer',
-  template: '<app-testl>',
+  template: '<app-sidebar-lecturer></app-sidebar-lecturer>',
   styles: ['']
 })
 export class LecturerComponent {
@@ -17,8 +17,6 @@ export class LecturerComponent {
     const user = this.storageService.getUser();
     this.roles = user.quyen;
     if (!this.isLoggedIn || this.roles !== 'GiangVien') {
-      //console.log(user)
-      this.storageService.xoaCookie()
       this.router.navigate(['/403']);
     }
   }

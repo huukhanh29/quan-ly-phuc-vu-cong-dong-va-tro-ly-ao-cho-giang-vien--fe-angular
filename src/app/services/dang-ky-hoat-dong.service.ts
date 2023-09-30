@@ -53,8 +53,9 @@ export class DangKyHoatDongService {
     status?: string,
     startTime?: Date | null,
     endTime?: Date | null,
-    year?: string,
-    username?: number
+    username?: string,
+    year?: string|null
+
   ): Observable<any> {
     let params = new HttpParams();
     params = params.append('page', page.toString());
@@ -85,12 +86,14 @@ export class DangKyHoatDongService {
   dangKyHoatDong(maHoatDong: number): Observable<any> {
     return this.http.post(`${this.baseUrl}/${maHoatDong}`, {});
   }
-
+  kiemTraDangKyHoatDong(maHoatDong: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/kiem-tra/${maHoatDong}`, {});
+  }
   approveDangKyHoatDong(maDangKy: number): Observable<any> {
     return this.http.put(`${this.baseUrl}/duyet-dang-ky/${maDangKy}`, {});
   }
 
-  huyDangKyHoatDong(maDangKy: number, lyDoHuy: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/huy-hoat-dong/${maDangKy}`, { lyDoHuy });
+  huyDangKyHoatDong(maDangKy: number, body: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/huy-hoat-dong/${maDangKy}`, body);
   }
 }

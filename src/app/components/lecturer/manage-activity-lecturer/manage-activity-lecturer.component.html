@@ -10,6 +10,8 @@
       />
       <mat-icon (click)="onSearch()" matSuffix color="search">search</mat-icon>
     </mat-form-field>
+
+
   </div>
   <div class="filter">
     <button mat-icon-button (click)="toggleFilter()">
@@ -22,12 +24,9 @@
   <div [ngClass]="{ hidden: !filterVisible }" class="date-range-container">
     <mat-form-field appearance="outline">
       <mat-label>Ngày bắt đầu</mat-label>
-      <input
-        matInput
-        [matDatepicker]="startPicker"
-        [(ngModel)]="startTime"
-        (ngModelChange)="filter()"
-      />
+      <input matInput [matDatepicker]="startPicker"
+      [(ngModel)]="startTime"
+      (ngModelChange)="filter()"  />
       <mat-datepicker-toggle
         matSuffix
         [for]="startPicker"
@@ -36,12 +35,10 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Ngày kết thúc</mat-label>
-      <input
-        matInput
-        [matDatepicker]="endPicker"
-        [(ngModel)]="endTime"
-        (ngModelChange)="filter()"
-      />
+      <input matInput
+      [matDatepicker]="endPicker"
+      [(ngModel)]="endTime"
+      (ngModelChange)="filter()"  />
       <mat-datepicker-toggle
         matSuffix
         [for]="endPicker"
@@ -51,11 +48,18 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Trạng thái</mat-label>
-      <mat-select [(value)]="status" (valueChange)="filter()">
+      <mat-select [(value)]="status"
+      (valueChange)="filter()" >
         <mat-option value="Chua_Duyet">Chưa Duyệt</mat-option>
         <mat-option value="Da_Duyet">Đã Duyệt</mat-option>
         <mat-option value="Da_Huy">Đã Hủy</mat-option>
         <!-- thêm các option khác nếu cần -->
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Năm</mat-label>
+      <mat-select [(value)]="selectedYear" (valueChange)="onYearChange()">
+        <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -75,57 +79,30 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header
           >Tên hoạt động</mat-header-cell
         >
-        <mat-cell *matCellDef="let item">
-          {{ item.hoatDong.tenHoatDong }}</mat-cell
-        >
+        <mat-cell *matCellDef="let item"> {{ item.hoatDong.tenHoatDong }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="giangVien.taiKhoan.tenDayDu">
+      <ng-container matColumnDef="hoatDong.thoiGianBatDau">
         <mat-header-cell *matHeaderCellDef mat-sort-header
-          >Tên Giảng Viên</mat-header-cell
+          >Bắt đầu</mat-header-cell
         >
         <mat-cell *matCellDef="let item">
-          {{ item.giangVien.taiKhoan.tenDayDu }}</mat-cell
+          {{ item.hoatDong.thoiGianBatDau | date : "HH:mm:ss dd/MM/yyyy" }}</mat-cell
         >
       </ng-container>
-
+      <ng-container matColumnDef="hoatDong.thoiGianKetThuc">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Kết thúc</mat-header-cell
+        >
+        <mat-cell *matCellDef="let item">
+          {{ item.hoatDong.thoiGianKetThuc | date : "HH:mm:ss dd/MM/yyyy" }}</mat-cell
+        >
+      </ng-container>
       <ng-container matColumnDef="hanhdong">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let item">
-          <ng-container *ngIf="item.trangThaiDangKy === 'Chua_Duyet'; else daDuyetOrDaHuyBlock">
-            <button mat-stroked-button
-                    (click)="duyet(item.maDangKy)"
-                    color="primary"
-                    style="margin-right: 5px;">
-              Duyệt
-            </button>
-            <button mat-stroked-button
-                    (click)="huy(item)"
-                    color="warn">
-              Hủy
-            </button>
-          </ng-container>
-
-          <ng-template #daDuyetOrDaHuyBlock>
-            <ng-container *ngIf="item.trangThaiDangKy === 'Da_Duyet'; else daHuyBlock">
-              <button mat-stroked-button
-                      (click)="huy(item)"
-                      color="warn"
-                      style="margin-right: 5px;">
-                Hủy
-              </button>
-            </ng-container>
-            <ng-template #daHuyBlock>
-              <button mat-stroked-button
-                      (click)="duyet(item.maDangKy)"
-                      color="primary"
-                      style="margin-right: 5px;">
-                Duyệt Lại
-              </button>
-              <mat-icon (click)="xemChiTiet(item)" style="cursor: pointer;">info</mat-icon>
-            </ng-template>
-          </ng-template>
-
-
+          <mat-icon color="primary" (click)="detail(item.hoatDong)"
+          >infor</mat-icon
+        >
         </mat-cell>
       </ng-container>
 

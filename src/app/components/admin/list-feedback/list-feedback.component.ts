@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,12 +12,13 @@ import { DetailFeedbackComponent } from './detail-feedback/detail-feedback.compo
 import { PhanHoi } from 'src/app/models/PhanHoi';
 import { DeleteFeedbackComponent } from './delete-feedback/delete-feedback.component';
 import { ReplyFeedbackComponent } from './reply-feedback/reply-feedback.component';
+import { WebSocketService } from 'src/app/services/web-socket.service';
 @Component({
   selector: 'app-list-feedback',
   templateUrl: './list-feedback.component.html',
   styleUrls: ['./list-feedback.component.css']
 })
-export class ListFeedbackComponent {
+export class ListFeedbackComponent implements OnInit, OnDestroy{
   danhSachPhanHoi: MatTableDataSource<PhanHoi> = new MatTableDataSource();
   displayedColumns: string[] = ['stt', 'noiDung', 'cauHoi.cauHoi','sinhVien.taiKhoan.tenDayDu', 'hanhdong'];
   length: number = 0;
@@ -26,7 +27,7 @@ export class ListFeedbackComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
-
+    private webSocketService: WebSocketService,
     private phanHoiService: PhanHoiService,
     private storageService: StorageService,
     private toastr: ToastrService,
@@ -35,9 +36,19 @@ export class ListFeedbackComponent {
   ) {}
 
   ngOnInit(): void {
+   this.connectWebsocket();
     this.loadDanhSachPhanHoi();
   }
+  connectWebsocket(){
+    const user = this.storageService.getUser();
+    this.webSocketService.connect(user.tenTaiKhoan);
 
+    this.webSocketService.messageEvent.subscribe((data) => {
+      if(data==='send-feedback'){
+        this.loadDanhSachPhanHoi();
+      }
+    });
+  }
   ngAfterViewInit() {
     this.danhSachPhanHoi.paginator = this.paginator;
     this.danhSachPhanHoi.sort = this.sort;
@@ -139,5 +150,8 @@ export class ListFeedbackComponent {
     popup.afterClosed().subscribe((item) => {
       this.loadDanhSachPhanHoi();
     });
+  }
+  ngOnDestroy(): void {
+    this.webSocketService.disconnect();
   }
 }

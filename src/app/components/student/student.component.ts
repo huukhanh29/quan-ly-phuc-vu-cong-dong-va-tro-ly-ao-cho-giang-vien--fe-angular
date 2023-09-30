@@ -10,6 +10,7 @@ import { StorageService } from 'src/app/services/storage.service';
   styles: ['']
 })
 export class StudentComponent {
+
   private roles: string = '';
   isLoggedIn = false;
   constructor(private storageService: StorageService, private router: Router) {}
@@ -19,7 +20,6 @@ export class StudentComponent {
     const user = this.storageService.getUser();
     this.roles = user.quyen;
     if (!this.isLoggedIn || this.roles !== 'SinhVien') {
-      this.storageService.xoaCookie()
       this.router.navigate(['/403']);
     }
   }

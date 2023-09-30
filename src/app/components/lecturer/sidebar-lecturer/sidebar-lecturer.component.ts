@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { LogoutComponent } from '../../auth/logout/logout.component';
-import { MatDialog } from '@angular/material/dialog';
-import { ThongBaoService } from 'src/app/services/thong-bao.service';
-import { Subscription } from 'rxjs';
-import { WebSocketService } from 'src/app/services/web-socket.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { ThongBaoService } from 'src/app/services/thong-bao.service';
+import { WebSocketService } from 'src/app/services/web-socket.service';
 
 @Component({
-  selector: 'app-student-header',
-  templateUrl: './student-header.component.html',
-  styleUrls: ['./student-header.component.css']
+  selector: 'app-sidebar-lecturer',
+  templateUrl: './sidebar-lecturer.component.html',
+  styleUrls: ['./sidebar-lecturer.component.css']
 })
-export class StudentHeaderComponent implements OnInit{
+export class SidebarLecturerComponent implements OnInit{
   soThongBao: number =0;
-  constructor( private dialog: MatDialog,
+  constructor(
     private thongBaoService: ThongBaoService,
     private webSocketService: WebSocketService,
     private storageService:StorageService
@@ -23,6 +20,7 @@ export class StudentHeaderComponent implements OnInit{
       this.laySoThongBao();
       this.connectWebsocket();
     }
+
     laySoThongBao(){
       this.thongBaoService.laySoThongBaoChuaDocTheoNguoiDungId().subscribe({
         next: data =>{
@@ -33,14 +31,14 @@ export class StudentHeaderComponent implements OnInit{
         }
       })
     }
+
     connectWebsocket(){
       const user = this.storageService.getUser();
       this.webSocketService.connect(user.tenTaiKhoan);
-
       this.webSocketService.messageEvent.subscribe((data) => {
-        if(data==="update-status" || data==="reply-feedback"){
+        console.log("xxxx")
+        if(data==="approve-activity" || data==="destroy-activity"){
           this.laySoThongBao();
-          console.log("cap nhat")
         }
       });
     }
@@ -48,11 +46,5 @@ export class StudentHeaderComponent implements OnInit{
     ngOnDestroy(): void {
       this.webSocketService.disconnect()
     }
-    dangXuat(): void {
-      this.dialog.open(LogoutComponent, {
-        width: '350px',
-        enterAnimationDuration: '300ms',
-        exitAnimationDuration: '300ms',
-      });
-    }
+
 }

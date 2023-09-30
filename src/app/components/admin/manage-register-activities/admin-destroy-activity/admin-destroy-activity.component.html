@@ -1,0 +1,16 @@
+<form [formGroup]="myform" (ngSubmit)="data.isEditable ? huy() : closePopup()">
+  <h1 mat-dialog-title>{{data.isEditable ? 'Hủy Đăng Ký' : 'Xem Chi Tiết'}}</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Lý do</mat-label>
+      <textarea formControlName="lyDoHuy" matInput required [ngStyle]="{'color': data.isEditable ? '' : 'black'}"></textarea>
+      <mat-error *ngIf="formControls.lyDoHuy && formControls.lyDoHuy.errors?.['required']">
+        Lý do hủy là bắt buộc
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button *ngIf="data.isEditable" mat-raised-button type="submit" color="primary">Hủy</button>
+    <button (click)="closePopup()" mat-raised-button color="warn">Đóng</button>
+  </div>
+</form>

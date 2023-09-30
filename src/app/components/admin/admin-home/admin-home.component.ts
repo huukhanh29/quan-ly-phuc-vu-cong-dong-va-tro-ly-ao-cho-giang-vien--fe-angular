@@ -38,7 +38,7 @@ export class AdminHomeComponent implements OnInit{
 
   ngOnInit(): void {
     const user = this.storageService.getUser()
-    this.w.connect(user.tenTaiKhoan)
+    //this.w.connect(user.tenTaiKhoan)
   }
   taiKhoanData: any = {
     tenDangNhap: 'giangvien1',
