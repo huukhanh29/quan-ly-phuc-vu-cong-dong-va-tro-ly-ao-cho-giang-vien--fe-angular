@@ -53,6 +53,10 @@ import { ActivityLecturerComponent } from './components/lecturer/activity-lectur
 import { ManageActivityLecturerComponent } from './components/lecturer/manage-activity-lecturer/manage-activity-lecturer.component';
 import { SidebarAdminComponent } from './components/admin/sidebar-admin/sidebar-admin.component';
 import { AdminDestroyActivityComponent } from './components/admin/manage-register-activities/admin-destroy-activity/admin-destroy-activity.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { LichHoatDongComponent } from './components/lich-hoat-dong/lich-hoat-dong.component';
+import { ChiTietSuKienComponent } from './components/lich-hoat-dong/chi-tiet-su-kien/chi-tiet-su-kien.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +104,9 @@ import { AdminDestroyActivityComponent } from './components/admin/manage-registe
     SidebarLecturerComponent,
     ActivityLecturerComponent,
     ManageActivityLecturerComponent,
-    AdminDestroyActivityComponent
+    AdminDestroyActivityComponent,
+    LichHoatDongComponent,
+    ChiTietSuKienComponent
   ],
   imports: [
     BrowserModule,
@@ -113,6 +119,7 @@ import { AdminDestroyActivityComponent } from './components/admin/manage-registe
       timeOut: 2500,
       progressBar: true,
     }),
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [httpInterceptorProviders, CookieService],
   bootstrap: [AppComponent],

@@ -38,6 +38,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatetimepickerModule, MatNativeDatetimeModule } from '@mat-datetimepicker/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [],
   imports: [
@@ -74,7 +75,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatDatetimepickerModule,
     MatNativeDatetimeModule,
     MatSnackBarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTooltipModule
   ],
   exports: [
     MatToolbarModule,
@@ -110,6 +112,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatNativeDatetimeModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }

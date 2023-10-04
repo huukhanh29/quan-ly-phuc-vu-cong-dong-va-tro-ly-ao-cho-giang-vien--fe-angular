@@ -75,7 +75,7 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header
           >Tên hoạt động</mat-header-cell
         >
-        <mat-cell *matCellDef="let item">
+        <mat-cell *matCellDef="let item" (click)="chiTietHoatDong(item.hoatDong)">
           {{ item.hoatDong.tenHoatDong }}</mat-cell
         >
       </ng-container>
@@ -83,7 +83,7 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header
           >Tên Giảng Viên</mat-header-cell
         >
-        <mat-cell *matCellDef="let item">
+        <mat-cell *matCellDef="let item" (click)="chiTietGiangVien(item.giangVien)">
           {{ item.giangVien.taiKhoan.tenDayDu }}</mat-cell
         >
       </ng-container>

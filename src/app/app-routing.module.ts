@@ -23,6 +23,7 @@ import { ListActivitiesComponent } from './components/admin/list-activities/list
 import { ManageRegisterActivitiesComponent } from './components/admin/manage-register-activities/manage-register-activities.component';
 import { ActivityLecturerComponent } from './components/lecturer/activity-lecturer/activity-lecturer.component';
 import { ManageActivityLecturerComponent } from './components/lecturer/manage-activity-lecturer/manage-activity-lecturer.component';
+import { LichHoatDongComponent } from './components/lich-hoat-dong/lich-hoat-dong.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
       {
         path: 'quan-ly-dang-ky-hoat-dong',
         component: ManageRegisterActivitiesComponent,
+      },
+      {
+        path: 'lich',
+        component: LichHoatDongComponent,
       },
     ],
   },

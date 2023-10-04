@@ -37,7 +37,7 @@ export class SidebarLecturerComponent implements OnInit{
       this.webSocketService.connect(user.tenTaiKhoan);
       this.webSocketService.messageEvent.subscribe((data) => {
         console.log("xxxx")
-        if(data==="approve-activity" || data==="destroy-activity"){
+        if(data==="approve-activity" || data==="destroy-activity" || "update-status"){
           this.laySoThongBao();
         }
       });

@@ -36,7 +36,7 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
     this.webSocketService.connect(user.tenTaiKhoan);
 
     this.webSocketService.messageEvent.subscribe((data) => {
-      if(data==='reply-feedback'){
+      if(data==='reply-feedback' || data==='approve-activity'){
         this.loadNotifications();
       }
     });
@@ -119,7 +119,7 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
     }
   }
   disconnectWebSocket(): void {
-    this.webSocketService.disconnect(); 
+    this.webSocketService.disconnect();
   }
   ngOnDestroy(): void {
     this.disconnectWebSocket();

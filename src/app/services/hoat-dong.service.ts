@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HoatDong } from '../models/HoatDong';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class HoatDongService {
     return this.http.get(`${this.baseUrl}/${maHoatDong}`);
   }
 
-  getAllHoatDong1(params:any): Observable<any> {
-    return this.http.get(`${this.baseUrl}/lay-danh-sach`, { params });
+  getAllHoatDongs1(): Observable<HoatDong[]> {
+    return this.http.get<HoatDong[]>(`${this.baseUrl}/all`);
   }
   getAllHoatDong(
     page: number = 0,

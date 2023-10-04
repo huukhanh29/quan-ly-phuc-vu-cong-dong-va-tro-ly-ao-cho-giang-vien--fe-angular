@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { B } from '@angular/cdk/keycodes';
 import { AdminDestroyActivityComponent } from './admin-destroy-activity/admin-destroy-activity.component';
 import { WebSocketService } from 'src/app/services/web-socket.service';
+import { DetailActivityComponent } from '../list-activities/detail-activity/detail-activity.component';
+import { DetailLecturerComponent } from '../list-lecturer/detail-lecturer/detail-lecturer.component';
 
 @Component({
   selector: 'app-manage-register-activities',
@@ -151,7 +153,30 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
   xemChiTiet(item:any){
     this.openDialog(item, false);
   }
-
+  chiTietHoatDong(item: any | null): void {
+    if (item) {
+      var popup = this.dialog.open(DetailActivityComponent, {
+        data: {
+          item: item,
+        },
+        width: '40%',
+        enterAnimationDuration: '300ms',
+        exitAnimationDuration: '300ms',
+      });
+    }
+  }
+  chiTietGiangVien(lecturer: any | null): void {
+    if (lecturer) {
+      var popup = this.dialog.open(DetailLecturerComponent, {
+        data: {
+          lecturer: lecturer,
+        },
+        width: '40%',
+        enterAnimationDuration: '300ms',
+        exitAnimationDuration: '300ms',
+      });
+    }
+  }
   openDialog(item: number, isEditable: boolean) {
     var popup = this.dialog.open(AdminDestroyActivityComponent, {
       data: {
