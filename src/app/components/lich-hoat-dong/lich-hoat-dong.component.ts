@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarEvent } from 'angular-calendar';
-import { ChiTietSuKienComponent } from './chi-tiet-su-kien/chi-tiet-su-kien.component';
 import { DetailActivityComponent } from '../admin/list-activities/detail-activity/detail-activity.component';
 import { HoatDongService } from 'src/app/services/hoat-dong.service';
 import { addMonths, subMonths, addYears, subYears, format } from 'date-fns';
@@ -31,7 +30,6 @@ export class LichHoatDongComponent implements OnInit {
           title: hoatDong.tenHoatDong,
           meta: hoatDong
         }));
-
       },
       error: (err) => {
         console.log(err);

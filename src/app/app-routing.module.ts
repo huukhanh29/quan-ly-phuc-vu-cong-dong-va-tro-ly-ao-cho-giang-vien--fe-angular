@@ -6,10 +6,8 @@ import { AdminHomeComponent } from './components/admin/admin-home/admin-home.com
 import { StudentHomeComponent } from './components/student/student-home/student-home.component';
 import { LecturerComponent } from './components/lecturer/lecturer.component';
 import { LecturerHomeComponent } from './components/lecturer/lecturer-home/lecturer-home.component';
-import { AppComponent } from './app.component';
 import { PhanHoiChatComponent } from './components/student/phan-hoi-chat/phan-hoi-chat.component';
 import { StudentComponent } from './components/student/student.component';
-import { TestComponent } from './components/student/test/test.component';
 import { RootComponent } from './root.component';
 import { ThongBaoComponent } from './components/thong-bao/thong-bao.component';
 import { ListStudentComponent } from './components/admin/list-student/list-student.component';
@@ -24,6 +22,7 @@ import { ManageRegisterActivitiesComponent } from './components/admin/manage-reg
 import { ActivityLecturerComponent } from './components/lecturer/activity-lecturer/activity-lecturer.component';
 import { ManageActivityLecturerComponent } from './components/lecturer/manage-activity-lecturer/manage-activity-lecturer.component';
 import { LichHoatDongComponent } from './components/lich-hoat-dong/lich-hoat-dong.component';
+import { ChartPieComponent } from './components/lecturer/chart-pie/chart-pie.component';
 
 const routes: Routes = [
   {
@@ -94,6 +93,7 @@ const routes: Routes = [
         component: ManageActivityLecturerComponent,
       },
       { path: 'thong-bao', component: ThongBaoComponent },
+      { path: 'bieu-do', component: ChartPieComponent },
     ],
   },
   {

@@ -1,0 +1,15 @@
+mat-card {
+  margin: 16px;
+  padding: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.chart-container {
+  display: block;
+  height: 400px;
+  width: 100%;
+}

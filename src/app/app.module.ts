@@ -56,8 +56,9 @@ import { AdminDestroyActivityComponent } from './components/admin/manage-registe
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { LichHoatDongComponent } from './components/lich-hoat-dong/lich-hoat-dong.component';
-import { ChiTietSuKienComponent } from './components/lich-hoat-dong/chi-tiet-su-kien/chi-tiet-su-kien.component';
-
+import { NgChartsModule } from 'ng2-charts';
+import { ChartPieComponent } from './components/lecturer/chart-pie/chart-pie.component';
+import { ChartLineComponent } from './components/admin/chart-line/chart-line.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -106,7 +107,8 @@ import { ChiTietSuKienComponent } from './components/lich-hoat-dong/chi-tiet-su-
     ManageActivityLecturerComponent,
     AdminDestroyActivityComponent,
     LichHoatDongComponent,
-    ChiTietSuKienComponent
+    ChartPieComponent,
+    ChartLineComponent
   ],
   imports: [
     BrowserModule,
@@ -115,6 +117,7 @@ import { ChiTietSuKienComponent } from './components/lich-hoat-dong/chi-tiet-su-
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
+    NgChartsModule,
     ToastrModule.forRoot({
       timeOut: 2500,
       progressBar: true,

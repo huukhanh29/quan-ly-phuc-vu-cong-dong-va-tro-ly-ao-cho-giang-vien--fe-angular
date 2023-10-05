@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-content class="content">
+
+    <div class="left-side">
+      <mat-form-field appearance="outline">
+        <mat-label>Chọn năm học</mat-label>
+        <mat-select [(value)]="selectedYear" (selectionChange)="onYearChange()">
+          <mat-option *ngFor="let year of academicYears" [value]="year">{{year}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="stats">
+        <p><strong>Tổng giờ đã hoàn thành:</strong> {{ totalHours }}</p>
+        <p><strong>Giờ chưa hoàn thành:</strong> {{ missHours }}</p>
+        <p><strong>Giờ bắt buộc:</strong> {{ requiredHours }}</p>
+      </div>
+    </div>
+    <div class="right-side">
+      <canvas baseChart
+        [type]="'pie'"
+        [datasets]="pieChartDatasets"
+        [labels]="pieChartLabels"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [legend]="pieChartLegend">
+      </canvas>
+    </div>
+  </mat-card-content>
+</mat-card>
