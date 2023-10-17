@@ -1,5 +1,5 @@
 <form [formGroup]="myForm" (ngSubmit)="saveActivity()">
-  <h1 mat-dialog-title>Thêm hoạt động</h1>
+  <h1 mat-dialog-title>{{ isEditing ? 'Chỉnh Sửa Hoạt Động' : 'Thêm Hoạt Động' }}</h1>
   <div mat-dialog-content>
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Tên hoạt động</mat-label>
@@ -173,6 +173,7 @@
   </div>
   <div mat-dialog-actions>
     <button mat-raised-button type="submit" color="primary">Lưu</button>
-    <button (click)="closePopup()" mat-raised-button color="warn">Đóng</button>
+    <button (click)="closePopup($event)" mat-raised-button color="warn">Đóng</button>
+
   </div>
 </form>

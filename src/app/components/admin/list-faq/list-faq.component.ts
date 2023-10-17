@@ -121,6 +121,17 @@ export class ListFaqComponent implements OnInit {
       this.loadDanhSachCauHoi();
     });
   }
+  editFaq(item:any): void {
+    var popup = this.dialog.open(AddFaqComponent, {
+      width: '50%',
+      data:{item},
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+    });
+    popup.afterClosed().subscribe((item) => {
+      this.loadDanhSachCauHoi();
+    });
+  }
   deleteFaq(id: any): void {
     var popup = this.dialog.open(DeleteFaqComponent, {
       width: '50%',

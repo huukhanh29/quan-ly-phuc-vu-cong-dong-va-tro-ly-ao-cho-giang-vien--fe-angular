@@ -59,6 +59,19 @@ import { LichHoatDongComponent } from './components/lich-hoat-dong/lich-hoat-don
 import { NgChartsModule } from 'ng2-charts';
 import { ChartPieComponent } from './components/lecturer/chart-pie/chart-pie.component';
 import { ChartLineComponent } from './components/admin/chart-line/chart-line.component';
+import { DeleteComponent } from './components/delete/delete.component';
+import { LoaiHoatDongComponent } from './components/admin/loai-hoat-dong/loai-hoat-dong.component';
+import { ChiTietLhdComponent } from './components/admin/loai-hoat-dong/chi-tiet-lhd/chi-tiet-lhd.component';
+import { FormLhdComponent } from './components/admin/loai-hoat-dong/form-lhd/form-lhd.component';
+import { TruongComponent } from './components/admin/truong/truong.component';
+import { KhoaComponent } from './components/admin/khoa/khoa.component';
+import { ChucDanhComponent } from './components/admin/chuc-danh/chuc-danh.component';
+import { FormTruongComponent } from './components/admin/truong/form-truong/form-truong.component';
+import { ChiTietTruongComponent } from './components/admin/truong/chi-tiet-truong/chi-tiet-truong.component';
+import { FormKhoaComponent } from './components/admin/khoa/form-khoa/form-khoa.component';
+import { ChiTietKhoaComponent } from './components/admin/khoa/chi-tiet-khoa/chi-tiet-khoa.component';
+import { ChiTietChucDanhComponent } from './components/admin/chuc-danh/chi-tiet-chuc-danh/chi-tiet-chuc-danh.component';
+import { FormChucDanhComponent } from './components/admin/chuc-danh/form-chuc-danh/form-chuc-danh.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,7 +121,20 @@ import { ChartLineComponent } from './components/admin/chart-line/chart-line.com
     AdminDestroyActivityComponent,
     LichHoatDongComponent,
     ChartPieComponent,
-    ChartLineComponent
+    ChartLineComponent,
+    DeleteComponent,
+    LoaiHoatDongComponent,
+    ChiTietLhdComponent,
+    FormLhdComponent,
+    TruongComponent,
+    KhoaComponent,
+    ChucDanhComponent,
+    FormTruongComponent,
+    ChiTietTruongComponent,
+    FormKhoaComponent,
+    ChiTietKhoaComponent,
+    ChiTietChucDanhComponent,
+    FormChucDanhComponent
   ],
   imports: [
     BrowserModule,

@@ -112,7 +112,10 @@
           <mat-icon color="primary" (click)="detail(item)"
             >infor</mat-icon
           >
-          <mat-icon color="accent" (click)="deleteHoatDong(item.maCauHoi)"
+          <mat-icon color="primary" (click)="editHoatDong(item)"
+          >edit</mat-icon
+        >
+          <mat-icon *ngIf="item.trangThaiHoatDong === 'SAP_DIEN_RA'" color="accent" (click)="deleteHoatDong(item.maHoatDong)"
             >delete
           </mat-icon>
           <ng-container *ngIf="customButton">

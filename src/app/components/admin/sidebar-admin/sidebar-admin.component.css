@@ -16,15 +16,13 @@ mat-icon {
   color: white;
 }
 
-mat-list-item button {
-  border-radius: 10px;
-}
-
 .active-link {
   border-radius: 10px;
   background-color: #815af7;
   border-left: 5px solid #ffff00;
   font-weight: bold;
+  display: flex!important;
+  justify-content: space-between!important;
 }
 
 .active-link mat-icon,
@@ -36,3 +34,9 @@ mat-list-item button {
   text-align: center;
   min-height: 450px;
 }
+
+.drawer div {
+  margin-top: 5px;
+  padding-left: 40px;
+}
+

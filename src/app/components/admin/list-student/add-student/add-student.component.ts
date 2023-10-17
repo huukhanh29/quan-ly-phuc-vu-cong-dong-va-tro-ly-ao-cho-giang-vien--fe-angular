@@ -26,9 +26,11 @@ export class AddStudentComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  closePopup() {
+  closePopup(event: Event): void {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
     this.dialogRef.close('Closed');
   }
+
 
   myform = this.formBuilder.group({
     tenDayDu: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^.*\s.*$/)]],
@@ -48,7 +50,7 @@ export class AddStudentComponent implements OnInit {
     const formData = this.myform.value;
       this.taiKhoanService.createUser(formData).subscribe({
         next: data=>{
-          this.closePopup();
+          this.dialogRef.close('Closed');
           this.toastr.success("Thêm tài khoản sinh viên thành công!");
         },
         error: err=>{
@@ -64,7 +66,7 @@ export class AddStudentComponent implements OnInit {
       } );
     }
   }
-  
+
 
 }
 

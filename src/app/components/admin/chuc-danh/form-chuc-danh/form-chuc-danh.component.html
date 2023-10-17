@@ -1,0 +1,26 @@
+<form [formGroup]="myform" (ngSubmit)="save()">
+  <h1 mat-dialog-title>{{ data && data.item ? 'Cập nhật Chức Danh' : 'Thêm Chức Danh' }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Tên Chức Danh</mat-label>
+      <input formControlName="tenChucDanh" matInput required />
+      <mat-error *ngIf="formControls.tenChucDanh && formControls.tenChucDanh.errors?.['required']">
+        Tên Chức Danh là bắt buộc
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Số giờ bắt buộc</mat-label>
+      <input formControlName="gioBatBuoc" matInput required />
+      <mat-error *ngIf="formControls.gioBatBuoc && formControls.gioBatBuoc.errors?.['required']">
+        Số giờ bắt buộc là bắt buộc
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button type="submit" color="primary">
+      {{ data && data.item ? 'Cập nhật' : 'Lưu' }}
+    </button>
+    <button (click)="closePopup($event)" mat-raised-button color="warn">Đóng</button>
+  </div>
+</form>

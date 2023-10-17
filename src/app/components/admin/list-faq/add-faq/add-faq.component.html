@@ -1,5 +1,5 @@
 <form [formGroup]="myform" (ngSubmit)="savelecturer()">
-  <h1 mat-dialog-title>Thêm dữ liệu bộ câu hỏi</h1>
+  <h1 mat-dialog-title>   {{ data && data.item ? 'Cập nhật dữ liệu bộ câu hỏi' : 'Thêm dữ liệu bộ câu hỏi' }}</h1>
   <div mat-dialog-content>
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Từ khóa</mat-label>
@@ -23,7 +23,8 @@
 
   </div>
   <div mat-dialog-actions>
-    <button mat-raised-button type="submit" color="primary">Lưu</button>
-    <button (click)="closePopup()" mat-raised-button color="warn">Đóng</button>
+    <button mat-raised-button type="submit" color="primary">   {{ data && data.item ? 'Cập nhật' : 'Lưu' }}</button>
+    <button (click)="closePopup($event)" mat-raised-button color="warn">Đóng</button>
+
   </div>
 </form>

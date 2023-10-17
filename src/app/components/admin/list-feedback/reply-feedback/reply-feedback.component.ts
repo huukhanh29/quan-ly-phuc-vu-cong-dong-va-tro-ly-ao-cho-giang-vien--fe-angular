@@ -27,9 +27,11 @@ export class ReplyFeedbackComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  closePopup() {
+  closePopup(event: Event): void {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
     this.dialogRef.close('Closed');
   }
+
 
   myform = this.formBuilder.group({
     cauHoi: ['', Validators.required],
@@ -44,7 +46,7 @@ export class ReplyFeedbackComponent implements OnInit {
           if(data.message && data.message === 'cauhoi-exist'){
             this.toastr.warning("Từ khóa đã tồn tại! Đã gán cho phản hồi!");
           }else{
-            this.closePopup();
+            this.dialogRef.close('Closed');
             this.toastr.success("Thêm câu hỏi thành công!");
           }
 

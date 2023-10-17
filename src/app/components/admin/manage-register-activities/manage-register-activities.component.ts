@@ -84,7 +84,7 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
   loadDanhSachDangKy(
     page: number = 0,
     size: number = 5,
-    sortBy: string = 'hoatDong.ngayTao',
+    sortBy: string = 'hoatDong.thoiGianBatDau',
     sortDir: string = 'DESC',
     status: any = this.status
   ) {
@@ -122,7 +122,7 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
   }
   refresh() {
     this.searchTerm = '';
-    this.status = '';
+    this.status = 'Chua_Duyet';
     this.startTime = null;
     this.endTime = null;
     if (this.paginator) {

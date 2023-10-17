@@ -16,10 +16,30 @@ export class ChucDanhService {
   }
 
   updateGiangVien(maChucDanh: number): Observable<any> {
-    return this.httpClient.put(`${this.baseUrl}/cap-nhat/${maChucDanh}`, null); 
+    return this.httpClient.put(`${this.baseUrl}/cap-nhat/${maChucDanh}`, null);
   }
 
   getChartData(academic: string): Observable<any> {
     return this.httpClient.get(`${this.baseUrl}/du-lieu-bieu-do/${academic}`);
+  }
+
+  addChucDanh(chucDanhData: any): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}/them`, chucDanhData);
+  }
+
+  getAllChucDanh(): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}/lay-tat-ca`);
+  }
+
+  getChucDanh(maChucDanh: number): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}/lay/${maChucDanh}`);
+  }
+
+  editChucDanh(maChucDanh: number, chucDanhData: any): Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}/sua/${maChucDanh}`, chucDanhData);
+  }
+
+  deleteChucDanh(maChucDanh: number): Observable<any> {
+    return this.httpClient.delete(`${this.baseUrl}/xoa/${maChucDanh}`);
   }
 }

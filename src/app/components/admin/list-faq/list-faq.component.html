@@ -75,6 +75,7 @@
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let item" >
         <mat-icon color="primary" (click)="detail(item.maCauHoi)">infor</mat-icon>
+        <mat-icon color="primary" (click)="editFaq(item)">edit</mat-icon>
         <mat-icon color="accent" (click)="deleteFaq(item.maCauHoi)">delete </mat-icon>
       </mat-cell>
 

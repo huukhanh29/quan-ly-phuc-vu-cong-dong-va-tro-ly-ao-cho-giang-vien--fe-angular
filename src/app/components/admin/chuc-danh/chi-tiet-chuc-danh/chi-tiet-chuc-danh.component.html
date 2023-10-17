@@ -1,0 +1,21 @@
+<div class="detail-chuc-danh">
+  <h1 mat-dialog-title>
+    Thông tin chi tiết
+    <hr />
+  </h1>
+  <mat-form-field appearance="outline">
+    <mat-label>Tên chức danh</mat-label>
+    <textarea disabled="true" class="ten-chuc-danh" matInput>{{
+      data.item?.tenChucDanh
+    }}</textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Giờ chuẩn phục vụ cộng cộng</mat-label>
+    <textarea disabled="true" class="gio-bat-buoc" matInput>{{
+      data.item?.gioBatBuoc
+    }}</textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="warn" (click)="closePopup()">Đóng</button>
+</div>

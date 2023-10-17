@@ -1,0 +1,52 @@
+<mat-card>
+  <div class="search-container">
+    <button mat-icon-button color="add" (click)="addLoaiHoatDong()" class="icon-add">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Tìm kiếm</mat-label>
+      <input matInput placeholder="Nhập nội dung tìm kiếm..." [(ngModel)]="searchTerm" class="example-full-width" />
+      <mat-icon (click)="onSearch()" matSuffix color="search">search</mat-icon>
+      <mat-icon (click)="refresh()" matSuffix color="search">refresh</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="mat-elevation-z4">
+    <mat-table [dataSource]="danhSachLoaiHoatDong" matSort class="mat-elevation-z8">
+      <!-- Các cột trong bảng -->
+      <ng-container matColumnDef="stt">
+        <mat-header-cell *matHeaderCellDef>STT</mat-header-cell>
+        <mat-cell *matCellDef="let i = index">{{ i + 1 }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tenLoaiHoatDong">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Tên Loại Hoạt Động</mat-header-cell>
+        <mat-cell *matCellDef="let item">{{ item.tenLoaiHoatDong }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="moTa">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Mô Tả</mat-header-cell>
+        <mat-cell *matCellDef="let item">{{ item.moTa?.length > 50
+          ? item.moTa.slice(0, 50) + "..."
+          : item.moTa }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="hanhdong">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let item">
+            <mat-icon  (click)="detail(item)">info</mat-icon>
+            <mat-icon color="primary" (click)="edit(item)">edit</mat-icon>
+            <mat-icon color="accent" (click)="deleteLhd(item.maLoaiHoatDong)">delete</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Dòng tiêu đề của bảng -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <!-- Dòng dữ liệu của bảng -->
+      <mat-row class="element-row" *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <!-- Phân trang -->
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</mat-card>

@@ -35,9 +35,11 @@ export class AdminDestroyActivityComponent {
     }
   }
 
-  closePopup() {
+  closePopup(event: Event): void {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
     this.dialogRef.close('Closed');
   }
+
 
   myform = this.formBuilder.group({
     lyDoHuy: ['', Validators.required],
@@ -49,7 +51,7 @@ export class AdminDestroyActivityComponent {
       this.dangKyHoatDongService.huyDangKyHoatDong(this.data.item.maDangKy,formData).subscribe({
         next: data=>{
           console.log(data)
-            this.closePopup();
+          this.dialogRef.close('Closed');
             this.toastr.success("Hủy đăng ký hoạt động thành công!");
         },
         error: err=>{

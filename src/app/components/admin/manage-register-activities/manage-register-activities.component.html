@@ -93,6 +93,8 @@
         <mat-cell *matCellDef="let item">
           <ng-container *ngIf="item.trangThaiDangKy === 'Chua_Duyet'; else daDuyetOrDaHuyBlock">
             <button mat-stroked-button
+            [disabled]="item.hoatDong.trangThaiHoatDong === 'SAP_DIEN_RA' ||
+            item.hoatDong.trangThaiHoatDong === 'DANG_DIEN_RA'"
                     (click)="duyet(item.maDangKy)"
                     color="primary"
                     style="margin-right: 5px;">
@@ -116,6 +118,7 @@
             </ng-container>
             <ng-template #daHuyBlock>
               <button mat-stroked-button
+
                       (click)="duyet(item.maDangKy)"
                       color="primary"
                       style="margin-right: 5px;">

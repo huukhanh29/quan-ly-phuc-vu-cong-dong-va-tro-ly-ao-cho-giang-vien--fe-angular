@@ -1,0 +1,29 @@
+<form [formGroup]="myform" (ngSubmit)="save()">
+  <h1 mat-dialog-title>   {{ data && data.item ? 'Cập nhật loại hoạt động' : 'Thêm dữ loại hoạt động' }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Tên loại hoạt động</mat-label>
+      <textarea formControlName="tenLoaiHoatDong" matInput required ></textarea>
+      <mat-error
+        *ngIf="formControls.tenLoaiHoatDong && formControls.tenLoaiHoatDong.errors?.['required']"
+      >
+      Tên loại hoạt động là bắt buộc
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Mô tả</mat-label>
+      <textarea formControlName="moTa" matInput required></textarea>
+      <mat-error
+        *ngIf="formControls.moTa.errors?.['required'] "
+      >
+        Mô tả là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button type="submit" color="primary">   {{ data && data.item ? 'Cập nhật' : 'Lưu' }}</button>
+    <button (click)="closePopup($event)" mat-raised-button color="warn">Đóng</button>
+
+  </div>
+</form>

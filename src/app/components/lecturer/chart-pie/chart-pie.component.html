@@ -3,7 +3,7 @@
 
     <div class="left-side">
       <mat-form-field appearance="outline">
-        <mat-label>Chọn năm học</mat-label>
+        <mat-label>Chọn năm</mat-label>
         <mat-select [(value)]="selectedYear" (selectionChange)="onYearChange()">
           <mat-option *ngFor="let year of academicYears" [value]="year">{{year}}</mat-option>
         </mat-select>

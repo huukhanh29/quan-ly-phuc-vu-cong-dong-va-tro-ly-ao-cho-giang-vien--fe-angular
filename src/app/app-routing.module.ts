@@ -23,6 +23,10 @@ import { ActivityLecturerComponent } from './components/lecturer/activity-lectur
 import { ManageActivityLecturerComponent } from './components/lecturer/manage-activity-lecturer/manage-activity-lecturer.component';
 import { LichHoatDongComponent } from './components/lich-hoat-dong/lich-hoat-dong.component';
 import { ChartPieComponent } from './components/lecturer/chart-pie/chart-pie.component';
+import { LoaiHoatDongComponent } from './components/admin/loai-hoat-dong/loai-hoat-dong.component';
+import { TruongComponent } from './components/admin/truong/truong.component';
+import { KhoaComponent } from './components/admin/khoa/khoa.component';
+import { ChucDanhComponent } from './components/admin/chuc-danh/chuc-danh.component';
 
 const routes: Routes = [
   {
@@ -65,6 +69,22 @@ const routes: Routes = [
       {
         path: 'lich',
         component: LichHoatDongComponent,
+      },
+      {
+        path: 'loai-hoat-dong',
+        component: LoaiHoatDongComponent,
+      },
+      {
+        path: 'truong',
+        component: TruongComponent,
+      },
+      {
+        path: 'khoa',
+        component: KhoaComponent,
+      },
+      {
+        path: 'chuc-danh',
+        component: ChucDanhComponent,
       },
     ],
   },

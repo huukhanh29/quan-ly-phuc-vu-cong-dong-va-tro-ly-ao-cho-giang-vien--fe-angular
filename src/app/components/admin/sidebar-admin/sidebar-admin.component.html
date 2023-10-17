@@ -1,37 +1,33 @@
-
 <app-sidebar>
-  <div drawer-content >
-    <mat-nav-list class = "drawer">
-    <mat-list-item routerLink="/quan-tri-vien/danh-sach-giang-vien" routerLinkActive="active-link">
-      <button mat-button disabled>
-       <mat-icon>school</mat-icon>
-        <span>Giảng Viên</span>
-      </button>
-    </mat-list-item>
-    <mat-list-item routerLink="/quan-tri-vien/danh-sach-sinh-vien" routerLinkActive="active-link">
-      <button  mat-button disabled>
-        <mat-icon>people</mat-icon><span>Sinh Viên</span></button>
-    </mat-list-item>
-    <mat-list-item routerLink="/quan-tri-vien/danh-sach-cau-hoi" routerLinkActive="active-link">
-      <button  mat-button disabled>
-        <mat-icon>question_answer</mat-icon><span>Câu hỏi</span></button>
-    </mat-list-item>
-    <mat-list-item routerLink="/quan-tri-vien/danh-sach-phan-hoi" routerLinkActive="active-link">
-      <button  mat-button disabled>
-        <mat-icon>feedback</mat-icon><span>Phản hồi</span></button>
-    </mat-list-item>
-    <mat-list-item routerLink="/quan-tri-vien/danh-sach-hoat-dong" routerLinkActive="active-link">
-      <button  mat-button disabled>
-        <mat-icon>local_activity</mat-icon><span>Hoạt động</span></button>
-    </mat-list-item>
-    <mat-list-item routerLink="/quan-tri-vien/quan-ly-dang-ky-hoat-dong" routerLinkActive="active-link">
-      <button  mat-button disabled>
-        <mat-icon>dns</mat-icon><span>Phê duyệt</span></button>
-    </mat-list-item>
-    <mat-list-item routerLink="/quan-tri-vien/lich" routerLinkActive="active-link">
-      <button  mat-button disabled>
-        <mat-icon>today</mat-icon><span>Lịch</span></button>
-    </mat-list-item>
-  </mat-nav-list>
+  <div drawer-content>
+    <mat-nav-list class="drawer">
+      <ng-container *ngFor="let menuItem of menuItems; let i = index">
+        <mat-list-item
+          (click)="toggleSubMenu(i)"
+          [ngClass]="{'active-link': selectedLink === menuItem.label || activeMenuIndex === i}"
+        >
+          <button mat-button disabled>
+            <mat-icon>{{ menuItem.icon }}</mat-icon>
+            <span>{{ menuItem.label }}</span>
+          </button>
+          <button mat-button disabled>
+            <mat-icon>{{ activeMenuIndex === i ? 'arrow_right' : 'arrow_drop_down' }}</mat-icon>
+          </button>
+
+        </mat-list-item>
+        <div *ngIf="activeMenuIndex === i">
+          <mat-list-item
+            *ngFor="let subItem of menuItem.subItems"
+            [routerLink]="subItem.routerLink"
+            routerLinkActive="active-link"
+          >
+            <button mat-button disabled>
+              <mat-icon>{{ subItem.icon }}</mat-icon>
+              <span>{{ subItem.label }}</span>
+            </button>
+          </mat-list-item>
+        </div>
+      </ng-container>
+    </mat-nav-list>
   </div>
 </app-sidebar>

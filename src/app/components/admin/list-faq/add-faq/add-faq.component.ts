@@ -13,7 +13,7 @@ export class AddFaqComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
-      lecturer: any;
+      item: any;
     },
     private dialogRef: MatDialogRef<AddFaqComponent>,
     private formBuilder: FormBuilder,
@@ -25,11 +25,21 @@ export class AddFaqComponent implements OnInit {
     return this.myform.controls;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.data && this.data.item) {
+      // Trường hợp chỉnh sửa: gán giá trị từ item vào form
+      this.myform.patchValue({
+        cauHoi: this.data.item.cauHoi,
+        traLoi: this.data.item.traLoi,
+      });
+    }
+  }
 
-  closePopup() {
+  closePopup(event: Event): void {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
     this.dialogRef.close('Closed');
   }
+
 
   myform = this.formBuilder.group({
     cauHoi: ['', Validators.required],
@@ -38,24 +48,43 @@ export class AddFaqComponent implements OnInit {
   });
 
   savelecturer() {
-    if(this.myform.valid){
-    const formData = this.myform.value;
-      this.cauHoiService.createCauHoi(formData).subscribe({
-        next: data=>{
-          console.log(data)
-          if(data.message && data.message === 'cauhoi-exist'){
-            this.toastr.warning("Từ khóa đã tồn tại!");
-          }else{
-            this.closePopup();
-            this.toastr.success("Thêm câu hỏi thành công!");
-          }
-
-        },
-        error: err=>{
-          this.toastr.error("Thêm câu hỏi không thành công!");
-          console.log(err)
-        }
-      } );
+    if (this.myform.valid) {
+      const formData = this.myform.value;
+      if (this.data && this.data.item) {
+        // Trường hợp chỉnh sửa: cập nhật dữ liệu
+        this.cauHoiService.updateCauHoi(this.data.item.maCauHoi, formData).subscribe({
+          next: (data) => {
+            console.log(data);
+            if (data.message && data.message === 'cauhoi-exist') {
+              this.toastr.warning('Từ khóa đã tồn tại!');
+            } else {
+              this.dialogRef.close('Closed');
+              this.toastr.success('Cập nhật câu hỏi thành công!');
+            }
+          },
+          error: (err) => {
+            this.toastr.error('Cập nhật câu hỏi không thành công!');
+            console.log(err);
+          },
+        });
+      } else {
+        // Trường hợp thêm mới: thêm dữ liệu
+        this.cauHoiService.createCauHoi(formData).subscribe({
+          next: (data) => {
+            console.log(data);
+            if (data.message && data.message === 'cauhoi-exist') {
+              this.toastr.warning('Từ khóa đã tồn tại!');
+            } else {
+              this.dialogRef.close('Closed');
+              this.toastr.success('Thêm câu hỏi thành công!');
+            }
+          },
+          error: (err) => {
+            this.toastr.error('Thêm câu hỏi không thành công!');
+            console.log(err);
+          },
+        });
+      }
     }
   }
 }

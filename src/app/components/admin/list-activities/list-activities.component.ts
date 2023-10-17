@@ -10,6 +10,7 @@ import { DetailActivityComponent } from './detail-activity/detail-activity.compo
 import { AddActivityComponent } from './add-activity/add-activity.component';
 import { GiangVien } from 'src/app/models/GiangVien';
 import { ListLecturerJoinComponent } from './list-lecturer-join/list-lecturer-join.component';
+import { DeleteComponent } from '../../delete/delete.component';
 
 @Component({
   selector: 'app-list-activities',
@@ -120,19 +121,36 @@ export class ListActivitiesComponent implements OnInit{
 
   addHoatDong(): void {
     const dialogRef = this.dialog.open(AddActivityComponent, {
-      width: '60%', // Adjust the width as needed
+      width: '60%',
       data: {
-        activity: null, // You can pass any initial data here if needed
-      },
+        activity: null,
+        isEditing: false // Thêm hoạt động mới
+      }
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // Handle the result if needed, e.g., refresh the list of activities
       if (result === 'Closed') {
-        this.loadDanhSachHoatDong(); // Refresh the list of activities after adding a new one
+        this.loadDanhSachHoatDong();
       }
     });
   }
+
+  editHoatDong(item: any): void {
+    const dialogRef = this.dialog.open(AddActivityComponent, {
+      width: '60%',
+      data: {
+        activity: item,
+        isEditing: true // Chỉnh sửa hoạt động hiện có
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'Closed') {
+        this.loadDanhSachHoatDong();
+      }
+    });
+  }
+
 
   detail(item: any | null): void {
     if (item) {
@@ -159,6 +177,30 @@ export class ListActivitiesComponent implements OnInit{
     }
   }
   deleteHoatDong(id: any): void {
+    var popup = this.dialog.open(DeleteComponent, {
+      width: '40%',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+    });
+    popup.afterClosed().subscribe((result) => {
+      if (result === 'ok') {
+       this.hoatDongService.deleteHoatDong(id).subscribe({
+        next: data=>{
+          if (data.message && data.message === 'cant-delete') {
+            this.toastr.warning("Không thể xóa!")
+          } else {
+            this.toastr.success("Xóa thành công!")
+          }
 
+        },
+        error: err=>{
+          if(err.status ===401){
+            this.toastr.warning("Không thể xóa!")
+          }
+        }
+
+       })
+      }
+    });
   }
 }
