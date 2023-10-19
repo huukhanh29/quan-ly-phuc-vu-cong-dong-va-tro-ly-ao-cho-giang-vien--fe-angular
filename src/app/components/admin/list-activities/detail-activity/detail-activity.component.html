@@ -44,7 +44,10 @@
     </div>
     <div class="table-row">
       <div class="table-cell"><strong>File Quyết Định:</strong></div>
-      <div class="table-cell">{{ data.item.fileQuyetDinh }}</div>
+      <div class="table-cell">{{  data.tenFile}}
+        <mat-icon color="primary" (click)="taiFile(data.item.maHoatDong)"
+        >file_download</mat-icon>
+      </div>
     </div>
     <div class="table-row">
       <div class="table-cell"><strong>Cấp Tổ Chức:</strong></div>

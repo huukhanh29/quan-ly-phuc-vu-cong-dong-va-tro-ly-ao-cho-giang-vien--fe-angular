@@ -2,21 +2,22 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { HoatDongService } from 'src/app/services/hoat-dong.service';
+import { HoatDongNgoaiTruongService } from 'src/app/services/hoat-dong-ngoai-truong.service';
 
 @Component({
-  selector: 'app-detail-activity',
-  templateUrl: './detail-activity.component.html',
-  styleUrls: ['./detail-activity.component.css']
+  selector: 'app-chi-tiet-hdnt',
+  templateUrl: './chi-tiet-hdnt.component.html',
+  styleUrls: ['./chi-tiet-hdnt.component.css']
 })
-export class DetailActivityComponent {
+export class ChiTietHdntComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
       item: any,
       tenFile: any
     },
-    private dialogRef: MatDialogRef<DetailActivityComponent>,
-    private hoatDongService: HoatDongService,
+    private dialogRef: MatDialogRef<ChiTietHdntComponent>,
+    private hoatDongNgoaiTruongService: HoatDongNgoaiTruongService,
     private toastr: ToastrService
   ) {}
 
@@ -24,7 +25,7 @@ export class DetailActivityComponent {
     this.dialogRef.close();
   }
   taiFile(ma: any) {
-    this.hoatDongService.downloadFile(ma).subscribe({
+    this.hoatDongNgoaiTruongService.downloadFile(ma).subscribe({
       next: (response) => {
         const blob = new Blob([response.body as Blob], {
           type: 'application/octet-stream',

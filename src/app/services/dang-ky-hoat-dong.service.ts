@@ -17,8 +17,10 @@ export class DangKyHoatDongService {
     searchTerm: string = '',
     type: string = '',
     status?: any,
-    startTime?: Date | null,
-    endTime?: Date | null
+    startTime?: any,
+    endTime?: any,
+    year?: any,
+    username?:any
   ): Observable<any> {
     let params = new HttpParams()
       .set('page', page.toString())
@@ -28,18 +30,26 @@ export class DangKyHoatDongService {
       .set('searchTerm', searchTerm)
       .set('type', type);
 
-    if (status) {
+    if (status!== undefined) {
       params = params.set('status', status);
     }
 
     if (startTime) {
-      let formattedStartTime = startTime.toISOString().split('T')[0];
-      params = params.set('startTime', formattedStartTime);
-    }
+      const formattedStartDate = startTime.toISOString().split('T')[0];
+      params = params.set('startTime', formattedStartDate);
+  }
+  
+  if (endTime) {
+      const formattedEndDate = endTime.toISOString().split('T')[0];
+      params = params.set('endTime', formattedEndDate);
+  }
 
-    if (endTime) {
-      let formattedEndTime = endTime.toISOString().split('T')[0];
-      params = params.set('endTime', formattedEndTime);
+
+    if (year) {
+      params = params.set('year', year);
+    }
+    if (username) {
+      params = params.set('username', username);
     }
 
     return this.http.get<any>(`${this.baseUrl}/lay-danh-sach`, { params: params });

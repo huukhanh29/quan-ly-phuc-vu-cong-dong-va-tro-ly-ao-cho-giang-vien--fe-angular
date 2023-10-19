@@ -77,4 +77,16 @@ export class HoatDongService {
   getAllLoaiHoatDong(): Observable<any> {
     return this.http.get(`${this.baseUrl}/danh-sach-loai-hoat-dong`);
   }
+  suaFileHoatDong(maHoatDong: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.put(`${this.baseUrl}/sua-file/${maHoatDong}`, formData);
+  }
+  downloadFile(maHoatDongNgoaiTruong: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${maHoatDongNgoaiTruong}/download`, { responseType: 'blob', observe: 'response' });
+  }
+  getFileName(maHoatDong: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${maHoatDong}/ten-file`,  {responseType: 'text'});
+  }
 }

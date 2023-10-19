@@ -40,7 +40,8 @@ export class ManageActivityLecturerComponent implements OnInit {
     private dialog: MatDialog,
     private storageService: StorageService,
     private hoatDongService: HoatDongService
-  ) {}
+  ) {
+  }
   public filterVisible: boolean = true;
   lyDoHuy(item: any) {
     var popup = this.dialog.open(AdminDestroyActivityComponent, {
@@ -94,8 +95,7 @@ export class ManageActivityLecturerComponent implements OnInit {
     sortDir: string = 'DESC',
     status: any = this.status,
     startTime?: Date | null,
-    endTime?: Date | null,
-    username?: string
+    endTime?: Date | null
   ) {
     this.dangKyHoatDongService
       .layDanhSachTatCaDangKyHoatDong(
@@ -107,7 +107,7 @@ export class ManageActivityLecturerComponent implements OnInit {
         status,
         startTime,
         endTime,
-        username,
+        this.username,
         this.selectedYear
       )
       .subscribe((data) => {
@@ -119,6 +119,7 @@ export class ManageActivityLecturerComponent implements OnInit {
 
   getYears() {
     this.hoatDongService.getYears().subscribe((data: string[]) => {
+      console.log(data);
       this.years = data;
       if (this.years.length > 0) {
         this.selectedYear = this.years[this.years.length - 1];
@@ -140,8 +141,7 @@ export class ManageActivityLecturerComponent implements OnInit {
       this.sort.direction,
       this.status,
       this.startTime,
-      this.endTime,
-      this.username
+      this.endTime
     );
   }
   onSearch() {
@@ -159,8 +159,7 @@ export class ManageActivityLecturerComponent implements OnInit {
       this.sort.direction,
       this.status,
       this.startTime,
-      this.endTime,
-      this.username
+      this.endTime
     );
   }
 
@@ -172,15 +171,14 @@ export class ManageActivityLecturerComponent implements OnInit {
       this.sort.direction,
       this.status,
       this.startTime,
-      this.endTime,
-      this.username
+      this.endTime
     );
   }
   refresh() {
     this.searchTerm = '';
     this.status = 'Chua_Duyet';
     this.startTime = null;
-    this.getYears()
+    this.getYears();
     this.endTime = null;
     if (this.paginator) {
       this.paginator.firstPage();

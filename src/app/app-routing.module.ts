@@ -27,6 +27,7 @@ import { LoaiHoatDongComponent } from './components/admin/loai-hoat-dong/loai-ho
 import { TruongComponent } from './components/admin/truong/truong.component';
 import { KhoaComponent } from './components/admin/khoa/khoa.component';
 import { ChucDanhComponent } from './components/admin/chuc-danh/chuc-danh.component';
+import { HoatDongNgoaiTruongComponent } from './components/admin/hoat-dong-ngoai-truong/hoat-dong-ngoai-truong.component';
 
 const routes: Routes = [
   {
@@ -86,6 +87,10 @@ const routes: Routes = [
         path: 'chuc-danh',
         component: ChucDanhComponent,
       },
+      {
+        path: 'hoat-dong-ngoai-truong',
+        component: HoatDongNgoaiTruongComponent,
+      },
     ],
   },
   {
@@ -114,6 +119,10 @@ const routes: Routes = [
       },
       { path: 'thong-bao', component: ThongBaoComponent },
       { path: 'bieu-do', component: ChartPieComponent },
+      {
+        path: 'hoat-dong-ngoai-truong',
+        component: HoatDongNgoaiTruongComponent,
+      },
     ],
   },
   {

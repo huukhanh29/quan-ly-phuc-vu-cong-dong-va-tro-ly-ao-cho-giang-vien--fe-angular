@@ -151,18 +151,27 @@ export class ListActivitiesComponent implements OnInit{
     });
   }
 
+  detail(item: any ): void {
+    this.hoatDongService.getFileName(item.maHoatDong).subscribe({
+      next: data=>{
+        console.log(data)
+        var popup = this.dialog.open(DetailActivityComponent, {
+          data: {
+            item: item,
+            tenFile: data
+          },
+          width: '40%',
+          enterAnimationDuration: '300ms',
+          exitAnimationDuration: '300ms',
+        });
 
-  detail(item: any | null): void {
-    if (item) {
-      var popup = this.dialog.open(DetailActivityComponent, {
-        data: {
-          item: item,
-        },
-        width: '40%',
-        enterAnimationDuration: '300ms',
-        exitAnimationDuration: '300ms',
-      });
-    }
+      },
+      error: err=>{
+        console.log(err)
+      }
+
+     })
+
   }
   listLecturer(item: any | null): void {
     if (item) {

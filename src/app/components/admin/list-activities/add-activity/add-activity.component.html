@@ -97,13 +97,6 @@
     </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>File Quyết Định</mat-label>
-      <input formControlName="fileQuyetDinh" matInput required />
-      <mat-error *ngIf="formControls.fileQuyetDinh.errors?.['required']">
-        File quyết định là bắt buộc!
-    </mat-error>
-    </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Cấp Tổ Chức</mat-label>
@@ -170,6 +163,10 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <div clas="file">
+      <label>Chọn file quyết định</label>
+      <input type="file" (change)="onFileSelect($event)" required />
+    </div>
   </div>
   <div mat-dialog-actions>
     <button mat-raised-button type="submit" color="primary">Lưu</button>

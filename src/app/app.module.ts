@@ -72,6 +72,11 @@ import { FormKhoaComponent } from './components/admin/khoa/form-khoa/form-khoa.c
 import { ChiTietKhoaComponent } from './components/admin/khoa/chi-tiet-khoa/chi-tiet-khoa.component';
 import { ChiTietChucDanhComponent } from './components/admin/chuc-danh/chi-tiet-chuc-danh/chi-tiet-chuc-danh.component';
 import { FormChucDanhComponent } from './components/admin/chuc-danh/form-chuc-danh/form-chuc-danh.component';
+import { HoatDongNgoaiTruongComponent } from './components/admin/hoat-dong-ngoai-truong/hoat-dong-ngoai-truong.component';
+import { ThemHdntComponent } from './components/admin/hoat-dong-ngoai-truong/them-hdnt/them-hdnt.component';
+import { ChiTietHdntComponent } from './components/admin/hoat-dong-ngoai-truong/chi-tiet-hdnt/chi-tiet-hdnt.component';
+import { DuyetHdntComponent } from './components/admin/hoat-dong-ngoai-truong/duyet-hdnt/duyet-hdnt.component';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -134,7 +139,11 @@ import { FormChucDanhComponent } from './components/admin/chuc-danh/form-chuc-da
     FormKhoaComponent,
     ChiTietKhoaComponent,
     ChiTietChucDanhComponent,
-    FormChucDanhComponent
+    FormChucDanhComponent,
+    HoatDongNgoaiTruongComponent,
+    ThemHdntComponent,
+    ChiTietHdntComponent,
+    DuyetHdntComponent
   ],
   imports: [
     BrowserModule,
@@ -150,7 +159,7 @@ import { FormChucDanhComponent } from './components/admin/chuc-danh/form-chuc-da
     }),
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
-  providers: [httpInterceptorProviders, CookieService],
+  providers: [httpInterceptorProviders, CookieService, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

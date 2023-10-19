@@ -33,7 +33,7 @@ export class AddActivityComponent implements OnInit {
   filteredGiangVien!: Observable<any[]>;
   selectedGiangVien: any[] = [];
   public isEditing: boolean = false;
-
+  selectedFile: File | null = null;
   @ViewChild('maGiangVienInput')
   maGiangVienInput!: ElementRef<HTMLInputElement>;
   constructor(
@@ -158,11 +158,30 @@ export class AddActivityComponent implements OnInit {
     tenQuyetDinh: ['', [Validators.required]],
     soQuyetDinh: ['', [Validators.required]],
     nguoiKyQuyetDinh: ['', [Validators.required]],
-    fileQuyetDinh: ['', [Validators.required]],
     capToChuc: ['', [Validators.required]],
     maLoaiHoatDong: [''],
     giangVienToChucs: this.formBuilder.array([]),
   });
+  onFileSelect(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+
+    const maxFileSize = 5 * 1024 * 1024; // 5 MB in bytes
+    const allowedMimeTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/jpg', 'image/png'];
+
+    if (file.size > maxFileSize) {
+      this.toastr.warning('Kích thước file quá lớn. Vui lòng chọn file nhỏ hơn 5MB.');
+      this.selectedFile = null;
+      return;
+    }
+
+    if (allowedMimeTypes.includes(file.type)) {
+      this.selectedFile = file;
+    } else {
+      this.toastr.warning('Loại tệp không hợp lệ. Vui lòng chọn tệp PDF, DOCX, JPEG, JPG hoặc PNG.');
+      this.selectedFile = null;
+    }
+  }
 
   saveActivity() {
     if (this.myForm.valid) {
@@ -186,8 +205,27 @@ export class AddActivityComponent implements OnInit {
           .updateHoatDong(this.data.activity.maHoatDong, formData)
           .subscribe({
             next: (data) => {
-              this.dialogRef.close('Closed');
-              this.toastr.success('Cập nhật hoạt động thành công!');
+              if (this.selectedFile) {
+                this.hoatDongService
+                  .suaFileHoatDong(
+                    this.data.activity.maHoatDong,
+                    this.selectedFile!
+                  )
+                  .subscribe({
+                    next: (fileData) => {
+                      this.dialogRef.close('Closed');
+                      this.toastr.success(
+                        'Cập nhật hoạt động và file thành công!'
+                      );
+                    },
+                    error: (fileError) => {
+                      this.toastr.error('Có lỗi xảy ra khi lưu file.');
+                    },
+                  });
+              } else {
+                this.dialogRef.close('Closed');
+                this.toastr.success('Cập nhật hoạt động thành công!');
+              }
             },
             error: (err) => {
               this.toastr.error('Cập nhật hoạt động không thành công!');
@@ -195,17 +233,31 @@ export class AddActivityComponent implements OnInit {
             },
           });
       } else {
-        // Gọi API thêm mới nếu không phải chỉnh sửa
-        this.hoatDongService.addHoatDong(formData).subscribe({
-          next: (data) => {
-            this.dialogRef.close('Closed');
-            this.toastr.success('Thêm hoạt động thành công!');
-          },
-          error: (err) => {
-            this.toastr.error('Thêm hoạt động không thành công!');
-            console.error('Error adding activity:', err);
-          },
-        });
+        if (this.selectedFile) {
+          this.hoatDongService.addHoatDong(formData).subscribe({
+            next: (data) => {
+              this.hoatDongService
+                .suaFileHoatDong(data.maHoatDong, this.selectedFile!)
+                .subscribe({
+                  next: (fileData) => {
+                    this.dialogRef.close('Closed');
+                    this.toastr.success(
+                      'Thêm hoạt động và file thành công!'
+                    );
+                  },
+                  error: (fileError) => {
+                    this.toastr.error('Có lỗi xảy ra khi lưu file.');
+                  },
+                });
+            },
+            error: (err) => {
+              this.toastr.error('Thêm hoạt động không thành công!');
+              console.error('Error adding activity:', err);
+            },
+          });
+        }else{
+          this.toastr.warning('Chưa chọn file');
+        }
       }
     }
   }

@@ -1,0 +1,84 @@
+<form
+  [formGroup]="myform"
+  (ngSubmit)="saveDocument()"
+  enctype="multipart/form-data"
+>
+  <h1 mat-dialog-title>{{ data.isEditing ? 'Chỉnh sửa hoạt động ngoài trường' : 'Khai báo tham gia hoạt động ngoài trường' }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Tên hoạt động</mat-label>
+      <input formControlName="tenHoatDong" matInput required />
+      <mat-error *ngIf="formControls.tenHoatDong.errors?.['required']">
+        Tên hoạt động là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Mô tả</mat-label>
+      <input formControlName="moTa" matInput required />
+      <mat-error *ngIf="formControls.moTa.errors?.['required']">
+        Mô tả là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Địa điểm</mat-label>
+      <input formControlName="diaDiem" matInput required />
+      <mat-error *ngIf="formControls.diaDiem.errors?.['required']">
+        Địa điểm là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Ban tổ chức</mat-label>
+      <input formControlName="banToChuc" matInput required />
+      <mat-error *ngIf="formControls.banToChuc.errors?.['required']">
+        Ban tổ chức là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Thời Gian Bắt Đầu</mat-label>
+      <input
+        formControlName="thoiGianBatDau"
+        matInput
+        [matDatetimepicker]="picker"
+        required
+      />
+      <mat-hint>MM/DD/YYYY HH:mm</mat-hint>
+      <mat-datetimepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datetimepicker-toggle>
+      <mat-datetimepicker #picker type="datetime"></mat-datetimepicker>
+      <mat-error *ngIf="formControls.thoiGianBatDau.errors?.['required']">
+        Thời gian bắt đầu là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Thời Gian Kết Thúc</mat-label>
+      <input
+        formControlName="thoiGianKetThuc"
+        matInput
+        [matDatetimepicker]="picker2"
+        required
+      />
+      <mat-hint>MM/DD/YYYY HH:mm</mat-hint>
+      <mat-datetimepicker-toggle
+        matIconSuffix
+        [for]="picker2"
+      ></mat-datetimepicker-toggle>
+      <mat-datetimepicker #picker2 type="datetime"></mat-datetimepicker>
+      <mat-error *ngIf="formControls.thoiGianKetThuc.errors?.['required']">
+        Thời gian kết thúc là bắt buộc!
+      </mat-error>
+    </mat-form-field>
+    <div clas="file">
+      <label>Chọn file minh chứng</label>
+      <input type="file" (change)="onFileSelect($event)" required />
+    </div>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button type="submit" color="primary">Lưu</button>
+    <button (click)="closePopup()" mat-stroked-button color="warn">Đóng</button>
+  </div>
+</form>

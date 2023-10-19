@@ -44,25 +44,32 @@ export class SidebarAdminComponent {
       icon: 'event_note',
       subItems: [
         {
+          label: 'Loại hoạt động',
+          icon: 'folder_special',
+          routerLink: '/quan-tri-vien/loai-hoat-dong'
+        },
+        {
           label: 'Hoạt động',
           icon: 'local_activity',
           routerLink: '/quan-tri-vien/danh-sach-hoat-dong'
         },
+
         {
           label: 'Phê duyệt',
           icon: 'dns',
           routerLink: '/quan-tri-vien/quan-ly-dang-ky-hoat-dong'
         },
         {
+          label: 'Ngoài trường',
+          icon: 'local_activity',
+          routerLink: '/quan-tri-vien/hoat-dong-ngoai-truong'
+        },
+        {
           label: 'Lịch',
           icon: 'today',
           routerLink: '/quan-tri-vien/lich'
         },
-        {
-          label: 'Loại hoạt động',
-          icon: 'folder_special',
-          routerLink: '/quan-tri-vien/loai-hoat-dong'
-        }
+
       ]
     },
     {
