@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HoatDong } from '../models/HoatDong';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class DangKyHoatDongService {
       const formattedStartDate = startTime.toISOString().split('T')[0];
       params = params.set('startTime', formattedStartDate);
   }
-  
+
   if (endTime) {
       const formattedEndDate = endTime.toISOString().split('T')[0];
       params = params.set('endTime', formattedEndDate);
@@ -106,4 +107,8 @@ export class DangKyHoatDongService {
   huyDangKyHoatDong(maDangKy: number, body: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/huy-hoat-dong/${maDangKy}`, body);
   }
+  getHoatDongsByGiangVien(ten: string): Observable<HoatDong[]> {
+    return this.http.get<HoatDong[]>(`${this.baseUrl}/hoat-dong/${ten}`);
+}
+
 }

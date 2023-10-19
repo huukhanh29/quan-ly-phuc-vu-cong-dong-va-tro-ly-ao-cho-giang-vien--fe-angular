@@ -77,6 +77,7 @@ import { ThemHdntComponent } from './components/admin/hoat-dong-ngoai-truong/the
 import { ChiTietHdntComponent } from './components/admin/hoat-dong-ngoai-truong/chi-tiet-hdnt/chi-tiet-hdnt.component';
 import { DuyetHdntComponent } from './components/admin/hoat-dong-ngoai-truong/duyet-hdnt/duyet-hdnt.component';
 import { DatePipe } from '@angular/common';
+import { BreadcrumbsComponent } from './components/layouts/breadcrumbs/breadcrumbs.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -143,7 +144,8 @@ import { DatePipe } from '@angular/common';
     HoatDongNgoaiTruongComponent,
     ThemHdntComponent,
     ChiTietHdntComponent,
-    DuyetHdntComponent
+    DuyetHdntComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     BrowserModule,

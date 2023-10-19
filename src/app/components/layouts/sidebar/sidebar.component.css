@@ -33,3 +33,14 @@ mat-list-item button {
   text-align: center;
   min-height: 450px;
 }
+img{
+  width: 30px;
+  margin-right: 10px;
+}
+.mat-white{
+  color: white;
+}
+.dang-xuat
+{
+  margin-right: 10px;
+}

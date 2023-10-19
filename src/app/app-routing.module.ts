@@ -37,102 +37,167 @@ const routes: Routes = [
   {
     path: 'quan-tri-vien',
     component: AdminComponent,
+    data: { titulo: 'Quản trị viên' },
     children: [
-      { path: '', component: AdminHomeComponent },
+      {
+        path: '',
+        component: AdminHomeComponent,
+        data: { titulo: 'Trang chủ' },
+      },
       {
         path: 'trang-chu',
         component: AdminHomeComponent,
+        data: { titulo: 'Trang chủ' },
       },
       {
         path: 'danh-sach-sinh-vien',
         component: ListStudentComponent,
+        data: { titulo: 'Tài khoản sinh viên' },
       },
       {
         path: 'danh-sach-giang-vien',
         component: ListLecturerComponent,
+        data: { titulo: 'Tài khoản giảng viên' },
       },
       {
         path: 'danh-sach-cau-hoi',
         component: ListFaqComponent,
+        data: { titulo: 'Danh sách câu hỏi' },
       },
       {
         path: 'danh-sach-phan-hoi',
         component: ListFeedbackComponent,
+        data: { titulo: 'Danh sách phản hồi' },
       },
       {
         path: 'danh-sach-hoat-dong',
         component: ListActivitiesComponent,
+        data: { titulo: 'Danh sách hoạt động' },
       },
       {
         path: 'quan-ly-dang-ky-hoat-dong',
         component: ManageRegisterActivitiesComponent,
+        data: { titulo: 'Quản lý đăng ký hoạt động' },
       },
       {
         path: 'lich',
         component: LichHoatDongComponent,
+        data: { titulo: 'Lịch hoạt động' },
       },
       {
         path: 'loai-hoat-dong',
         component: LoaiHoatDongComponent,
+        data: { titulo: 'Loại hoạt động' },
       },
       {
         path: 'truong',
         component: TruongComponent,
+        data: { titulo: 'Trường' },
       },
-      {
-        path: 'khoa',
-        component: KhoaComponent,
-      },
+      { path: 'khoa', component: KhoaComponent, data: { titulo: 'Khoa' } },
       {
         path: 'chuc-danh',
         component: ChucDanhComponent,
+        data: { titulo: 'Chức danh' },
       },
       {
         path: 'hoat-dong-ngoai-truong',
         component: HoatDongNgoaiTruongComponent,
+        data: { titulo: 'Hoạt động ngoài trường' },
       },
     ],
   },
+
   {
     path: 'sinh-vien',
     component: StudentComponent,
+    data: { titulo: 'Sinh viên' },
     children: [
-      { path: '', component: StudentHomeComponent },
-      { path: 'trang-chu', component: StudentHomeComponent },
-      { path: 'phan-hoi-chat', component: PhanHoiChatComponent },
-      { path: 'thong-bao', component: ThongBaoComponent },
+      {
+        path: '',
+        component: StudentHomeComponent,
+        data: { titulo: 'Trang chủ' },
+      },
+      {
+        path: 'trang-chu',
+        component: StudentHomeComponent,
+        data: { titulo: 'Trang chủ' },
+      },
+      {
+        path: 'phan-hoi-chat',
+        component: PhanHoiChatComponent,
+        data: { titulo: 'Phản hồi chat' },
+      },
+      {
+        path: 'thong-bao',
+        component: ThongBaoComponent,
+        data: { titulo: 'Thông báo' },
+      },
     ],
   },
   {
     path: 'giang-vien',
     component: LecturerComponent,
+    data: { titulo: 'Giảng viên' },
     children: [
-      { path: '', component: LecturerHomeComponent },
-      { path: 'trang-chu', component: LecturerHomeComponent },
+      {
+        path: '',
+        component: LecturerHomeComponent,
+        data: { titulo: 'Trang chủ' },
+      },
+      {
+        path: 'trang-chu',
+        component: LecturerHomeComponent,
+        data: { titulo: 'Trang chủ' },
+      },
       {
         path: 'danh-sach-hoat-dong',
         component: ActivityLecturerComponent,
+        data: { titulo: 'Danh sách hoạt động' },
       },
       {
         path: 'quan-ly-hoat-dong',
         component: ManageActivityLecturerComponent,
+        data: { titulo: 'Quản lý hoạt động' },
       },
-      { path: 'thong-bao', component: ThongBaoComponent },
-      { path: 'bieu-do', component: ChartPieComponent },
+      {
+        path: 'thong-bao',
+        component: ThongBaoComponent,
+        data: { titulo: 'Thông báo' },
+      },
+      {
+        path: 'bieu-do',
+        component: ChartPieComponent,
+        data: { titulo: 'Biểu đồ' },
+      },
       {
         path: 'hoat-dong-ngoai-truong',
         component: HoatDongNgoaiTruongComponent,
+        data: { titulo: 'Hoạt động ngoại trường' },
+      },
+      {
+        path: 'lich',
+        component: LichHoatDongComponent,
+        data: { titulo: 'Lịch hoạt động' },
       },
     ],
   },
   {
     path: 'dang-nhap',
     component: LoginComponent,
+    data: { titulo: 'Đăng nhập' },
   },
-  { path: 'bao-tri', component: Page0Component },
-  { path: '403', component: Page403Component },
-  { path: '**', component: Page404Component },
-
+  { path: 'bao-tri', component: Page0Component, data: { titulo: 'Bảo trì' } },
+  {
+    path: '403',
+    component: Page403Component,
+    data: { titulo: '403 - Truy cập bị từ chối' },
+  },
+  {
+    path: '**',
+    component: Page404Component,
+    data: { titulo: '404 - Không tìm thấy trang' },
+  },
 ];
 
 @NgModule({

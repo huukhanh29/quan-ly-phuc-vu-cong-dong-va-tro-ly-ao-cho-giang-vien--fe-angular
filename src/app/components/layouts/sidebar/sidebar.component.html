@@ -2,9 +2,11 @@
   <button (click)="drawer.toggle()" mat-icon-button>
     <mat-icon color="basic">menu</mat-icon>
   </button>
-  <span>Material UI Tutorial</span>
+  <img src="../../../../assets/images/graduation-cap.png" alt="Logo" />
+  <span>Hệ thống quản lý</span>
   <span class="example-spacer"></span>
-  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+  <span>Xin chào {{username}}!</span>
+  <mat-icon class="dang-xuat" color="white" [matMenuTriggerFor]="menu">exit_to_app</mat-icon>
   <ng-content select="[notification]"></ng-content>
   <mat-menu #menu="matMenu">
     <button (click)="logout()" mat-menu-item>Logout</button>
@@ -17,7 +19,8 @@
   </mat-drawer>
   <mat-drawer-content>
     <div class="content">
-      <router-outlet></router-outlet>
+      <app-breadcrumbs></app-breadcrumbs>
+      <router-outlet> </router-outlet>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

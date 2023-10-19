@@ -1,0 +1,32 @@
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+}
+
+mat-card {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  height: 60px;
+  margin: 16px 16px 16px 16px;
+  padding: 5px 5px 5px 5px;
+}
+
+mat-card-header {
+  padding: 0;
+}
+
+mat-card-title {
+  color: #000000;
+  font-size: 23px;
+  padding-left: 40px;
+}
+
+hr{
+  border: 2px solid #724AE8;
+  margin-top: 2px;
+}

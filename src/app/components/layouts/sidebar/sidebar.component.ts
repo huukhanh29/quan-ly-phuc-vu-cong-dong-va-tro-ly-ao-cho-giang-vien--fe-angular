@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
 import { LogoutComponent } from '../../auth/logout/logout.component';
@@ -11,10 +11,16 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
+  username!: string
   constructor(
     private dialog: MatDialog,
+    private storageService: StorageService
   ) {}
+  ngOnInit(): void {
+    const user = this.storageService.getUser();
+    this.username = user.tenTaiKhoan;
+  }
   badgevisible = false;
   badgevisibility() {
     this.badgevisible = true;
