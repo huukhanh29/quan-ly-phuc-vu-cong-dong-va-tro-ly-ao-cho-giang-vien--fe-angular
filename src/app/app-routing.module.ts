@@ -28,6 +28,7 @@ import { TruongComponent } from './components/admin/truong/truong.component';
 import { KhoaComponent } from './components/admin/khoa/khoa.component';
 import { ChucDanhComponent } from './components/admin/chuc-danh/chuc-danh.component';
 import { HoatDongNgoaiTruongComponent } from './components/admin/hoat-dong-ngoai-truong/hoat-dong-ngoai-truong.component';
+import { DanhSachGiangVienComponent } from './components/admin/danh-sach-giang-vien/danh-sach-giang-vien.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,11 @@ const routes: Routes = [
         path: 'danh-sach-hoat-dong',
         component: ListActivitiesComponent,
         data: { titulo: 'Danh sách hoạt động' },
+      },
+      {
+        path: 'danh-sach-giang-vien-cua-hoat-dong/:maHoatDong',
+        component: DanhSachGiangVienComponent,
+        data: { titulo: 'Danh sách giảng viên' },
       },
       {
         path: 'quan-ly-dang-ky-hoat-dong',
@@ -155,6 +161,7 @@ const routes: Routes = [
         component: ActivityLecturerComponent,
         data: { titulo: 'Danh sách hoạt động' },
       },
+
       {
         path: 'quan-ly-hoat-dong',
         component: ManageActivityLecturerComponent,
@@ -180,6 +187,7 @@ const routes: Routes = [
         component: LichHoatDongComponent,
         data: { titulo: 'Lịch hoạt động' },
       },
+
     ],
   },
   {

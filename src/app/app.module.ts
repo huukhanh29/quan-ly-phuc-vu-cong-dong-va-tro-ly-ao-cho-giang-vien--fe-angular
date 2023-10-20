@@ -78,6 +78,7 @@ import { ChiTietHdntComponent } from './components/admin/hoat-dong-ngoai-truong/
 import { DuyetHdntComponent } from './components/admin/hoat-dong-ngoai-truong/duyet-hdnt/duyet-hdnt.component';
 import { DatePipe } from '@angular/common';
 import { BreadcrumbsComponent } from './components/layouts/breadcrumbs/breadcrumbs.component';
+import { DanhSachGiangVienComponent } from './components/admin/danh-sach-giang-vien/danh-sach-giang-vien.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -145,7 +146,8 @@ import { BreadcrumbsComponent } from './components/layouts/breadcrumbs/breadcrum
     ThemHdntComponent,
     ChiTietHdntComponent,
     DuyetHdntComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    DanhSachGiangVienComponent
   ],
   imports: [
     BrowserModule,

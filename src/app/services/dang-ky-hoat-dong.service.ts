@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HoatDong } from '../models/HoatDong';
+import { GiangVien } from '../models/GiangVien';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DangKyHoatDongService {
   private baseUrl = '/api/dang-ky-hoat-dong';
@@ -21,7 +22,7 @@ export class DangKyHoatDongService {
     startTime?: any,
     endTime?: any,
     year?: any,
-    username?:any
+    username?: any
   ): Observable<any> {
     let params = new HttpParams()
       .set('page', page.toString())
@@ -31,20 +32,19 @@ export class DangKyHoatDongService {
       .set('searchTerm', searchTerm)
       .set('type', type);
 
-    if (status!== undefined) {
+    if (status !== undefined) {
       params = params.set('status', status);
     }
 
     if (startTime) {
       const formattedStartDate = startTime.toISOString().split('T')[0];
       params = params.set('startTime', formattedStartDate);
-  }
+    }
 
-  if (endTime) {
+    if (endTime) {
       const formattedEndDate = endTime.toISOString().split('T')[0];
       params = params.set('endTime', formattedEndDate);
-  }
-
+    }
 
     if (year) {
       params = params.set('year', year);
@@ -53,7 +53,9 @@ export class DangKyHoatDongService {
       params = params.set('username', username);
     }
 
-    return this.http.get<any>(`${this.baseUrl}/lay-danh-sach`, { params: params });
+    return this.http.get<any>(`${this.baseUrl}/lay-danh-sach`, {
+      params: params,
+    });
   }
   layDanhSachTatCaDangKyHoatDong(
     page: number,
@@ -65,8 +67,7 @@ export class DangKyHoatDongService {
     startTime?: Date | null,
     endTime?: Date | null,
     username?: string,
-    year?: string|null
-
+    year?: string | null
   ): Observable<any> {
     let params = new HttpParams();
     params = params.append('page', page.toString());
@@ -109,6 +110,8 @@ export class DangKyHoatDongService {
   }
   getHoatDongsByGiangVien(ten: string): Observable<HoatDong[]> {
     return this.http.get<HoatDong[]>(`${this.baseUrl}/hoat-dong/${ten}`);
-}
-
+  }
+  getGiangViensByHoatDong(maHD: number): Observable<GiangVien[]> {
+    return this.http.get<GiangVien[]>(`${this.baseUrl}/giang-vien-tham-gia/${maHD}`);
+  }
 }

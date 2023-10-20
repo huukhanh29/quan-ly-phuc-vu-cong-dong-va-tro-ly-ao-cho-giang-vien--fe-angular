@@ -11,6 +11,8 @@ import { AddActivityComponent } from './add-activity/add-activity.component';
 import { GiangVien } from 'src/app/models/GiangVien';
 import { ListLecturerJoinComponent } from './list-lecturer-join/list-lecturer-join.component';
 import { DeleteComponent } from '../../delete/delete.component';
+import { DataTransferService } from 'src/app/services/data-transfer.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-activities',
@@ -37,7 +39,10 @@ export class ListActivitiesComponent implements OnInit{
   constructor(
     private hoatDongService: HoatDongService,
     private toastr: ToastrService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dataTransferService: DataTransferService,
+    private activateRoute: ActivatedRoute,
+    private router: Router,
   ) {}
   public filterVisible: boolean = true;
 
@@ -175,16 +180,25 @@ export class ListActivitiesComponent implements OnInit{
   }
   listLecturer(item: any | null): void {
     if (item) {
-      var popup = this.dialog.open(ListLecturerJoinComponent, {
-        data: {
-          item: item,
-        },
-        width: '50%',
-        enterAnimationDuration: '300ms',
-        exitAnimationDuration: '300ms',
-      });
+      //DanhSachGiangVien
+      this.dataTransferService.sendData(item.giangVienToChucs);
+      this.router.navigate([
+        `/quan-tri-vien/danh-sach-giang-vien-cua-hoat-dong/${item.maHoatDong}`,
+      ]);
     }
   }
+  //   listLecturer(item: any | null): void {
+  //   if (item) {
+  //     var popup = this.dialog.open(ListLecturerJoinComponent, {
+  //       data: {
+  //         item: item,
+  //       },
+  //       width: '50%',
+  //       enterAnimationDuration: '300ms',
+  //       exitAnimationDuration: '300ms',
+  //     });
+  //   }
+  // }
   deleteHoatDong(id: any): void {
     var popup = this.dialog.open(DeleteComponent, {
       width: '40%',
