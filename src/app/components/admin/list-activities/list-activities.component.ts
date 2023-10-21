@@ -13,6 +13,7 @@ import { ListLecturerJoinComponent } from './list-lecturer-join/list-lecturer-jo
 import { DeleteComponent } from '../../delete/delete.component';
 import { DataTransferService } from 'src/app/services/data-transfer.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StorageService } from './../../../services/storage.service';
 
 @Component({
   selector: 'app-list-activities',
@@ -30,18 +31,20 @@ export class ListActivitiesComponent implements OnInit{
   public status: string='SAP_DIEN_RA';
   loaiHoatDongs: any[] = [];
   giangVienToChucs: GiangVien[] = [];
+  role!: string
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @Input() showAddButton: boolean = true; // true by default
   @Input() customButton: TemplateRef<any> | null = null;
   @Output() activitiesLoaded = new EventEmitter<HoatDong[]>();
+  @Input() showDangKyColumn: boolean = false;
 
   constructor(
     private hoatDongService: HoatDongService,
     private toastr: ToastrService,
     private dialog: MatDialog,
     private dataTransferService: DataTransferService,
-    private activateRoute: ActivatedRoute,
+    private storageService: StorageService,
     private router: Router,
   ) {}
   public filterVisible: boolean = true;
@@ -50,6 +53,11 @@ export class ListActivitiesComponent implements OnInit{
     this.filterVisible = !this.filterVisible;
   }
   ngOnInit(): void {
+    if (this.showDangKyColumn) {
+      this.displayedColumns.push('dangky');
+  }
+    const user = this.storageService.getUser()
+    this.role = user.quyen;
     this.loadDanhSachHoatDong();
     this.getAllLoaiHoatDong();
   }

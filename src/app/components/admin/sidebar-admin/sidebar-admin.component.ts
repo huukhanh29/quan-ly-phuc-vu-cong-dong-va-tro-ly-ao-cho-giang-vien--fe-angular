@@ -69,6 +69,12 @@ export class SidebarAdminComponent {
           icon: 'today',
           routerLink: '/quan-tri-vien/lich'
         },
+        {
+          label: 'Xuất dữ liệu',
+          icon: 'cloud_upload',
+          routerLink: '/quan-tri-vien/xuat-du-lieu'
+        },
+
 
       ]
     },

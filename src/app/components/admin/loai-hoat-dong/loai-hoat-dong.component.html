@@ -1,14 +1,17 @@
 <mat-card>
   <div class="search-container">
-    <button mat-icon-button color="add" (click)="addLoaiHoatDong()" class="icon-add">
+    <button mat-icon-button color="add" matTooltip="Thêm loại hoạt động mới"
+     (click)="addLoaiHoatDong()" class="icon-add">
       <mat-icon>add</mat-icon>
     </button>
 
     <mat-form-field appearance="outline" class="search-input">
       <mat-label>Tìm kiếm</mat-label>
       <input matInput placeholder="Nhập nội dung tìm kiếm..." [(ngModel)]="searchTerm" class="example-full-width" />
-      <mat-icon (click)="onSearch()" matSuffix color="search">search</mat-icon>
-      <mat-icon (click)="refresh()" matSuffix color="search">refresh</mat-icon>
+      <mat-icon (click)="onSearch()"  matTooltip="Tìm kiếm"
+       matSuffix color="search">search</mat-icon>
+      <mat-icon (click)="refresh()" matTooltip="Làm mới"
+      matSuffix color="search">refresh</mat-icon>
     </mat-form-field>
   </div>
   <div class="mat-elevation-z4">
@@ -34,9 +37,9 @@
       <ng-container matColumnDef="hanhdong">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let item">
-            <mat-icon  (click)="detail(item)">info</mat-icon>
-            <mat-icon color="primary" (click)="edit(item)">edit</mat-icon>
-            <mat-icon color="accent" (click)="deleteLhd(item.maLoaiHoatDong)">delete</mat-icon>
+            <mat-icon   matTooltip="Xem chi tiết" (click)="detail(item)">info</mat-icon>
+            <mat-icon matTooltip="Chỉnh sữa"color="primary" (click)="edit(item)">edit</mat-icon>
+            <mat-icon matTooltip="Xóa" color="accent" (click)="deleteLhd(item.maLoaiHoatDong)">delete</mat-icon>
         </mat-cell>
       </ng-container>
 

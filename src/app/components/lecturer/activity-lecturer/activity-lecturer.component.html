@@ -1,4 +1,4 @@
-<app-list-activities [showAddButton]="false" [customButton]="customBtnTemplate"
+<app-list-activities [showDangKyColumn]="true" [showAddButton]="false" [customButton]="customBtnTemplate"
 (activitiesLoaded)="onActivitiesLoaded($event)"></app-list-activities>
 
 <ng-template #customBtnTemplate let-item>
@@ -7,7 +7,7 @@
           (click)="dangKy(item)">
     {{ registrationStatus[item.maHoatDong] === 'daduyet' ? 'Đã Duyệt' :
        registrationStatus[item.maHoatDong] === 'dahuy' ? 'Đã Hủy' :
-       registrationStatus[item.maHoatDong] === 'dadangky' ? 'Đã Đăng Ký' : 'Đăng Ký' }}
+       registrationStatus[item.maHoatDong] === 'dadangky' ? 'Chờ Duyệt' : 'Đăng Ký' }}
   </button>
 </ng-template>
 

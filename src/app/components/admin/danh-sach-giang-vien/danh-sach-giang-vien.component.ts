@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie-service';
 import { DetailLecturerComponent } from '../list-lecturer/detail-lecturer/detail-lecturer.component';
 import { DataTransferService } from 'src/app/services/data-transfer.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DangKyHoatDong } from 'src/app/models/DangKyHoatDong';
 import { DangKyHoatDongService } from 'src/app/services/dang-ky-hoat-dong.service';
 
@@ -34,7 +34,7 @@ export class DanhSachGiangVienComponent implements OnInit {
     private storageService: StorageService,
     private toastr: ToastrService,
     private dialog: MatDialog,
-    private cookie: CookieService,
+    private router: Router,
     private dataTransferService: DataTransferService,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -50,12 +50,9 @@ export class DanhSachGiangVienComponent implements OnInit {
   loadGVThamGia(){
     this.dangKyHoatDongService.getGiangViensByHoatDong(this.maHoatDong).subscribe({
       next: data=>{
-        console.log(data)
         this.danhSachGiangVienTG = new MatTableDataSource<GiangVien>(data);
-
         // Tùy chỉnh hàm lọc
         this.danhSachGiangVienTG.filterPredicate = this.customFilterPredicate;
-
         this.danhSachGiangVienTG.sort = this.sort;
         this.danhSachGiangVienTG.paginator = this.paginator;
       },
@@ -127,5 +124,8 @@ export class DanhSachGiangVienComponent implements OnInit {
         exitAnimationDuration: '300ms',
       });
     }
+  }
+  quayLai(){
+    this.router.navigate(['/quan-tri-vien/danh-sach-hoat-dong']);
   }
 }

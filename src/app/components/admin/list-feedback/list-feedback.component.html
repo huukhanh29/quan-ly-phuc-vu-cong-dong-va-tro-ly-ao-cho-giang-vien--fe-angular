@@ -7,8 +7,10 @@
       [(ngModel)]="searchTerm"
       class="example-full-width"
     />
-    <mat-icon (click)="onSearch()" matSuffix color="search">search</mat-icon>
-    <mat-icon (click)="refresh()" matSuffix color="search">refresh</mat-icon>
+    <mat-icon (click)="onSearch()"  matTooltip="Tìm kiếm"
+     matSuffix color="search">search</mat-icon>
+    <mat-icon (click)="refresh()" matTooltip="Làm mới"
+     matSuffix color="search">refresh</mat-icon>
   </mat-form-field>
   <mat-table [dataSource]="danhSachPhanHoi" matSort class="mat-elevation-z8">
     <ng-container matColumnDef="stt">

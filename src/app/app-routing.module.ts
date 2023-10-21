@@ -29,6 +29,7 @@ import { KhoaComponent } from './components/admin/khoa/khoa.component';
 import { ChucDanhComponent } from './components/admin/chuc-danh/chuc-danh.component';
 import { HoatDongNgoaiTruongComponent } from './components/admin/hoat-dong-ngoai-truong/hoat-dong-ngoai-truong.component';
 import { DanhSachGiangVienComponent } from './components/admin/danh-sach-giang-vien/danh-sach-giang-vien.component';
+import { XuatDuLieuComponent } from './components/xuat-du-lieu/xuat-du-lieu.component';
 
 const routes: Routes = [
   {
@@ -110,6 +111,11 @@ const routes: Routes = [
         path: 'hoat-dong-ngoai-truong',
         component: HoatDongNgoaiTruongComponent,
         data: { titulo: 'Hoạt động ngoài trường' },
+      },
+      {
+        path: 'xuat-du-lieu',
+        component: XuatDuLieuComponent,
+        data: { titulo: 'Xuất dữ liệu' },
       },
     ],
   },

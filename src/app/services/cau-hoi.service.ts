@@ -68,5 +68,7 @@ export class CauHoiService {
       catchError(error => of({ error: true, message: `Upload Error: ${error.message}` }))
     );
   }
-
+  downloadFile(): Observable<any> {
+    return this.http.get(`/api/cau-hoi/file-mau/download`, { responseType: 'blob', observe: 'response' });
+  }
 }

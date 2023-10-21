@@ -1,7 +1,8 @@
 <mat-card>
   <div class="search-container">
      <button   mat-icon-button
-     color="add" *ngIf="showAddButton && this.role !== 'QuanTriVien'" (click)="addHoatDong()" class="icon-add"> <mat-icon>add</mat-icon></button>
+     color="add" *ngIf="showAddButton && this.role !== 'QuanTriVien'" matTooltip="Thêm hoạt động mới"
+      (click)="addHoatDong()" class="icon-add"> <mat-icon>add</mat-icon></button>
     <mat-form-field appearance="outline" class="search-input">
       <mat-label>Tìm kiếm</mat-label>
       <input
@@ -10,14 +11,15 @@
         [(ngModel)]="searchTerm"
         class="example-full-width"
       />
-      <mat-icon (click)="onSearch()" matSuffix color="search">search</mat-icon>
+      <mat-icon (click)="onSearch()"  matTooltip="Tìm kiếm"
+      matSuffix color="search">search</mat-icon>
     </mat-form-field>
   </div>
   <div class="filter">
-    <button mat-icon-button (click)="toggleFilter()">
+    <button mat-icon-button (click)="toggleFilter()" matTooltip="Lọc">
       <mat-icon>{{ filterVisible ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
-    <button mat-icon-button (click)="refresh()">
+    <button mat-icon-button (click)="refresh()" matTooltip="Làm mới" >
       <mat-icon>refresh</mat-icon>
     </button>
   </div>
@@ -85,19 +87,23 @@
       <ng-container matColumnDef="hanhdong">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let item">
-          <mat-icon color="primary" (click)="detail(item)"
+          <mat-icon color="primary"  matTooltip="Xem chi tiết" (click)="detail(item)"
             >infor</mat-icon
           >
-          <mat-icon *ngIf="this.role !== 'QuanTriVien' && item.trangThai ==='Chua_Duyet'"color="primary" (click)="editHoatDong(item)"
+          <mat-icon *ngIf="this.role !== 'QuanTriVien' && item.trangThai ==='Chua_Duyet'"
+          matTooltip="Chỉnh sữa" color="primary" (click)="editHoatDong(item)"
           >edit</mat-icon
         >
-        <mat-icon *ngIf="this.role === 'QuanTriVien' && item.trangThai ==='Chua_Duyet'" color="primary" (click)="duyetHoatDong(item)"
+        <mat-icon *ngIf="this.role === 'QuanTriVien' && item.trangThai ==='Chua_Duyet'"
+        matTooltip="Duyệt" color="primary" (click)="duyetHoatDong(item)"
           >check_circle</mat-icon
         >
-          <mat-icon *ngIf="this.role === 'GiangVien' && item.trangThai ==='Chua_Duyet'" color="accent" (click)="deleteHoatDong(item.maHoatDongNgoaiTruong)"
+          <mat-icon *ngIf="this.role === 'GiangVien' && item.trangThai ==='Chua_Duyet'"
+          matTooltip="Xóa"  color="accent" (click)="deleteHoatDong(item.maHoatDongNgoaiTruong)"
             >delete
           </mat-icon>
-          <mat-icon  *ngIf="this.role === 'QuanTriVien' && item.trangThai ==='Chua_Duyet'" color="accent" (click)="huyHoatDong(item.maHoatDongNgoaiTruong)"
+          <mat-icon  *ngIf="this.role === 'QuanTriVien' && item.trangThai ==='Chua_Duyet'"
+          matTooltip="Hủy" color="accent" (click)="huyHoatDong(item.maHoatDongNgoaiTruong)"
             >close
           </mat-icon>
           <ng-container *ngIf="customButton">

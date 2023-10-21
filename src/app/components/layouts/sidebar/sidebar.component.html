@@ -5,12 +5,13 @@
   <img src="../../../../assets/images/graduation-cap.png" alt="Logo" />
   <span>Hệ thống quản lý</span>
   <span class="example-spacer"></span>
-  <span>Xin chào {{username}}!</span>
-  <mat-icon class="dang-xuat" color="white" [matMenuTriggerFor]="menu">exit_to_app</mat-icon>
+  <span [matMenuTriggerFor]="menu">Xin chào {{username}}!</span>
+  <!-- <mat-icon class="dang-xuat" color="white" [matMenuTriggerFor]="menu">exit_to_app</mat-icon> -->
   <ng-content select="[notification]"></ng-content>
   <mat-menu #menu="matMenu">
-    <button (click)="logout()" mat-menu-item>Logout</button>
-    <button mat-menu-item>hihi</button>
+    <button (click)="info()" mat-menu-item>Thông tin cá nhân</button>
+    <button (click)="logout()" mat-menu-item>Đăng xuất</button>
+
   </mat-menu>
 </mat-toolbar>
 <mat-drawer-container autosize>

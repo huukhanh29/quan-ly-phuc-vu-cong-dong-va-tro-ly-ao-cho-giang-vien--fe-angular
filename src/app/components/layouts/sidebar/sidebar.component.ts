@@ -5,6 +5,7 @@ import { LogoutComponent } from '../../auth/logout/logout.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TaiKhoanService } from 'src/app/services/tai-khoan.service';
 import { ToastrService } from 'ngx-toastr';
+import { UserInfoComponent } from '../../user-info/user-info.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,13 +14,16 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SidebarComponent implements OnInit{
   username!: string
+  role!: string
   constructor(
     private dialog: MatDialog,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private taiKhoanService: TaiKhoanService
   ) {}
   ngOnInit(): void {
     const user = this.storageService.getUser();
     this.username = user.tenTaiKhoan;
+    this.role = user.quyen
   }
   badgevisible = false;
   badgevisibility() {
@@ -33,5 +37,14 @@ export class SidebarComponent implements OnInit{
       exitAnimationDuration: '300ms',
     });
 
+  }
+  info(): void {
+    this.taiKhoanService.layThongTinNguoiDung().subscribe(data => {
+      console.log(data)
+      this.dialog.open(UserInfoComponent, {
+        width: '500px',
+        data: data
+      });
+    });
   }
 }

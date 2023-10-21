@@ -24,7 +24,7 @@ export class ActivityLecturerComponent implements OnInit {
   registrationStatus: { [key: string]: string } = {};
 
   ngOnInit(): void {
-
+    
   }
 
   dangKy(item: any) {

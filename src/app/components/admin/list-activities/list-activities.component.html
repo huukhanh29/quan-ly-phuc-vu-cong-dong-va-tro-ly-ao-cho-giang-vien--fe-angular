@@ -1,7 +1,15 @@
 <mat-card>
   <div class="search-container">
-     <button   mat-icon-button
-     color="add" *ngIf="showAddButton" (click)="addHoatDong()" class="icon-add"> <mat-icon>add</mat-icon></button>
+    <button
+      mat-icon-button
+      color="add"
+      *ngIf="showAddButton"
+      (click)="addHoatDong()"
+      matTooltip="Thêm hoạt động mới"
+      class="icon-add"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
     <mat-form-field appearance="outline" class="search-input">
       <mat-label>Tìm kiếm</mat-label>
       <input
@@ -10,23 +18,32 @@
         [(ngModel)]="searchTerm"
         class="example-full-width"
       />
-      <mat-icon (click)="onSearch()" matSuffix color="search">search</mat-icon>
+      <mat-icon
+        (click)="onSearch()"
+        matTooltip="Tìm kiếm"
+        matSuffix
+        color="search"
+        >search</mat-icon
+      >
     </mat-form-field>
   </div>
   <div class="filter">
-    <button mat-icon-button (click)="toggleFilter()">
+    <button mat-icon-button (click)="toggleFilter()" matTooltip="Lọc">
       <mat-icon>{{ filterVisible ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
-    <button mat-icon-button (click)="refresh()">
+    <button mat-icon-button (click)="refresh()" matTooltip="Làm mới">
       <mat-icon>refresh</mat-icon>
     </button>
   </div>
   <div [ngClass]="{ hidden: !filterVisible }" class="date-range-container">
     <mat-form-field appearance="outline">
       <mat-label>Ngày bắt đầu</mat-label>
-      <input matInput [matDatepicker]="startPicker"
-      [(ngModel)]="startTime"
-      (ngModelChange)="filter()"  />
+      <input
+        matInput
+        [matDatepicker]="startPicker"
+        [(ngModel)]="startTime"
+        (ngModelChange)="filter()"
+      />
       <mat-datepicker-toggle
         matSuffix
         [for]="startPicker"
@@ -35,10 +52,12 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Ngày kết thúc</mat-label>
-      <input matInput
-      [matDatepicker]="endPicker"
-      [(ngModel)]="endTime"
-      (ngModelChange)="filter()"  />
+      <input
+        matInput
+        [matDatepicker]="endPicker"
+        [(ngModel)]="endTime"
+        (ngModelChange)="filter()"
+      />
       <mat-datepicker-toggle
         matSuffix
         [for]="endPicker"
@@ -47,8 +66,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Loại hoạt động</mat-label>
-      <mat-select   [(value)]="type"
-      (valueChange)="filter()" >
+      <mat-select [(value)]="type" (valueChange)="filter()">
         <mat-option
           *ngFor="let loaiHoatDong of loaiHoatDongs"
           [value]="loaiHoatDong.tenLoaiHoatDong"
@@ -60,8 +78,7 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Trạng thái</mat-label>
-      <mat-select [(value)]="status"
-      (valueChange)="filter()" >
+      <mat-select [(value)]="status" (valueChange)="filter()">
         <mat-option value="SAP_DIEN_RA">Sắp diễn ra</mat-option>
         <mat-option value="DANG_DIEN_RA">Đang diễn ra</mat-option>
         <mat-option value="DA_DIEN_RA">Đã diễn ra</mat-option>
@@ -103,24 +120,44 @@
           {{ item.thoiGianKetThuc | date : "HH:mm:ss dd/MM/yyyy" }}</mat-cell
         >
       </ng-container>
+
       <ng-container matColumnDef="hanhdong">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let item">
-          <mat-icon color="primary" (click)="listLecturer(item)"
-          >people_outline</mat-icon
-        >
-          <mat-icon color="primary" (click)="detail(item)"
+          <mat-icon
+            color="primary"
+            *ngIf="role === 'QuanTriVien'"
+            (click)="listLecturer(item)"
+            matTooltip="Danh sách giảng viên"
+            >people_outline</mat-icon
+          >
+          <mat-icon
+            color="primary"
+            matTooltip="Xem chi tiết"
+            (click)="detail(item)"
             >infor</mat-icon
           >
-          <mat-icon color="primary" (click)="editHoatDong(item)"
-          >edit</mat-icon
-        >
-          <mat-icon *ngIf="item.trangThaiHoatDong === 'SAP_DIEN_RA'" color="accent" (click)="deleteHoatDong(item.maHoatDong)"
+          <mat-icon
+            color="primary"
+            matTooltip="Chỉnh sữa"
+            (click)="editHoatDong(item)"
+            >edit</mat-icon
+          >
+          <mat-icon
+            *ngIf="item.trangThaiHoatDong === 'SAP_DIEN_RA'"
+            matTooltip="Xóa"
+            color="accent"
+            (click)="deleteHoatDong(item.maHoatDong)"
             >delete
           </mat-icon>
-          <ng-container *ngIf="customButton">
-            <ng-container *ngTemplateOutlet="customButton; context: { $implicit: item }"></ng-container>
-          </ng-container>
+        </mat-cell>
+      </ng-container>
+      <ng-container *ngIf="customButton" matColumnDef="dangky">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let item">
+          <ng-container
+            *ngTemplateOutlet="customButton; context: { $implicit: item }"
+          ></ng-container>
         </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

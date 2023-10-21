@@ -8,16 +8,17 @@
         [(ngModel)]="searchTerm"
         class="example-full-width"
       />
-      <mat-icon (click)="onSearch()" matSuffix color="search">search</mat-icon>
+      <mat-icon (click)="onSearch()"  matTooltip="Tìm kiếm"
+       matSuffix color="search">search</mat-icon>
     </mat-form-field>
 
 
   </div>
   <div class="filter">
-    <button mat-icon-button (click)="toggleFilter()">
+    <button mat-icon-button (click)="toggleFilter()" matTooltip="Lọc" >
       <mat-icon>{{ filterVisible ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
-    <button mat-icon-button (click)="refresh()">
+    <button mat-icon-button (click)="refresh()"  matTooltip="Làm mới" >
       <mat-icon>refresh</mat-icon>
     </button>
   </div>
@@ -100,9 +101,9 @@
       <ng-container matColumnDef="hanhdong">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let item">
-          <mat-icon color="primary" (click)="detail(item.hoatDong)"
+          <mat-icon color="primary" (click)="detail(item.hoatDong)"  matTooltip="Xem chi tiết"
           >infor</mat-icon>
-          <mat-icon *ngIf="item.trangThaiDangKy=== 'Da_Huy'"
+          <mat-icon *ngIf="item.trangThaiDangKy=== 'Da_Huy'" matTooltip="Lý do hủy"
           (click)="lyDoHuy(item)" color="warn">help_outline</mat-icon>
         </mat-cell>
       </ng-container>

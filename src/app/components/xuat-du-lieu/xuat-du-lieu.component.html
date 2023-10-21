@@ -1,0 +1,148 @@
+<mat-card>
+  <table id="season-tble" class=""hidden>
+    <tr></tr>
+    <tr>
+      <th>STT</th>
+      <th>Mã giảng viên</th>
+      <th>Họ tên</th>
+      <th>Email</th>
+      <th>Giờ hoàn thành</th>
+      <th>Giờ bắt buộc</th>
+    </tr>
+    <tr *ngFor="let data of dataExel; let i = index">
+      <td>{{ i + 1 }}</td>
+
+      <td>{{ data.tenDangNhap }}</td>
+      <td>{{ data.hoTen }}</td>
+      <td>{{ data.email }}</td>
+      <td>{{ data.tongSoGio }}</td>
+      <td>{{ data.soGioBatBuoc }}</td>
+    </tr>
+  </table>
+  <div class="search-container">
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Tìm kiếm</mat-label>
+      <input
+        matInput
+        placeholder="Nhập nội dung tìm kiếm..."
+        [(ngModel)]="searchTerm"
+        class="example-full-width"
+      />
+      <mat-icon
+        (click)="onSearch()"
+        matTooltip="Tìm kiếm"
+        matSuffix
+        color="search"
+        >search</mat-icon
+      >
+    </mat-form-field>
+  </div>
+  <div class="filter">
+    <button mat-icon-button (click)="toggleFilter()" matTooltip="Lọc">
+      <mat-icon>{{ filterVisible ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+    <button mat-icon-button (click)="refresh()" matTooltip="Làm mới">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+  <div [ngClass]="{ hidden: !filterVisible }" class="date-range-container">
+    <!-- Thêm dropdown menu cho chọn năm -->
+    <mat-form-field appearance="outline">
+      <mat-label>Chọn năm</mat-label>
+      <mat-select [(value)]="selectedNam" (valueChange)="filter()">
+        <mat-option *ngFor="let nam of danhSachNam" [value]="nam">{{
+          nam
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Thêm dropdown menu cho chọn loại -->
+    <mat-form-field appearance="outline">
+      <mat-label>Chọn loại</mat-label>
+      <mat-select [(value)]="selectedLoai" (valueChange)="filter()">
+
+        <mat-option value="Chưa hoàn thành">Chưa hoàn thành</mat-option>
+        <mat-option value="Hoàn thành">Hoàn thành</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Chọn trường</mat-label>
+      <mat-select [(value)]="selectedTruong" (valueChange)="filter()">
+        <mat-option *ngFor="let truong of danhSachTruong" [value]="truong.maTruong">{{ truong.tenTruong }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Chọn khoa</mat-label>
+      <mat-select [(value)]="selectedKhoa" (valueChange)="filter()">
+        <mat-option *ngFor="let khoa of danhSachKhoa" [value]="khoa.maKhoa">{{ khoa.tenKhoa }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button [disabled]="selectedKhoa===undefined"
+    (click)="exportToExcel()" mat-raised-button color="accent">
+      Xuất excel
+    </button>
+  </div>
+  <div class="mat-elevation-z4">
+    <mat-table
+      [dataSource]="danhSachGiangVien"
+      matSort
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="stt">
+        <mat-header-cell *matHeaderCellDef>STT</mat-header-cell>
+        <mat-cell *matCellDef="let i = index">{{ i + 1 }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tenDangNhap">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Mã tài khoản</mat-header-cell
+        >
+        <mat-cell *matCellDef="let giangVien">{{
+          giangVien.tenDangNhap
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="hoTen">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Họ tên</mat-header-cell
+        >
+        <mat-cell *matCellDef="let giangVien">
+          {{ giangVien.hoTen }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="tiLeGio">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Tỉ lệ giờ</mat-header-cell
+        >
+        <mat-cell *matCellDef="let giangVien">
+          {{ giangVien.tongSoGio??0 }}/{{ giangVien.soGioBatBuoc??0 }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="hanhdong">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell
+          *matCellDef="let item"
+          matTooltip="Chi tiết tài khoản"
+          (click)="detail(item.giangVien)"
+        >
+          <mat-icon color="primary">infor </mat-icon>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row
+        matRipple
+        class="element-row"
+        *matRowDef="let row; columns: displayedColumns"
+      ></mat-row>
+    </mat-table>
+    <mat-paginator
+      [length]="length || 0"
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    >
+    </mat-paginator>
+  </div>
+</mat-card>

@@ -50,10 +50,12 @@ export class TaiKhoanService {
     return this.http.get<any>(`/api/tai-khoan/danh-sach-nam-dang-ky-hoat-dong`);
   }
 
-  getGiangVien(namHoc: string, loai: string): Observable<any> {
+
+  getGiangVienKhenThuongHoacKienTrach(namHoc: string, loai: string, maKhoa: number): Observable<any> {
     const params = new HttpParams()
-      .set('namHoc', namHoc)
-      .set('loai', loai);
+      .set('nam', namHoc)
+      .set('loai', loai)
+      .set('khoa', maKhoa);
 
     return this.http.get<any>(`/api/tai-khoan/ds-giang-vien-khen-thuong-hoac-khien-trach`, { params: params });
   }

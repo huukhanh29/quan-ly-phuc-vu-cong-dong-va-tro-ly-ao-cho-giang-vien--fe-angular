@@ -79,6 +79,8 @@ import { DuyetHdntComponent } from './components/admin/hoat-dong-ngoai-truong/du
 import { DatePipe } from '@angular/common';
 import { BreadcrumbsComponent } from './components/layouts/breadcrumbs/breadcrumbs.component';
 import { DanhSachGiangVienComponent } from './components/admin/danh-sach-giang-vien/danh-sach-giang-vien.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
+import { XuatDuLieuComponent } from './components/xuat-du-lieu/xuat-du-lieu.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -147,7 +149,9 @@ import { DanhSachGiangVienComponent } from './components/admin/danh-sach-giang-v
     ChiTietHdntComponent,
     DuyetHdntComponent,
     BreadcrumbsComponent,
-    DanhSachGiangVienComponent
+    DanhSachGiangVienComponent,
+    UserInfoComponent,
+    XuatDuLieuComponent
   ],
   imports: [
     BrowserModule,

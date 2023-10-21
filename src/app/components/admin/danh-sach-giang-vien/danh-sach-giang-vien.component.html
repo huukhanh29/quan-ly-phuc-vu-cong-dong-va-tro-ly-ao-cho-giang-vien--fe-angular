@@ -1,7 +1,12 @@
 <mat-card>
+  <button mat-mini-fab color="add" (click)="quayLai()"
+        matTooltip="Trở lại" class="icon-add">
+          <mat-icon>keyboard_backspace</mat-icon>
+        </button>
   <mat-tab-group dynamicHeight>
     <mat-tab label="Giảng viên tổ chức">
       <div class="search-container">
+
         <mat-form-field appearance="outline" class="search-input">
           <mat-label>Tìm kiếm</mat-label>
           <input
