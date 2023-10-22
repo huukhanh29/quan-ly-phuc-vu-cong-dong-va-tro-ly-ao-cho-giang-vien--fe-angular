@@ -1,11 +1,7 @@
 <mat-card *ngIf="years && lineChartData">
-  <mat-card-header>
-    <mat-card-title>Select Year and View Chart</mat-card-title>
-  </mat-card-header>
-
   <mat-card-content>
     <mat-form-field appearance="outline">
-      <mat-label>Select Year</mat-label>
+      <mat-label>Chọn năm</mat-label>
       <mat-select [(value)]="selectedYear" (selectionChange)="onYearChange(selectedYear)">
         <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
       </mat-select>

@@ -44,7 +44,11 @@
     </div>
     <div class="table-row">
       <div class="table-cell"><strong>File Quyết Định:</strong></div>
-      <div class="table-cell">{{  data.tenFile}}
+      <div class="table-cell">{{
+        data.tenFile?.length > 20
+          ? data.tenFile.slice(0, 20) + "..."
+          : data.tenFile
+      }}
         <mat-icon color="primary" (click)="taiFile(data.item.maHoatDong)"
         >file_download</mat-icon>
       </div>

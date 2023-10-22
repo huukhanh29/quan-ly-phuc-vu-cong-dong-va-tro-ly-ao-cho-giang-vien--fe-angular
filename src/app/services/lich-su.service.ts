@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class LichSuService {
 
-  private baseUrl = '/api/lich-su'; 
+  private baseUrl = '/api/lich-su';
 
   constructor(private http: HttpClient) { }
 
@@ -22,11 +22,11 @@ export class LichSuService {
     return this.http.get(`${this.baseUrl}?${params.toString()}`);
   }
 
-  getChartData(year: number): Observable<any> {
+  getChartData(year: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/bieu-do-luot-hoi?year=${year}`);
   }
 
-  getDistinctYears(): Observable<number[]> {
-    return this.http.get<number[]>(`${this.baseUrl}/danh-sach-nam-cua-lich-su`);
+  getDistinctYears(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/danh-sach-nam-cua-lich-su`);
   }
 }
