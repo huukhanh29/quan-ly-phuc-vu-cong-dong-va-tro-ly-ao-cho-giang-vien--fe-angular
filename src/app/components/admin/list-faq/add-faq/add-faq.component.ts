@@ -36,7 +36,7 @@ export class AddFaqComponent implements OnInit {
   }
 
   closePopup(event: Event): void {
-    event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
+    event.preventDefault(); 
     this.dialogRef.close('Closed');
   }
 

@@ -1,0 +1,92 @@
+<mat-card>
+  <div class="search-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Chọn năm</mat-label>
+      <mat-select [(value)]="selectedNam" (valueChange)="onSearch()">
+        <mat-option *ngFor="let nam of danhSachNam" [value]="nam">{{
+          nam
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Tìm kiếm</mat-label>
+      <input
+        matInput
+        placeholder="Nhập nội dung tìm kiếm..."
+        [(ngModel)]="searchTerm"
+        class="example-full-width"
+      />
+      <mat-icon
+        (click)="onSearch()"
+        matTooltip="Tìm kiếm"
+        matSuffix
+        color="search"
+        >search</mat-icon
+      >
+    </mat-form-field>
+  </div>
+
+  <div class="mat-elevation-z4">
+    <mat-table
+      [dataSource]="danhSachHoatDong"
+      matSort
+      class="demo-table mat-elevation-z8"
+    >
+      <ng-container matColumnDef="stt">
+        <mat-header-cell *matHeaderCellDef>STT</mat-header-cell>
+        <mat-cell *matCellDef="let i = index">{{ i + 1 }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tenHoatDong">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Tên hoạt động</mat-header-cell
+        >
+        <mat-cell *matCellDef="let item"> {{ item.tenHoatDong }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="thoiGianBatDau">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Bắt đầu</mat-header-cell
+        >
+        <mat-cell *matCellDef="let item">
+          {{ item.thoiGianBatDau | date : "HH:mm:ss dd/MM/yyyy" }}</mat-cell
+        >
+      </ng-container>
+      <ng-container matColumnDef="thoiGianKetThuc">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Kết thúc</mat-header-cell
+        >
+        <mat-cell *matCellDef="let item">
+          {{ item.thoiGianKetThuc | date : "HH:mm:ss dd/MM/yyyy" }}</mat-cell
+        >
+      </ng-container>
+
+      <ng-container matColumnDef="hanhdong">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let item">
+
+          <mat-icon
+            color="primary"
+            matTooltip="Xem chi tiết"
+            (click)="detail(item)"
+            >infor</mat-icon
+          >
+
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row
+        matRipple
+        class="element-row"
+        *matRowDef="let row; columns: displayedColumns"
+      ></mat-row>
+    </mat-table>
+    <mat-paginator
+      [length]="length || 0"
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    >
+    </mat-paginator>
+  </div>
+</mat-card>

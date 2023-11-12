@@ -42,7 +42,7 @@ export class XuatDuLieuComponent {
   selectedKhoaTen: string = '';
 
   dataExel: any;
-  nameFile = 'Nhật ký nâng cấp';
+  nameFile = '';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(

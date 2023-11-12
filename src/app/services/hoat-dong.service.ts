@@ -89,4 +89,14 @@ export class HoatDongService {
   getFileName(maHoatDong: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${maHoatDong}/ten-file`,  {responseType: 'text'});
   }
+  layDsHDTH(nam: string, maGiangVien?: number): Observable<any> {
+    let params = new HttpParams().set('nam', nam);
+
+    if (maGiangVien != null) {
+      params = params.set('maGiangVien', maGiangVien.toString());
+    }
+
+    return this.http.get(`${this.baseUrl}/lay-hoat-dong-tong-hop`, { params });
+  }
+  
 }

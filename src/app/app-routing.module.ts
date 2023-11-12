@@ -30,6 +30,7 @@ import { ChucDanhComponent } from './components/admin/chuc-danh/chuc-danh.compon
 import { HoatDongNgoaiTruongComponent } from './components/admin/hoat-dong-ngoai-truong/hoat-dong-ngoai-truong.component';
 import { DanhSachGiangVienComponent } from './components/admin/danh-sach-giang-vien/danh-sach-giang-vien.component';
 import { XuatDuLieuComponent } from './components/xuat-du-lieu/xuat-du-lieu.component';
+import { HoatDongCuaGiangVienComponent } from './components/admin/hoat-dong-cua-giang-vien/hoat-dong-cua-giang-vien.component';
 
 const routes: Routes = [
   {
@@ -117,6 +118,11 @@ const routes: Routes = [
         component: XuatDuLieuComponent,
         data: { titulo: 'Xuất dữ liệu' },
       },
+      {
+        path: 'danh-sach-hoat-dong-cua-giang-vien',
+        component: HoatDongCuaGiangVienComponent,
+        data: { titulo: 'Danh sách hoạt động đã tham gia' },
+      },
     ],
   },
 
@@ -193,7 +199,11 @@ const routes: Routes = [
         component: LichHoatDongComponent,
         data: { titulo: 'Lịch hoạt động' },
       },
-
+      {
+        path: 'danh-sach-hoat-dong-cua-giang-vien',
+        component: HoatDongCuaGiangVienComponent,
+        data: { titulo: 'Danh sách hoạt động đã tham gia' },
+      },
     ],
   },
   {

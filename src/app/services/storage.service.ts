@@ -97,4 +97,6 @@ export class StorageService {
   public xoaCookie(): void {
     this.cookieService.deleteAll("/");
   }
+
+
 }

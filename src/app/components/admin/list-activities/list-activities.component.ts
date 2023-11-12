@@ -195,18 +195,7 @@ export class ListActivitiesComponent implements OnInit{
       ]);
     }
   }
-  //   listLecturer(item: any | null): void {
-  //   if (item) {
-  //     var popup = this.dialog.open(ListLecturerJoinComponent, {
-  //       data: {
-  //         item: item,
-  //       },
-  //       width: '50%',
-  //       enterAnimationDuration: '300ms',
-  //       exitAnimationDuration: '300ms',
-  //     });
-  //   }
-  // }
+
   deleteHoatDong(id: any): void {
     var popup = this.dialog.open(DeleteComponent, {
       width: '40%',

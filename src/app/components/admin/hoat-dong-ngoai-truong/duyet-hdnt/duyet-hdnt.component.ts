@@ -47,6 +47,7 @@ export class DuyetHdntComponent implements OnInit{
     const formData = this.myform.value;
       this.hoatDongNgoaiTruongService.pheDuyetHoatDongNgoaiTruong(this.data.item.maHoatDongNgoaiTruong,formData).subscribe({
         next: data=>{
+          console.log(formData)
           console.log(data)
           this.dialogRef.close('ok');
             this.toastr.success("Duyệt đăng ký hoạt động thành công!");

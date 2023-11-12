@@ -81,6 +81,7 @@ import { BreadcrumbsComponent } from './components/layouts/breadcrumbs/breadcrum
 import { DanhSachGiangVienComponent } from './components/admin/danh-sach-giang-vien/danh-sach-giang-vien.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { XuatDuLieuComponent } from './components/xuat-du-lieu/xuat-du-lieu.component';
+import { HoatDongCuaGiangVienComponent } from './components/admin/hoat-dong-cua-giang-vien/hoat-dong-cua-giang-vien.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -151,7 +152,8 @@ import { XuatDuLieuComponent } from './components/xuat-du-lieu/xuat-du-lieu.comp
     BreadcrumbsComponent,
     DanhSachGiangVienComponent,
     UserInfoComponent,
-    XuatDuLieuComponent
+    XuatDuLieuComponent,
+    HoatDongCuaGiangVienComponent
   ],
   imports: [
     BrowserModule,
