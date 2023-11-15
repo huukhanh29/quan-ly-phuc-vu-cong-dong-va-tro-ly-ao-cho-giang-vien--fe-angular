@@ -10,6 +10,7 @@ import { DetailLecturerComponent } from './detail-lecturer/detail-lecturer.compo
 import { MatDialog } from '@angular/material/dialog';
 import { AddLecturerComponent } from './add-lecturer/add-lecturer.component';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-lecturer',
@@ -36,7 +37,7 @@ export class ListLecturerComponent implements OnInit {
     private storageService: StorageService,
     private toastr: ToastrService,
     private dialog: MatDialog,
-    private cookie: CookieService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -139,5 +140,10 @@ export class ListLecturerComponent implements OnInit {
     popup.afterClosed().subscribe((item) => {
       this.loadDanhSachGiangVien();
     });
+  }
+  chiTietThamGiaHoatDong(ma:any){
+    this.router.navigate([
+      `/quan-tri-vien/danh-sach-hoat-dong-cua-giang-vien/${ma}`,
+    ]);
   }
 }

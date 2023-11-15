@@ -119,7 +119,7 @@ const routes: Routes = [
         data: { titulo: 'Xuất dữ liệu' },
       },
       {
-        path: 'danh-sach-hoat-dong-cua-giang-vien',
+        path: 'danh-sach-hoat-dong-cua-giang-vien/:maGiangVien',
         component: HoatDongCuaGiangVienComponent,
         data: { titulo: 'Danh sách hoạt động đã tham gia' },
       },

@@ -35,8 +35,9 @@ export class ThemHdntComponent implements OnInit {
     }
   }
 
-  closePopup() {
-    this.dialogRef.close('Closed using function');
+  closePopup(event: Event): void {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
+    this.dialogRef.close('Closed');
   }
 
   get formControls() {

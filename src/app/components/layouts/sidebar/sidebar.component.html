@@ -2,7 +2,7 @@
   <button (click)="drawer.toggle()" mat-icon-button>
     <mat-icon color="basic">menu</mat-icon>
   </button>
-  <img src="../../../../assets/images/graduation-cap.png" alt="Logo" />
+  <img src="../../../../assets/images/graduation-cap.png" alt="Logo" (click)="home()"/>
   <span>Hệ thống quản lý</span>
   <span class="example-spacer"></span>
   <span [matMenuTriggerFor]="menu">Xin chào {{username}}!</span>

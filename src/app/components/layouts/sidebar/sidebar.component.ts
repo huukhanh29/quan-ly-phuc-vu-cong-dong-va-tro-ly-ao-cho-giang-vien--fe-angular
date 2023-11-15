@@ -18,13 +18,15 @@ export class SidebarComponent implements OnInit{
   constructor(
     private dialog: MatDialog,
     private storageService: StorageService,
-    private taiKhoanService: TaiKhoanService
+    private taiKhoanService: TaiKhoanService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     const user = this.storageService.getUser();
     this.username = user.tenTaiKhoan;
     this.role = user.quyen
   }
+
   badgevisible = false;
   badgevisibility() {
     this.badgevisible = true;
@@ -46,5 +48,8 @@ export class SidebarComponent implements OnInit{
         data: data
       });
     });
+  }
+  home(){
+    this.router.navigate(['/']);
   }
 }

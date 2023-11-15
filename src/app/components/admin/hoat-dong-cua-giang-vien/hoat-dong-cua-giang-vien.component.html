@@ -1,13 +1,24 @@
 <mat-card>
   <div class="search-container">
-    <mat-form-field appearance="outline">
-      <mat-label>Chọn năm</mat-label>
-      <mat-select [(value)]="selectedNam" (valueChange)="onSearch()">
-        <mat-option *ngFor="let nam of danhSachNam" [value]="nam">{{
-          nam
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div>
+      <button
+        mat-mini-fab
+        color="add"
+        (click)="quayLai()"
+        matTooltip="Trở lại"
+        class="icon-add"
+      >
+        <mat-icon>keyboard_backspace</mat-icon>
+      </button>
+      <mat-form-field appearance="outline">
+        <mat-label>Chọn năm</mat-label>
+        <mat-select [(value)]="selectedNam" (valueChange)="filter()">
+          <mat-option *ngFor="let nam of danhSachNam" [value]="nam">{{
+            nam
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <mat-form-field appearance="outline" class="search-input">
       <mat-label>Tìm kiếm</mat-label>
       <input
@@ -23,9 +34,35 @@
         color="search"
         >search</mat-icon
       >
+      <mat-icon (click)="refresh()" matSuffix color="search">refresh</mat-icon>
     </mat-form-field>
   </div>
 
+  <div class="additional-info">
+    <table class="vertical-table">
+      <tr>
+        <th>Tổng số giờ hoàn thành</th>
+        <td>{{ tongSoGio }}</td>
+      </tr>
+      <tr>
+        <th>Giờ bắt buộc</th>
+        <td>{{ gioBatBuoc }}</td>
+      </tr>
+      <tr>
+        <th>Giờ HK1</th>
+        <td>{{ gioHk1 }}</td>
+      </tr>
+      <tr>
+        <th>Giờ HK2</th>
+        <td>{{ gioHk2 }}</td>
+      </tr>
+      <tr>
+        <th>Giờ HK3</th>
+        <td>{{ gioHk3 }}</td>
+      </tr>
+    </table>
+  </div>
+  <h2>Danh sách hoạt động</h2>
   <div class="mat-elevation-z4">
     <mat-table
       [dataSource]="danhSachHoatDong"
@@ -63,14 +100,12 @@
       <ng-container matColumnDef="hanhdong">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let item">
-
           <mat-icon
             color="primary"
             matTooltip="Xem chi tiết"
             (click)="detail(item)"
             >infor</mat-icon
           >
-
         </mat-cell>
       </ng-container>
 
@@ -82,7 +117,6 @@
       ></mat-row>
     </mat-table>
     <mat-paginator
-      [length]="length || 0"
       [pageSize]="5"
       [pageSizeOptions]="[5, 10, 20]"
       showFirstLastButtons

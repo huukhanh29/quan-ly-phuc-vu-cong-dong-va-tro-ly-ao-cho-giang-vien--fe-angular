@@ -73,3 +73,26 @@ mat-table {
 .hidden {
   display: none !important;
 }
+.vertical-table {
+  width: 100%; /* Full width of the container */
+  border-collapse: collapse;
+}
+
+.vertical-table th,
+.vertical-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.vertical-table th {
+  background-color: #f4f4f4;
+  width: 50%;
+}
+
+.additional-info {
+  margin-top: 20px;
+  padding: 16px;
+  /* other styles... */
+}
+

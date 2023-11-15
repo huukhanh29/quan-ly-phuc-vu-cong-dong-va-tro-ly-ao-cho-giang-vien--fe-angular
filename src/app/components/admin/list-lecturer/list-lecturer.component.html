@@ -71,9 +71,10 @@
     </ng-container>
     <ng-container matColumnDef="hanhdong">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let giaoVien" matTooltip="Chi tiết tài khoản"
-        (click)="detail(giaoVien)">
-        <mat-icon color="primary">infor </mat-icon>
+      <mat-cell *matCellDef="let giaoVien"
+       >
+        <mat-icon color="primary"  (click)="detail(giaoVien)" matTooltip="Chi tiết tài khoản">infor </mat-icon>
+        <mat-icon color="primary"  (click)="chiTietThamGiaHoatDong(giaoVien.maTaiKhoan)" matTooltip="Chi tiết tham gia hoạt động">event_note </mat-icon>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

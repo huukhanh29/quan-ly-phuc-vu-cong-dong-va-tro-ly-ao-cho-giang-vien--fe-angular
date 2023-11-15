@@ -82,6 +82,7 @@ import { DanhSachGiangVienComponent } from './components/admin/danh-sach-giang-v
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { XuatDuLieuComponent } from './components/xuat-du-lieu/xuat-du-lieu.component';
 import { HoatDongCuaGiangVienComponent } from './components/admin/hoat-dong-cua-giang-vien/hoat-dong-cua-giang-vien.component';
+import { ChiTietHoatDongGvComponent } from './components/admin/hoat-dong-cua-giang-vien/chi-tiet-hoat-dong-gv/chi-tiet-hoat-dong-gv.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -153,7 +154,8 @@ import { HoatDongCuaGiangVienComponent } from './components/admin/hoat-dong-cua-
     DanhSachGiangVienComponent,
     UserInfoComponent,
     XuatDuLieuComponent,
-    HoatDongCuaGiangVienComponent
+    HoatDongCuaGiangVienComponent,
+    ChiTietHoatDongGvComponent
   ],
   imports: [
     BrowserModule,

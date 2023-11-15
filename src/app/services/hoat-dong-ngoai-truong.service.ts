@@ -29,12 +29,7 @@ export class HoatDongNgoaiTruongService {
     return this.http.put(`${this.baseUrl}/sua/${maHoatDongNgoaiTruong}`, data);
   }
 
-  suaFileHoatDongNgoaiTruong(maHoatDongNgoaiTruong: number, file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('file', file);
 
-    return this.http.put(`${this.baseUrl}/sua-file/${maHoatDongNgoaiTruong}`, formData);
-  }
   pheDuyetHoatDongNgoaiTruong(maHoatDongNgoaiTruong: number, request: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/phe-duyet/${maHoatDongNgoaiTruong}`, request);
   }
@@ -82,6 +77,12 @@ export class HoatDongNgoaiTruongService {
   // Phương thức để lấy tên tài liệu
   getFileName(maHoatDongNgoaiTruong: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${maHoatDongNgoaiTruong}/ten-file`, {responseType: 'text'});
+  }
+  suaFileHoatDongNgoaiTruong(maHoatDongNgoaiTruong: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.put(`${this.baseUrl}/sua-file/${maHoatDongNgoaiTruong}`, formData);
   }
   getYears(): Observable<any> {
     return this.http.get(`${this.baseUrl}/lay-danh-sach-nam`);
