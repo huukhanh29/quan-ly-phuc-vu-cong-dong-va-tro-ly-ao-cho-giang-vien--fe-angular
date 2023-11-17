@@ -44,7 +44,7 @@
           </mat-list>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button color="primary" [routerLink]="['/infoDetail']">
+          <button mat-button color="primary" >
             Xem thêm...
           </button>
         </mat-card-actions>
@@ -55,35 +55,35 @@
     <div class="right-section">
       <mat-card >
         <mat-grid-list cols="2" rowHeight="100px">
-          <mat-grid-tile routerLink="/infoDetail">
+          <mat-grid-tile >
             <div class="tile-content">
               <img src="../../../assets/images/info.png" alt="#" />
               <span>Thông tin sinh viên</span>
             </div>
           </mat-grid-tile>
 
-          <mat-grid-tile routerLink="/education-program">
+          <mat-grid-tile >
             <div class="tile-content">
               <img src="../../../assets/images/calendar.png" alt="#" />
               <span>Chương trình đào tạo</span>
             </div>
           </mat-grid-tile>
 
-          <mat-grid-tile routerLink="/learning-result">
+          <mat-grid-tile >
             <div class="tile-content">
               <img src="../../../assets/images/exam.png" alt="#" />
               <span>Kết quả học tập</span>
             </div>
           </mat-grid-tile>
 
-          <mat-grid-tile routerLink="/test-schedule">
+          <mat-grid-tile >
             <div class="tile-content">
               <img src="../../../assets/images/lichthi.png" alt="#" />
               <span>Lịch thi</span>
             </div>
           </mat-grid-tile>
 
-          <mat-grid-tile routerLink="/tuition">
+          <mat-grid-tile >
             <div class="tile-content">
               <img src="../../../assets/images/tuition.png" alt="#" />
               <span>Học phí</span>
@@ -97,7 +97,7 @@
             </div>
           </mat-grid-tile>
 
-          <mat-grid-tile (click)="test()">
+          <mat-grid-tile >
             <div class="tile-content">
               <img src="../../../assets/images/graduation.png" alt="#" />
               <span>Kết quả học tập</span>

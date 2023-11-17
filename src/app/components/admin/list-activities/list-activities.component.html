@@ -138,6 +138,7 @@
             >infor</mat-icon
           >
           <mat-icon
+          *ngIf="item.trangThaiHoatDong !== 'DA_DIEN_RA'"
             color="primary"
             matTooltip="Chỉnh sữa"
             (click)="editHoatDong(item)"

@@ -36,6 +36,11 @@ export class SidebarAdminComponent {
           label: 'Phản hồi',
           icon: 'feedback',
           routerLink: '/quan-tri-vien/danh-sach-phan-hoi'
+        },
+        {
+          label: 'Biểu đồ chat',
+          icon: 'show_chart',
+          routerLink: '/quan-tri-vien/bieu-do-chat'
         }
       ]
     },
@@ -82,11 +87,11 @@ export class SidebarAdminComponent {
       label: 'Hệ thống',
       icon: 'event_note',
       subItems: [
-        {
-          label: 'Trường',
-          icon: 'local_activity',
-          routerLink: '/quan-tri-vien/truong'
-        },
+        // {
+        //   label: 'Trường',
+        //   icon: 'local_activity',
+        //   routerLink: '/quan-tri-vien/truong'
+        // },
         {
           label: 'Khoa',
           icon: 'dns',

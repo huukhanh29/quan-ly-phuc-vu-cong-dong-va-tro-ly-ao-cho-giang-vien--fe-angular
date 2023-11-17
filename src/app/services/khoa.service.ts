@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class KhoaService {
-  private baseUrl = 'http://localhost:8080/api/khoa'; // Thay đổi URL dựa trên URL của API của bạn
+  private baseUrl = '/api/khoa'; // Thay đổi URL dựa trên URL của API của bạn
 
   constructor(private http: HttpClient) {}
 
@@ -30,10 +30,10 @@ export class KhoaService {
     return this.http.put(`${this.baseUrl}/sua/${maKhoa}`, khoa);
   }
 
-  // Hàm gửi yêu cầu GET để lấy danh sách khoa theo mã trường
-  layKhoaTheoTruong(maTruong: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/lay-theo-truong/${maTruong}`);
-  }
+  // // Hàm gửi yêu cầu GET để lấy danh sách khoa theo mã trường
+  // layKhoaTheoTruong(maTruong: number): Observable<any> {
+  //   return this.http.get(`${this.baseUrl}/lay-theo-truong/${maTruong}`);
+  // }
 
   // Hàm gửi yêu cầu DELETE để xóa khoa
   xoaKhoa(maKhoa: number): Observable<any> {

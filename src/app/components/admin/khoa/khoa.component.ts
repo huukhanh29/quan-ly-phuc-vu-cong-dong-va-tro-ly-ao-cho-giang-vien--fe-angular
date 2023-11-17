@@ -17,7 +17,7 @@ import { ChiTietKhoaComponent } from './chi-tiet-khoa/chi-tiet-khoa.component';
 })
 export class KhoaComponent implements OnInit {
   danhSachKhoa: MatTableDataSource<Khoa> = new MatTableDataSource();
-  displayedColumns: string[] = ['stt', 'tenKhoa', 'tenTruong', 'hanhdong'];
+  displayedColumns: string[] = ['stt', 'tenKhoa', 'hanhdong'];
   searchTerm: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

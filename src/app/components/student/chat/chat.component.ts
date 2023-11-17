@@ -20,7 +20,7 @@ export class ChatComponent implements AfterViewInit  {
 
   constructor(private cauHoiService: CauHoiService, private renderer: Renderer2) {}
   ngAfterViewInit() {
-    this.combinedMessages.push({ content: 'Hi there! How can I help you today?', isOutgoing: false });
+    this.combinedMessages.push({ content: 'Xin chào! Chúng tôi có thể giúp gì cho bạn?', isOutgoing: false });
     this.renderer.listen('document', 'click', (event) => {
       if (
         this.chatbotRef &&

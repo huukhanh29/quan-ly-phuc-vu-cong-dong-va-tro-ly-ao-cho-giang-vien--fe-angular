@@ -55,8 +55,21 @@
     </div>
     <div class="table-row">
       <div class="table-cell"><strong>Cấp Tổ Chức:</strong></div>
-      <div class="table-cell">{{ data.item.capToChuc }}</div>
+      <div class="table-cell">
+        <span *ngIf="data.item.capToChuc === 'KHOA'; else isTruong">Khoa</span>
+        <ng-template #isTruong>
+          <span *ngIf="data.item.capToChuc === 'TRUONG'; else isBoMon">Trường</span>
+        </ng-template>
+        <ng-template #isBoMon>
+          <span *ngIf="data.item.capToChuc === 'BOMON'; else isCaNhan">Bộ Môn</span>
+        </ng-template>
+        <ng-template #isCaNhan>
+          <span *ngIf="data.item.capToChuc === 'CANHAN'">Cá Nhân</span>
+        </ng-template>
+      </div>
     </div>
+
+
     <div class="table-row">
       <div class="table-cell"><strong>Loại Hoạt Động:</strong></div>
       <div class="table-cell">{{ data.item.loaiHoatDong.tenLoaiHoatDong }}</div>
@@ -71,8 +84,17 @@
     </div>
     <div class="table-row">
       <div class="table-cell"><strong>Trạng Thái Hoạt Động:</strong></div>
-      <div class="table-cell">{{ data.item.trangThaiHoatDong }}</div>
+      <div class="table-cell">
+        <span *ngIf="data.item.trangThaiHoatDong === 'DA_DIEN_RA'; else isDangDienRa">Đã Diễn Ra</span>
+        <ng-template #isDangDienRa>
+          <span *ngIf="data.item.trangThaiHoatDong === 'DANG_DIEN_RA'; else isSapDienRa">Đang Diễn Ra</span>
+        </ng-template>
+        <ng-template #isSapDienRa>
+          <span *ngIf="data.item.trangThaiHoatDong === 'SAP_DIEN_RA'">Sắp Diễn Ra</span>
+        </ng-template>
+      </div>
     </div>
+
   </mat-card>
 </div>
 <div mat-dialog-actions>

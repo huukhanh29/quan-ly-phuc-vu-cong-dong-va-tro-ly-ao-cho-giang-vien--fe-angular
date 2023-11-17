@@ -30,20 +30,20 @@ export class FormKhoaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadDanhSachTruong();
+    //this.loadDanhSachTruong();
 
     if (this.data && this.data.item) {
       // Trường hợp chỉnh sửa: gán giá trị từ item vào form
       this.myform.patchValue({
         tenKhoa: this.data.item.tenKhoa,
-        maTruong: this.data.item.truong?.maTruong
+        //maTruong: this.data.item.truong?.maTruong
       });
     }
   }
 
-  loadDanhSachTruong() {
-    this.truongService.layTatCaTruong().subscribe(data => this.danhSachTruong = data);
-  }
+  // loadDanhSachTruong() {
+  //   this.truongService.layTatCaTruong().subscribe(data => this.danhSachTruong = data);
+  // }
 
   closePopup(event: Event): void {
     event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
@@ -52,7 +52,7 @@ export class FormKhoaComponent implements OnInit {
 
   myform = this.formBuilder.group({
     tenKhoa: ['', Validators.required],
-    maTruong: ['', Validators.required]
+    // maTruong: ['', Validators.required]
   });
 
   save() {

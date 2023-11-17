@@ -14,6 +14,7 @@ import { UserInfoComponent } from '../../user-info/user-info.component';
 })
 export class SidebarComponent implements OnInit{
   username!: string
+  hoTen!: string
   role!: string
   constructor(
     private dialog: MatDialog,
@@ -25,6 +26,7 @@ export class SidebarComponent implements OnInit{
     const user = this.storageService.getUser();
     this.username = user.tenTaiKhoan;
     this.role = user.quyen
+    this.loadInfo()
   }
 
   badgevisible = false;
@@ -40,9 +42,18 @@ export class SidebarComponent implements OnInit{
     });
 
   }
+  loadInfo(): void {
+    this.taiKhoanService.layThongTinNguoiDung().subscribe(data => {
+      if(data.taiKhoan){
+        this.hoTen = data.taiKhoan.tenDayDu
+      }else{
+        this.hoTen = data.tenDayDu
+      }
+
+    });
+  }
   info(): void {
     this.taiKhoanService.layThongTinNguoiDung().subscribe(data => {
-      console.log(data)
       this.dialog.open(UserInfoComponent, {
         width: '500px',
         data: data

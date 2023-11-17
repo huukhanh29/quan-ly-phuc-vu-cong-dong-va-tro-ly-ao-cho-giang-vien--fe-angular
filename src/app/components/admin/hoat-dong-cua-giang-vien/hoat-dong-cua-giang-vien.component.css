@@ -95,4 +95,18 @@ mat-table {
   padding: 16px;
   /* other styles... */
 }
+.export-button-container {
+
+  margin: 15px 0;    /* khoảng cách trên và dưới */
+}
+
+.export-button-container button {
+  background-color: #724AE8; /* màu nền cho nút, bạn có thể thay đổi */
+  color: white;              /* màu chữ */
+  margin-right: 15px;        /* khoảng cách bên phải */
+}
+
+.export-button-container button mat-icon {
+  margin-right: 5px; /* khoảng cách giữa icon và text */
+}
 

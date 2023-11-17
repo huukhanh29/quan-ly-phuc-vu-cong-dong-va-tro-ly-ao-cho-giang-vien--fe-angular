@@ -22,7 +22,8 @@ import { StorageService } from './../../../services/storage.service';
 import { DetailActivityComponent } from '../list-activities/detail-activity/detail-activity.component';
 import { TaiKhoanService } from 'src/app/services/tai-khoan.service';
 import { ChiTietHoatDongGvComponent } from './chi-tiet-hoat-dong-gv/chi-tiet-hoat-dong-gv.component';
-
+import * as XLSX from 'xlsx';
+import * as XLSXStyle from 'xlsx-js-style';
 @Component({
   selector: 'app-hoat-dong-cua-giang-vien',
   templateUrl: './hoat-dong-cua-giang-vien.component.html',
@@ -48,6 +49,9 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
   gioHk2: number = 0;
   gioHk3: number = 0;
   maGiangVien!: number;
+  dataExel: any;
+  nameFile = '';
+  giangVien!: GiangVien;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
@@ -65,15 +69,37 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
   ngOnInit(): void {
     this.layDanhSachNam();
     this.activatedRoute.params.subscribe((params: Params) => {
-      if (!isNaN(params['maGiangVien']) && params['maGiangVien'] !== undefined) {
+      if (
+        !isNaN(params['maGiangVien']) &&
+        params['maGiangVien'] !== undefined
+      ) {
         this.maGiangVien = +params['maGiangVien'];
+        this.loadThongTinGiangVien();
       } else {
-        this.maGiangVien = -1
+        this.maGiangVien = -1;
       }
     });
-    console.log(this.maGiangVien)
+    console.log(this.maGiangVien);
   }
 
+  loadThongTinGiangVien() {
+    //lấy từ giảng viên
+    if (this.maGiangVien === -1) {
+      this.taiKhoanService.layThongTinNguoiDung().subscribe((data) => {
+        this.giangVien = data;
+        this.nameFile = `Chi tiết tham gia hoạt động của ${this.giangVien.taiKhoan.tenDayDu} (${this.giangVien.taiKhoan.tenDangNhap}) năm ${this.selectedNam}`;
+        console.log(this.nameFile);
+      });
+    } else {
+      this.taiKhoanService
+        .layThongTinGvByMa(this.maGiangVien)
+        .subscribe((data) => {
+          this.giangVien = data;
+          this.nameFile = `Chi tiết tham gia hoạt động của ${this.giangVien.taiKhoan.tenDayDu} (${this.giangVien.taiKhoan.tenDangNhap}) năm ${this.selectedNam}`;
+          console.log(this.nameFile);
+        });
+    }
+  }
   layDanhSachNam() {
     this.taiKhoanService.getAcademicYearsByUser().subscribe((data) => {
       this.loadDanhSachHoatDong();
@@ -84,6 +110,7 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
       }
     });
   }
+
   ganDuLieu(data: any) {
     this.danhSachHoatDong = new MatTableDataSource<any>(data.danhSachHoatDong);
     this.tongSoGio = data.tongSoGio;
@@ -91,6 +118,7 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
     this.gioHk1 = data.gioHk1;
     this.gioHk2 = data.gioHk2;
     this.gioHk3 = data.gioHk3;
+    this.dataExel = data.danhSachHoatDong;
   }
   loadDanhSachHoatDong() {
     if (this.maGiangVien === -1) {
@@ -107,8 +135,8 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
   }
 
   onSearch() {
-    const filterValue = this.searchTerm.trim().toLowerCase(); // Trim whitespace and convert to lowercase
-    this.danhSachHoatDong.filter = filterValue; // Apply filter to the data source
+    const filterValue = this.searchTerm.trim().toLowerCase();
+    this.danhSachHoatDong.filter = filterValue;
   }
 
   refresh() {
@@ -136,7 +164,57 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
       this.router.navigate(['/giang-vien/bieu-do']);
     } else {
       this.router.navigate(['/quan-tri-vien/danh-sach-giang-vien']);
-
     }
+  }
+
+  exportToExcel(): void {
+    const element = document.getElementById('season-tble');
+    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    // Gộp ô tiêu đề
+    worksheet['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: 7 } }];
+
+    // Vị trí mới cho các hàng
+    const newRowStart = this.dataExel.length + 3; // Bắt đầu từ hàng thứ 2, ngay sau hàng tiêu đề
+
+    // Gộp ô cho các hàng mới
+    for (let i = 0; i < 5; i++) {
+      worksheet['!merges'].push({
+        s: { r: newRowStart + i, c: 0 },
+        e: { r: newRowStart + i, c: 6 },
+      });
+    }
+
+    // Đặt các hàng mới thành in đậm
+    for (let i = 0; i < 5; i++) {
+      const cell = XLSX.utils.encode_cell({ r: newRowStart + i, c: 7 });
+      worksheet[cell].s = { font: { bold: true } };
+    }
+    //custom style
+    worksheet['A1'] = {
+      t: 's',
+      v: this.nameFile,
+      s: { alignment: { horizontal: 'center' }, font: { bold: true } },
+    };
+
+    for (let col = 0; col <= 7; col++) {
+      const cell = XLSX.utils.encode_cell({ r: 1, c: col });
+      worksheet[cell].s = { font: { bold: true } };
+    }
+    const columnWidths = [
+      { wch: 5 }, // STT
+      { wch: 35 }, // Tên Hoạt Động
+      { wch: 15 }, // Địa Điểm
+      { wch: 20 }, // Loại Hoạt Động
+      { wch: 15 }, // Số Giờ Tích Lũy
+      { wch: 15 }, // Vai Trò
+      { wch: 15 }, // Bắt Đầu
+      { wch: 15 }, // Kết Thúc
+    ];
+    worksheet['!cols'] = columnWidths;
+
+    const book: XLSXStyle.WorkBook = XLSXStyle.utils.book_new();
+    XLSXStyle.utils.book_append_sheet(book, worksheet, 'Sheet1');
+    XLSXStyle.writeFile(book, `${this.nameFile}.xlsx`);
   }
 }

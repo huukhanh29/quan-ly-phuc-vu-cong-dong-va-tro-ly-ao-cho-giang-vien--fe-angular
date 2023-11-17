@@ -13,7 +13,9 @@ export class TaiKhoanService {
   layThongTinNguoiDung(): Observable<any> {
     return this.http.get<any>(`/api/tai-khoan/thong-tin`);
   }
-
+  layThongTinGvByMa(maGv: any): Observable<any> {
+    return this.http.get<any>(`/api/tai-khoan/thong-tin/${maGv}`);
+  }
   getAllUsersByRole(page: number, size: number, sortBy: string, sortDir: string, searchTerm: string, userRole: string): Observable<any> {
     const params = new HttpParams()
       .set('page', page.toString())

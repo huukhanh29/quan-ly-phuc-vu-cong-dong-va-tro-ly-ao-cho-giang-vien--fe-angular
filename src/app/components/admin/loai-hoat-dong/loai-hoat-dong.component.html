@@ -37,7 +37,7 @@
       <ng-container matColumnDef="hanhdong">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let item">
-            <mat-icon   matTooltip="Xem chi tiết" (click)="detail(item)">info</mat-icon>
+            <mat-icon   matTooltip="Xem chi tiết" color="primary" (click)="detail(item)">info</mat-icon>
             <mat-icon matTooltip="Chỉnh sữa"color="primary" (click)="edit(item)">edit</mat-icon>
             <mat-icon matTooltip="Xóa" color="accent" (click)="deleteLhd(item.maLoaiHoatDong)">delete</mat-icon>
         </mat-cell>

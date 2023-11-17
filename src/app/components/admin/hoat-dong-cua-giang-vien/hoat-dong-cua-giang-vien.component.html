@@ -1,4 +1,48 @@
 <mat-card>
+  <table id="season-tble" class="hidden">
+    <tr></tr>
+    <tr>
+      <th>STT</th>
+      <th>Tên Hoạt Động</th>
+      <th>Địa Điểm</th>
+      <th>Loại Hoạt Động</th>
+      <th>Số Giờ Tích Lũy</th>
+      <th>Vai Trò</th>
+      <th>Bắt Đầu</th>
+      <th>Kết Thúc</th>
+    </tr>
+    <tr *ngFor="let data of dataExel; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ data.tenHoatDong }}</td>
+      <td>{{ data.diaDiem }}</td>
+      <td>{{ data.loaiHoatDong }}</td>
+      <td>{{ data.soGioTichLuy }}</td>
+      <td>{{ data.vaiTro }}</td>
+      <td>{{ data.thoiGianBatDau | date: 'short' }}</td>
+      <td>{{ data.thoiGianKetThuc | date: 'short' }}</td>
+    </tr>
+    <tr></tr>
+    <tr>
+      <td colspan="7">Tổng Số Giờ</td>
+      <td>{{ tongSoGio }}</td>
+    </tr>
+    <tr>
+      <td colspan="7">Giờ Bắt Buộc</td>
+      <td>{{ gioBatBuoc }}</td>
+    </tr>
+    <tr>
+      <td colspan="7">Giờ HK1</td>
+      <td>{{ gioHk1 }}</td>
+    </tr>
+    <tr>
+      <td colspan="7">Giờ HK2</td>
+      <td>{{ gioHk2 }}</td>
+    </tr>
+    <tr>
+      <td colspan="7">Giờ HK3</td>
+      <td>{{ gioHk3 }}</td>
+    </tr>
+  </table>
   <div class="search-container">
     <div>
       <button
@@ -62,7 +106,14 @@
       </tr>
     </table>
   </div>
-  <h2>Danh sách hoạt động</h2>
+  <h2>Danh sách hoạt động
+  </h2>
+  <div class="export-button-container">
+    <button mat-raised-button color="primary" (click)="exportToExcel()">
+      <mat-icon>file_download</mat-icon>
+      Xuất Excel
+    </button>
+  </div>
   <div class="mat-elevation-z4">
     <mat-table
       [dataSource]="danhSachHoatDong"
@@ -123,4 +174,5 @@
     >
     </mat-paginator>
   </div>
+
 </mat-card>

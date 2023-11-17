@@ -40,7 +40,6 @@ export class XuatDuLieuComponent {
   selectedKhoa!: number;
   selectedTruongTen: string = '';
   selectedKhoaTen: string = '';
-
   dataExel: any;
   nameFile = '';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -63,7 +62,8 @@ export class XuatDuLieuComponent {
   ngOnInit(): void {
     this.user = this.storageService.getUser();
     this.layDanhSachNam();
-    this.loadDanhSachTruong();
+    this.loadDanhSachKhoa()
+    //this.loadDanhSachTruong();
     if (this.selectedKhoa !== undefined) {
       this.loadDanhSachGiangVien();
     }
@@ -77,23 +77,32 @@ export class XuatDuLieuComponent {
       }
     });
   }
-  loadDanhSachTruong() {
-    this.truongService.layTatCaTruong().subscribe((data) => {
-      this.danhSachTruong = data;
-    });
-  }
+  // loadDanhSachTruong() {
+  //   this.truongService.layTatCaTruong().subscribe((data) => {
+  //     this.danhSachTruong = data;
+  //   });
+  // }
 
   // Hàm gửi yêu cầu để lấy danh sách khoa theo trường đã chọn
+  // loadDanhSachKhoa() {
+  //   if (this.selectedTruong !== undefined) {
+  //     this.khoaService
+  //       .layKhoaTheoTruong(this.selectedTruong)
+  //       .subscribe((data) => {
+  //         this.danhSachKhoa = data;
+  //       });
+  //   } else {
+  //     this.danhSachKhoa = [];
+  //   }
+  // }
   loadDanhSachKhoa() {
-    if (this.selectedTruong !== undefined) {
+
       this.khoaService
-        .layKhoaTheoTruong(this.selectedTruong)
+        .layTatCaKhoa()
         .subscribe((data) => {
           this.danhSachKhoa = data;
         });
-    } else {
-      this.danhSachKhoa = [];
-    }
+
   }
   loadDanhSachGiangVien() {
     this.taiKhoanService
@@ -129,10 +138,10 @@ export class XuatDuLieuComponent {
     const truongSelected = this.danhSachTruong.find(
       (truong) => truong.maTruong === this.selectedTruong
     );
-    if (truongSelected) {
-      this.selectedTruongTen = truongSelected.tenTruong;
-      this.loadDanhSachKhoa()
-    }
+    // if (truongSelected) {
+    //   this.selectedTruongTen = truongSelected.tenTruong;
+    //   this.loadDanhSachKhoa()
+    // }
     const khoaSelected = this.danhSachKhoa.find(
       (khoa) => khoa.maKhoa === this.selectedKhoa
     );

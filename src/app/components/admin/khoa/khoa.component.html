@@ -24,15 +24,15 @@
         <mat-cell *matCellDef="let item">{{ item.tenKhoa }}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="tenTruong">
+      <!-- <ng-container matColumnDef="tenTruong">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Tên Trường</mat-header-cell>
         <mat-cell *matCellDef="let item">{{ item.truong?.tenTruong }}</mat-cell>
-      </ng-container>
+      </ng-container> -->
 
       <ng-container matColumnDef="hanhdong">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let item">
-          <mat-icon (click)="detailKhoa(item)">info</mat-icon>
+          <!-- <mat-icon (click)="detailKhoa(item)">info</mat-icon> -->
           <mat-icon color="primary" (click)="editKhoa(item)">edit</mat-icon>
           <mat-icon color="accent" (click)="deleteKhoa(item.maKhoa)">delete</mat-icon>
         </mat-cell>

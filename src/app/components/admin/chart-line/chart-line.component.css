@@ -10,6 +10,6 @@ mat-form-field {
 
 .chart-container {
   display: block;
-  height: 400px;
+  min-height: 400px;
   width: 100%;
 }

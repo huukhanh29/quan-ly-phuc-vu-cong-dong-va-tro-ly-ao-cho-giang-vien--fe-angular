@@ -36,7 +36,8 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
     this.webSocketService.connect(user.tenTaiKhoan);
 
     this.webSocketService.messageEvent.subscribe((data) => {
-      if(data==='reply-feedback' || data==='approve-activity'){
+      if(data==='reply-feedback' || data==='approve-activity'
+      || data==='destroy-activity'){
         this.loadNotifications();
       }
     });
