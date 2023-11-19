@@ -24,7 +24,7 @@ export class ActivityLecturerComponent implements OnInit {
   registrationStatus: { [key: string]: string } = {};
 
   ngOnInit(): void {
-    
+
   }
 
   dangKy(item: any) {
@@ -32,6 +32,9 @@ export class ActivityLecturerComponent implements OnInit {
       next: (data) => {
         if (data.message && data.message === 'dangky-exist') {
           this.toastr.warning('Bạn đã đăng ký rồi!');
+        }
+        else  if (data.message && data.message === 'registration-not-allowed'){
+          this.toastr.warning('Bạn là người tổ chức nên không thể đăng ký!');
         } else {
           this.listActivitiesComponent.loadDanhSachHoatDong();
           this.toastr.success('Đăng ký thành công!');

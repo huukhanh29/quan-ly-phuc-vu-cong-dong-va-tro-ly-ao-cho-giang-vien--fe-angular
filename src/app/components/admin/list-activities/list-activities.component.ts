@@ -91,7 +91,7 @@ export class ListActivitiesComponent implements OnInit{
   loadDanhSachHoatDong(
     page: number = 0,
     size: number = 5,
-    sortBy: string = 'ngayTao',
+    sortBy: string = 'thoiGianBatDau',
     sortDir: string = 'DESC',
     type: string = this.type,
     status: any = this.status
