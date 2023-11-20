@@ -11,52 +11,10 @@ export class DangKyHoatDongService {
   private baseUrl = '/api/dang-ky-hoat-dong';
 
   constructor(private http: HttpClient) {}
-  getAllHoatDong(
-    page: number = 0,
-    size: number = 10,
-    sortBy: string = 'ngayTao',
-    sortDir: string = 'DESC',
-    searchTerm: string = '',
-    type: string = '',
-    status?: any,
-    startTime?: any,
-    endTime?: any,
-    year?: any,
-    username?: any
-  ): Observable<any> {
-    let params = new HttpParams()
-      .set('page', page.toString())
-      .set('size', size.toString())
-      .set('sortBy', sortBy)
-      .set('sortDir', sortDir)
-      .set('searchTerm', searchTerm)
-      .set('type', type);
-
-    if (status !== undefined) {
-      params = params.set('status', status);
-    }
-
-    if (startTime) {
-      const formattedStartDate = startTime.toISOString().split('T')[0];
-      params = params.set('startTime', formattedStartDate);
-    }
-
-    if (endTime) {
-      const formattedEndDate = endTime.toISOString().split('T')[0];
-      params = params.set('endTime', formattedEndDate);
-    }
-
-    if (year) {
-      params = params.set('year', year);
-    }
-    if (username) {
-      params = params.set('username', username);
-    }
-
-    return this.http.get<any>(`${this.baseUrl}/lay-danh-sach`, {
-      params: params,
-    });
+  approveAllDangKyHoatDongByMaHoatDong(maHoatDong: number): Observable<any> {
+    return this.http.put(`${this.baseUrl}/duyet-tat-ca-dang-ky/${maHoatDong}`, {});
   }
+
   layDanhSachTatCaDangKyHoatDong(
     page: number,
     size: number,
@@ -66,8 +24,9 @@ export class DangKyHoatDongService {
     status?: string,
     startTime?: Date | null,
     endTime?: Date | null,
-    username?: string,
-    year?: string | null
+    username?: string | null,
+    year?: string | null,
+    maHoatDong?: any | null
   ): Observable<any> {
     let params = new HttpParams();
     params = params.append('page', page.toString());
@@ -91,10 +50,12 @@ export class DangKyHoatDongService {
     if (year) params = params.append('year', year);
 
     if (username) params = params.append('username', username.toString());
-
+    if (maHoatDong) params = params.append('maHoatDong', maHoatDong);
     return this.http.get(`${this.baseUrl}/lay-danh-sach`, { params });
   }
-
+  getAllHoatDongSapDienRa(): Observable<HoatDong[]> {
+    return this.http.get<HoatDong[]>(`${this.baseUrl}/hoat-dong-sap-dien-ra`);
+  }
   dangKyHoatDong(maHoatDong: number): Observable<any> {
     return this.http.post(`${this.baseUrl}/${maHoatDong}`, {});
   }

@@ -39,8 +39,10 @@ export class DuyetHdntComponent implements OnInit{
 
 
   myform = this.formBuilder.group({
-    gioTichLuyThamGia: ['', Validators.required],
+    gioTichLuyThamGia: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+    // Thêm các trường khác vào đây nếu cần
   });
+
 
   duyet() {
     if(this.myform.valid){

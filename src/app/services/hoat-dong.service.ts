@@ -19,6 +19,7 @@ export class HoatDongService {
   getAllHoatDongs1(): Observable<HoatDong[]> {
     return this.http.get<HoatDong[]>(`${this.baseUrl}/all`);
   }
+
   getAllHoatDong(
     page: number = 0,
     size: number = 10,
@@ -98,5 +99,5 @@ export class HoatDongService {
 
     return this.http.get(`${this.baseUrl}/lay-hoat-dong-tong-hop`, { params });
   }
-  
+
 }

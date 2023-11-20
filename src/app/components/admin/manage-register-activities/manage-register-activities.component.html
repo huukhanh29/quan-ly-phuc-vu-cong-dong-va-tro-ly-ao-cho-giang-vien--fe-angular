@@ -8,12 +8,17 @@
         [(ngModel)]="searchTerm"
         class="example-full-width"
       />
-      <mat-icon (click)="onSearch()"  matTooltip="Tìm kiếm"
-      matSuffix color="search">search</mat-icon>
+      <mat-icon
+        (click)="onSearch()"
+        matTooltip="Tìm kiếm"
+        matSuffix
+        color="search"
+        >search</mat-icon
+      >
     </mat-form-field>
   </div>
   <div class="filter">
-    <button mat-icon-button (click)="toggleFilter()"  matTooltip="Lọc">
+    <button mat-icon-button (click)="toggleFilter()" matTooltip="Lọc">
       <mat-icon>{{ filterVisible ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
     <button mat-icon-button (click)="refresh()" matTooltip="Làm mới">
@@ -59,6 +64,17 @@
         <!-- thêm các option khác nếu cần -->
       </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="status === 'Chua_Duyet'">
+      <mat-label>Chọn Hoạt Động</mat-label>
+      <mat-select [(value)]="selectedHoatDong" (selectionChange)="filter()">
+        <mat-option
+          *ngFor="let hoatDong of hoatDongSapDienRas"
+          [value]="hoatDong.maHoatDong"
+        >
+          {{ hoatDong.tenHoatDong }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <div class="mat-elevation-z4">
@@ -76,7 +92,10 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header
           >Tên hoạt động</mat-header-cell
         >
-        <mat-cell *matCellDef="let item" (click)="chiTietHoatDong(item.hoatDong)">
+        <mat-cell
+          *matCellDef="let item"
+          (click)="chiTietHoatDong(item.hoatDong)"
+        >
           {{ item.hoatDong.tenHoatDong }}</mat-cell
         >
       </ng-container>
@@ -84,7 +103,10 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header
           >Tên Giảng Viên</mat-header-cell
         >
-        <mat-cell *matCellDef="let item" (click)="chiTietGiangVien(item.giangVien)">
+        <mat-cell
+          *matCellDef="let item"
+          (click)="chiTietGiangVien(item.giangVien)"
+        >
           {{ item.giangVien.taiKhoan.tenDayDu }}</mat-cell
         >
       </ng-container>
@@ -92,44 +114,56 @@
       <ng-container matColumnDef="hanhdong">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let item">
-          <ng-container *ngIf="item.trangThaiDangKy === 'Chua_Duyet'; else daDuyetOrDaHuyBlock">
-            <button mat-stroked-button
-            [disabled]="item.hoatDong.trangThaiHoatDong === 'SAP_DIEN_RA' ||
-            item.hoatDong.trangThaiHoatDong === 'DANG_DIEN_RA'"
-                    (click)="duyet(item.maDangKy)"
-                    color="primary"
-                    style="margin-right: 5px;">
+          <ng-container
+            *ngIf="
+              item.trangThaiDangKy === 'Chua_Duyet';
+              else daDuyetOrDaHuyBlock
+            "
+          >
+            <button
+              mat-stroked-button
+              [disabled]="
+                item.hoatDong.trangThaiHoatDong === 'SAP_DIEN_RA' ||
+                item.hoatDong.trangThaiHoatDong === 'DANG_DIEN_RA'
+              "
+              (click)="duyet(item.maDangKy)"
+              color="primary"
+              style="margin-right: 5px"
+            >
               Duyệt
             </button>
-            <button mat-stroked-button
-                    (click)="huy(item)"
-                    color="warn">
+            <button mat-stroked-button (click)="huy(item)" color="warn">
               Hủy
             </button>
           </ng-container>
 
           <ng-template #daDuyetOrDaHuyBlock>
-            <ng-container *ngIf="item.trangThaiDangKy === 'Da_Duyet'; else daHuyBlock">
-              <button mat-stroked-button
-                      (click)="huy(item)"
-                      color="warn"
-                      style="margin-right: 5px;">
+            <ng-container
+              *ngIf="item.trangThaiDangKy === 'Da_Duyet'; else daHuyBlock"
+            >
+              <button
+                mat-stroked-button
+                (click)="huy(item)"
+                color="warn"
+                style="margin-right: 5px"
+              >
                 Hủy
               </button>
             </ng-container>
             <ng-template #daHuyBlock>
-              <button mat-stroked-button
-
-                      (click)="duyet(item.maDangKy)"
-                      color="primary"
-                      style="margin-right: 5px;">
+              <button
+                mat-stroked-button
+                (click)="duyet(item.maDangKy)"
+                color="primary"
+                style="margin-right: 5px"
+              >
                 Duyệt Lại
               </button>
-              <mat-icon (click)="xemChiTiet(item)" style="cursor: pointer;">info</mat-icon>
+              <mat-icon (click)="xemChiTiet(item)" style="cursor: pointer"
+                >info</mat-icon
+              >
             </ng-template>
           </ng-template>
-
-
         </mat-cell>
       </ng-container>
 
@@ -147,5 +181,10 @@
       showFirstLastButtons
     >
     </mat-paginator>
+  </div>
+  <div class="button-container" *ngIf="selectedHoatDong">
+    <button mat-raised-button color="primary" (click)="handleApproveAll()">
+      Duyệt tất cả đăng ký theo hoạt động đã chọn
+    </button>
   </div>
 </mat-card>

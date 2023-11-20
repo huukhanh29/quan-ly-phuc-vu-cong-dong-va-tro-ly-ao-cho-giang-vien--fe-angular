@@ -2,12 +2,16 @@
   <h1 mat-dialog-title>Duyệt Tham Gia Hoạt Động</h1>
   <div mat-dialog-content>
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Số giờ được tích lũy</mat-label>
-      <input formControlName="gioTichLuyThamGia" matInput required type="number"/>
-      <mat-error *ngIf="formControls.gioTichLuyThamGia && formControls.gioTichLuyThamGia.errors?.['required']">
-        Số giờ là bắt buộc
+      <mat-label>Giờ Tích Lũy Tham Gia</mat-label>
+      <input formControlName="gioTichLuyThamGia" matInput required />
+      <mat-error *ngIf="myform.controls['gioTichLuyThamGia'].errors?.['required']">
+        Giờ tích lũy tham gia là bắt buộc!
+      </mat-error>
+      <mat-error *ngIf="myform.controls['gioTichLuyThamGia'].errors?.['pattern']">
+        Chỉ được nhập số!
       </mat-error>
     </mat-form-field>
+
   </div>
   <div mat-dialog-actions>
     <button mat-raised-button type="submit" color="primary">Duyệt</button>

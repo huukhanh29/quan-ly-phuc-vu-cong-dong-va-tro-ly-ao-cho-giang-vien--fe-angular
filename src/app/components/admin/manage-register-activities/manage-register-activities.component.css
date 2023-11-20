@@ -20,7 +20,11 @@ mat-card {
 .example-full-width {
   width: 100%;
 }
-
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin: 16px;
+}
 
 mat-header-cell,
 mat-cell {

@@ -26,10 +26,13 @@
     </mat-form-field>
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Giờ Tích Lũy Tham Gia</mat-label>
-      <input formControlName="gioTichLuyThamGia" matInput required  />
+      <input formControlName="gioTichLuyThamGia" matInput required />
       <mat-error *ngIf="formControls.gioTichLuyThamGia.errors?.['required']">
         Giờ tích lũy tham gia là bắt buộc!
-    </mat-error>
+      </mat-error>
+      <mat-error *ngIf="formControls.gioTichLuyThamGia.errors?.['pattern']">
+        Chỉ được nhập số!
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
@@ -37,8 +40,12 @@
       <input formControlName="gioTichLuyToChuc" matInput required />
       <mat-error *ngIf="formControls.gioTichLuyToChuc.errors?.['required']">
         Giờ tích lũy tổ chức là bắt buộc!
-    </mat-error>
+      </mat-error>
+      <mat-error *ngIf="formControls.gioTichLuyToChuc.errors?.['pattern']">
+        Chỉ được nhập số!
+      </mat-error>
     </mat-form-field>
+
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Thời Gian Bắt Đầu</mat-label>

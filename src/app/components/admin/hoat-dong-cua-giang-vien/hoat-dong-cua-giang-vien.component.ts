@@ -77,6 +77,7 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
         this.loadThongTinGiangVien();
       } else {
         this.maGiangVien = -1;
+        this.loadThongTinGiangVien();
       }
     });
     console.log(this.maGiangVien);
@@ -94,6 +95,7 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
       this.taiKhoanService
         .layThongTinGvByMa(this.maGiangVien)
         .subscribe((data) => {
+
           this.giangVien = data;
           this.nameFile = `Chi tiết tham gia hoạt động của ${this.giangVien.taiKhoan.tenDayDu} (${this.giangVien.taiKhoan.tenDangNhap}) năm ${this.selectedNam}`;
           console.log(this.nameFile);
@@ -188,7 +190,7 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
     // Đặt các hàng mới thành in đậm
     for (let i = 0; i < 5; i++) {
       const cell = XLSX.utils.encode_cell({ r: newRowStart + i, c: 7 });
-      worksheet[cell].s = { font: { bold: true } };
+      worksheet[cell].s = { font: { bold: true },  };
     }
     //custom style
     worksheet['A1'] = {
@@ -204,12 +206,12 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
     const columnWidths = [
       { wch: 5 }, // STT
       { wch: 35 }, // Tên Hoạt Động
-      { wch: 15 }, // Địa Điểm
+      { wch: 35 }, // Địa Điểm
       { wch: 20 }, // Loại Hoạt Động
       { wch: 15 }, // Số Giờ Tích Lũy
       { wch: 15 }, // Vai Trò
-      { wch: 15 }, // Bắt Đầu
-      { wch: 15 }, // Kết Thúc
+      { wch: 25 }, // Bắt Đầu
+      { wch: 25 }, // Kết Thúc
     ];
     worksheet['!cols'] = columnWidths;
 

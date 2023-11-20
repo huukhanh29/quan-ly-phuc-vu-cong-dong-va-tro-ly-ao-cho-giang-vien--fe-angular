@@ -210,6 +210,7 @@ export class ListActivitiesComponent implements OnInit{
             this.toastr.warning("Không thể xóa!")
           } else {
             this.toastr.success("Xóa thành công!")
+            this.loadDanhSachHoatDong()
           }
 
         },

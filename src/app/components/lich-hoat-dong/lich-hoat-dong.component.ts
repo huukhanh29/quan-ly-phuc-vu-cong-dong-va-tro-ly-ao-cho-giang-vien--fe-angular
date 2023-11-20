@@ -35,6 +35,7 @@ export class LichHoatDongComponent implements OnInit {
     if(this.role === 'GiangVien'){
       this.dangKyHoatDongService.getHoatDongsByGiangVien(this.username).subscribe({
         next: (data) => {
+
           this.events = data.map(hoatDong => ({
             start: new Date(hoatDong.thoiGianBatDau),
             end: new Date(hoatDong.thoiGianKetThuc),
@@ -49,6 +50,7 @@ export class LichHoatDongComponent implements OnInit {
     }else{
       this.hoatDongService.getAllHoatDongs1().subscribe({
         next: (data) => {
+
           this.events = data.map(hoatDong => ({
             start: new Date(hoatDong.thoiGianBatDau),
             end: new Date(hoatDong.thoiGianKetThuc),
@@ -61,7 +63,7 @@ export class LichHoatDongComponent implements OnInit {
         },
       });
     }
-   
+
   }
 
   handleEventClick(event: CalendarEvent): void {

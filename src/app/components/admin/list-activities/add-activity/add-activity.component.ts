@@ -151,8 +151,14 @@ export class AddActivityComponent implements OnInit {
     tenHoatDong: ['', [Validators.required]],
     moTa: ['', [Validators.required]],
     diaDiem: ['', [Validators.required]],
-    gioTichLuyThamGia: ['', [Validators.required]],
-    gioTichLuyToChuc: ['', [Validators.required]],
+    gioTichLuyThamGia: [
+      '',
+      [Validators.required, Validators.pattern('^[0-9]+$')],
+    ],
+    gioTichLuyToChuc: [
+      '',
+      [Validators.required, Validators.pattern('^[0-9]+$')],
+    ],
     thoiGianBatDau: ['', [Validators.required]],
     thoiGianKetThuc: ['', [Validators.required]],
     tenQuyetDinh: ['', [Validators.required]],
@@ -167,10 +173,18 @@ export class AddActivityComponent implements OnInit {
     const file: File = (target.files as FileList)[0];
 
     const maxFileSize = 5 * 1024 * 1024; // 5 MB in bytes
-    const allowedMimeTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/jpg', 'image/png'];
+    const allowedMimeTypes = [
+      'application/pdf',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'image/jpeg',
+      'image/jpg',
+      'image/png',
+    ];
 
     if (file.size > maxFileSize) {
-      this.toastr.warning('Kích thước file quá lớn. Vui lòng chọn file nhỏ hơn 5MB.');
+      this.toastr.warning(
+        'Kích thước file quá lớn. Vui lòng chọn file nhỏ hơn 5MB.'
+      );
       this.selectedFile = null;
       return;
     }
@@ -178,7 +192,9 @@ export class AddActivityComponent implements OnInit {
     if (allowedMimeTypes.includes(file.type)) {
       this.selectedFile = file;
     } else {
-      this.toastr.warning('Loại tệp không hợp lệ. Vui lòng chọn tệp PDF, DOCX, JPEG, JPG hoặc PNG.');
+      this.toastr.warning(
+        'Loại tệp không hợp lệ. Vui lòng chọn tệp PDF, DOCX, JPEG, JPG hoặc PNG.'
+      );
       this.selectedFile = null;
     }
   }
@@ -189,6 +205,21 @@ export class AddActivityComponent implements OnInit {
       const batDau = new Date(formData.thoiGianBatDau ?? new Date());
       const ketThuc = new Date(formData.thoiGianKetThuc ?? new Date());
 
+      const now = new Date();
+
+      if (batDau < now) {
+        this.toastr.warning(
+          'Thời gian bắt đầu của hoạt động không hợp lệ. Phải sau thời gian hiện tại.'
+        );
+        return;
+      }
+
+      if (batDau >= ketThuc) {
+        this.toastr.warning(
+          'Thời gian kết thúc phải sau thời gian bắt đầu của hoạt động.'
+        );
+        return;
+      }
       //chuyển sang giờ địa phương
       formData.thoiGianBatDau = new Date(
         batDau.getTime() - batDau.getTimezoneOffset() * 60000
@@ -228,22 +259,26 @@ export class AddActivityComponent implements OnInit {
               }
             },
             error: (err) => {
-              this.toastr.error('Cập nhật hoạt động không thành công!');
-              console.error('Error updating activity:', err);
+              if(err.error.message ==="hoatdong-exist"){
+                this.toastr.warning('Tên hoạt động bị trùng!');
+              }else{
+                this.toastr.error('Thêm hoạt động không thành công!');
+                console.error('Error adding activity:', err);
+              }
             },
           });
       } else {
         if (this.selectedFile) {
           this.hoatDongService.addHoatDong(formData).subscribe({
             next: (data) => {
+
+
               this.hoatDongService
                 .suaFileHoatDong(data.maHoatDong, this.selectedFile!)
                 .subscribe({
                   next: (fileData) => {
                     this.dialogRef.close('Closed');
-                    this.toastr.success(
-                      'Thêm hoạt động và file thành công!'
-                    );
+                    this.toastr.success('Thêm hoạt động và file thành công!');
                   },
                   error: (fileError) => {
                     this.toastr.error('Có lỗi xảy ra khi lưu file.');
@@ -251,11 +286,16 @@ export class AddActivityComponent implements OnInit {
                 });
             },
             error: (err) => {
-              this.toastr.error('Thêm hoạt động không thành công!');
-              console.error('Error adding activity:', err);
+              if(err.error.message ==="hoatdong-exist"){
+                this.toastr.warning('Tên hoạt động bị trùng!');
+              }else{
+                this.toastr.error('Thêm hoạt động không thành công!');
+                console.error('Error adding activity:', err);
+              }
+
             },
           });
-        }else{
+        } else {
           this.toastr.warning('Chưa chọn file');
         }
       }

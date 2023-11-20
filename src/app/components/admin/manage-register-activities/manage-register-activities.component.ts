@@ -11,6 +11,8 @@ import { AdminDestroyActivityComponent } from './admin-destroy-activity/admin-de
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { DetailActivityComponent } from '../list-activities/detail-activity/detail-activity.component';
 import { DetailLecturerComponent } from '../list-lecturer/detail-lecturer/detail-lecturer.component';
+import { HoatDongService } from 'src/app/services/hoat-dong.service';
+import { subMonths } from 'date-fns';
 
 @Component({
   selector: 'app-manage-register-activities',
@@ -25,11 +27,13 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
     'giangVien.taiKhoan.tenDayDu',
     'hanhdong',
   ];
+  selectedHoatDong: any;
   length: number = 0;
   searchTerm: string = '';
   public startTime!: Date | null;
   public endTime!: Date | null;
   public status: string = 'Chua_Duyet';
+  hoatDongSapDienRas!: any[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -37,7 +41,7 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
     private dangKyHoatDongService: DangKyHoatDongService,
     private toastr: ToastrService,
     private dialog: MatDialog,
-    private webSocketService: WebSocketService,
+    private webSocketService: WebSocketService
   ) {}
   public filterVisible: boolean = true;
 
@@ -47,6 +51,7 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.loadDanhSachDangKy();
     this.connectWebsocket();
+    this.loadHoatDongSapDienRa()
   }
 
   connectWebsocket(){
@@ -80,13 +85,23 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
       );
     });
   }
-
+  loadHoatDongSapDienRa(){
+    this.dangKyHoatDongService.getAllHoatDongSapDienRa().subscribe({
+      next: data=>{
+        this.hoatDongSapDienRas = data
+      },
+      error: err=>{
+        console.log(err)
+      }
+    })
+  }
   loadDanhSachDangKy(
     page: number = 0,
     size: number = 5,
     sortBy: string = 'hoatDong.thoiGianBatDau',
     sortDir: string = 'DESC',
-    status: any = this.status
+    status: any = this.status,
+    maHoatDong: string = this.selectedHoatDong
   ) {
     this.dangKyHoatDongService
       .layDanhSachTatCaDangKyHoatDong(
@@ -97,7 +112,10 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
         this.searchTerm,
         status,
         this.startTime,
-        this.endTime
+        this.endTime,
+        null,
+        null,
+        maHoatDong
       )
       .subscribe((data) => {
         console.log(data);
@@ -117,7 +135,8 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
       this.paginator.pageSize,
       this.sort.active,
       this.sort.direction,
-      this.status
+      this.status,
+      this.selectedHoatDong // Thêm biến này vào phương thức
     );
   }
   refresh() {
@@ -190,6 +209,17 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
     popup.afterClosed().subscribe((item) => {
       this.loadDanhSachDangKy();
     });
+  }
+  handleApproveAll(){
+    this.dangKyHoatDongService.approveAllDangKyHoatDongByMaHoatDong(this.selectedHoatDong).subscribe({
+      next: data=>{
+        this.toastr.success("Đã duyệt tất cả đăng ký theo hoạt động đã chọn!")
+        this.loadDanhSachDangKy()
+      },
+      error: err=>{
+        console.log(err)
+      }
+    })
   }
   ngOnDestroy(): void {
     this.webSocketService.disconnect();

@@ -85,7 +85,7 @@ export class SidebarAdminComponent {
     },
     {
       label: 'Hệ thống',
-      icon: 'event_note',
+      icon: 'settings',
       subItems: [
         // {
         //   label: 'Trường',
@@ -94,12 +94,12 @@ export class SidebarAdminComponent {
         // },
         {
           label: 'Khoa',
-          icon: 'dns',
+          icon: 'view_column',
           routerLink: '/quan-tri-vien/khoa'
         },
         {
           label: 'Chức danh',
-          icon: 'dns',
+          icon: 'work',
           routerLink: '/quan-tri-vien/chuc-danh'
         },
       ]
