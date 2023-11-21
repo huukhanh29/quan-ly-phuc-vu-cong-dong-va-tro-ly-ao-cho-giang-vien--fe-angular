@@ -48,10 +48,14 @@ export class TaiKhoanService {
   xoaRefreshToken(rftoken:any): Observable<any> {
     return this.http.post<any>(`/api/tai-khoan/dang-xuat`, rftoken);
   }
-  getAcademicYearsByUser(): Observable<any> {
-    return this.http.get<any>(`/api/tai-khoan/danh-sach-nam-dang-ky-hoat-dong`);
-  }
+  getAcademicYearsByUser(maGv?: number|null): Observable<any> {
+    let params = new HttpParams();
+    if (maGv != null) {
+      params = params.append('maGv', maGv.toString());
+    }
 
+    return this.http.get<any>(`/api/tai-khoan/danh-sach-nam-dang-ky-hoat-dong`, { params });
+  }
 
   getGiangVienKhenThuongHoacKienTrach(namHoc: string, loai: string, maKhoa: number): Observable<any> {
     const params = new HttpParams()
@@ -60,5 +64,16 @@ export class TaiKhoanService {
       .set('khoa', maKhoa);
 
     return this.http.get<any>(`/api/tai-khoan/ds-giang-vien-khen-thuong-hoac-khien-trach`, { params: params });
+  }
+
+   capNhatGioMienGiam(request: any): Observable<any> {
+    return this.http.post<any>('/api/tai-khoan/cap-nhat-gio-mien-giam-cho-giang-vien', request);
+  }
+  timKiemGioTichLuy(maGiangVien: number, nam: string): Observable<any> {
+    const params = new HttpParams()
+      .set('nam', nam)
+      .set('maGiangVien', maGiangVien.toString());
+
+    return this.http.get<any>(`/api/tai-khoan//lay-gio-tich-luy-cua-giang-vien`, { params: params });
   }
 }

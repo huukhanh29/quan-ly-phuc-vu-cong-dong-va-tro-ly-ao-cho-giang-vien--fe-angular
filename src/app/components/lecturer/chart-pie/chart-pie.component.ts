@@ -17,6 +17,8 @@ export class ChartPieComponent implements OnInit {
   totalHours: number = 0;
   missHours: number = 0;
   requiredHours: number = 0;
+  exemptionHours: number =0;
+  overtakingHours: number =0;
   public pieChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -49,10 +51,13 @@ export class ChartPieComponent implements OnInit {
   }
   loadChartData() {
     this.chucDanhService.getChartData(this.selectedYear).subscribe((data) => {
+      console.log(data)
       this.pieChartDatasets = [{ data: [data.missHours, data.totalHours] }];
       this.missHours = data.missHours;
       this.requiredHours = data.requiredHours;
       this.totalHours = data.totalHours;
+      this.overtakingHours = data.overtakingHours;
+      this.exemptionHours = data.exemptionHours
     });
   }
   loadAcademicYears() {

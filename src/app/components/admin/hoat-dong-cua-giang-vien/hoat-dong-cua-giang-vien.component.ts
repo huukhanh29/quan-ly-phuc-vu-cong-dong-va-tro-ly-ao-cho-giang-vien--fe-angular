@@ -45,6 +45,9 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
   selectedNam: string = '';
   tongSoGio: number = 0;
   gioBatBuoc: number = 0;
+  gioVuotMuc: number = 0;
+  gioMienGiam: number = 0;
+  gioThieu: number = 0;
   gioHk1: number = 0;
   gioHk2: number = 0;
   gioHk3: number = 0;
@@ -95,7 +98,6 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
       this.taiKhoanService
         .layThongTinGvByMa(this.maGiangVien)
         .subscribe((data) => {
-
           this.giangVien = data;
           this.nameFile = `Chi tiết tham gia hoạt động của ${this.giangVien.taiKhoan.tenDayDu} (${this.giangVien.taiKhoan.tenDangNhap}) năm ${this.selectedNam}`;
           console.log(this.nameFile);
@@ -103,23 +105,39 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
     }
   }
   layDanhSachNam() {
-    this.taiKhoanService.getAcademicYearsByUser().subscribe((data) => {
-      this.loadDanhSachHoatDong();
-      this.danhSachNam = data;
-      if (this.danhSachNam.indexOf(this.selectedNam) === -1) {
-        this.danhSachNam.push(this.selectedNam);
-        this.danhSachNam.sort((a, b) => a.localeCompare(b));
-      }
-    });
+    if (this.maGiangVien === -1) {
+      this.taiKhoanService.getAcademicYearsByUser(null).subscribe((data) => {
+        this.ganDuLieuNam(data);
+      });
+    } else {
+      this.taiKhoanService
+        .getAcademicYearsByUser(this.maGiangVien)
+        .subscribe((data) => {
+          this.ganDuLieuNam(data);
+        });
+    }
   }
-
+  ganDuLieuNam(data: any) {
+    this.loadDanhSachHoatDong();
+    this.danhSachNam = data;
+    if (this.danhSachNam.indexOf(this.selectedNam) === -1) {
+      this.danhSachNam.push(this.selectedNam);
+      this.danhSachNam.sort((a, b) => a.localeCompare(b));
+    }
+  }
   ganDuLieu(data: any) {
     this.danhSachHoatDong = new MatTableDataSource<any>(data.danhSachHoatDong);
+    // Cài đặt paginator và sort
+    this.danhSachHoatDong.paginator = this.paginator;
+    this.danhSachHoatDong.sort = this.sort;
     this.tongSoGio = data.tongSoGio;
     this.gioBatBuoc = data.gioBatBuoc;
     this.gioHk1 = data.gioHk1;
     this.gioHk2 = data.gioHk2;
     this.gioHk3 = data.gioHk3;
+    this.gioMienGiam = data.gioMienGiam;
+    this.gioVuotMuc = data.gioVuotMuc;
+    this.gioThieu = data.gioThieu;
     this.dataExel = data.danhSachHoatDong;
   }
   loadDanhSachHoatDong() {
@@ -180,7 +198,7 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
     const newRowStart = this.dataExel.length + 3; // Bắt đầu từ hàng thứ 2, ngay sau hàng tiêu đề
 
     // Gộp ô cho các hàng mới
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       worksheet['!merges'].push({
         s: { r: newRowStart + i, c: 0 },
         e: { r: newRowStart + i, c: 6 },
@@ -188,9 +206,9 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
     }
 
     // Đặt các hàng mới thành in đậm
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       const cell = XLSX.utils.encode_cell({ r: newRowStart + i, c: 7 });
-      worksheet[cell].s = { font: { bold: true },  };
+      worksheet[cell].s = { font: { bold: true } };
     }
     //custom style
     worksheet['A1'] = {

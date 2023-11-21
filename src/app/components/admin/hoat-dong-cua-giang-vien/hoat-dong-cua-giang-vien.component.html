@@ -22,12 +22,9 @@
       <td>{{ data.thoiGianKetThuc | date : "HH:mm:ss dd/MM/yyyy" }}</td>
     </tr>
     <tr></tr>
+
     <tr>
-      <td colspan="7">Tổng Số Giờ</td>
-      <td>{{ tongSoGio }}</td>
-    </tr>
-    <tr>
-      <td colspan="7">Giờ Bắt Buộc</td>
+      <td colspan="7">Giờ Quy Định</td>
       <td>{{ gioBatBuoc }}</td>
     </tr>
     <tr>
@@ -41,6 +38,30 @@
     <tr>
       <td colspan="7">Giờ HK3</td>
       <td>{{ gioHk3 }}</td>
+    </tr>
+    <tr>
+      <td colspan="7">Giờ Hoàn Thành</td>
+      <td>{{ tongSoGio }}</td>
+    </tr>
+    <tr>
+      <td colspan="7">Giờ Quy Định</td>
+      <td>{{ gioBatBuoc }}</td>
+    </tr>
+    <tr>
+      <td colspan="7">Giờ Cần Hoàn Thành</td>
+      <td>{{ gioBatBuoc - gioMienGiam }}</td>
+    </tr>
+    <tr>
+      <td colspan="7">Giờ Miễn Giảm</td>
+      <td>{{ gioMienGiam }}</td>
+    </tr>
+    <tr>
+      <td colspan="7">Giờ Vượt Mức</td>
+      <td>{{ gioVuotMuc }}</td>
+    </tr>
+    <tr>
+      <td colspan="7">Giờ Chưa Hoàn Thành</td>
+      <td>{{ gioThieu }}</td>
     </tr>
   </table>
   <div class="search-container">
@@ -84,14 +105,8 @@
 
   <div class="additional-info">
     <table class="vertical-table">
-      <tr>
-        <th>Tổng số giờ hoàn thành</th>
-        <td>{{ tongSoGio }}</td>
-      </tr>
-      <tr>
-        <th>Giờ bắt buộc</th>
-        <td>{{ gioBatBuoc }}</td>
-      </tr>
+
+
       <tr>
         <th>Giờ HK1</th>
         <td>{{ gioHk1 }}</td>
@@ -103,6 +118,31 @@
       <tr>
         <th>Giờ HK3</th>
         <td>{{ gioHk3 }}</td>
+      </tr>
+      <tr>
+        <th>Tổng số giờ hoàn thành</th>
+        <td>{{ tongSoGio }}</td>
+      </tr>
+
+      <tr>
+        <th>Giờ quy định</th>
+        <td>{{ gioBatBuoc }}</td>
+      </tr>
+      <tr>
+        <th>Giờ cần hoàn thành</th>
+        <td>{{ gioBatBuoc - gioMienGiam }}</td>
+      </tr>
+      <tr>
+        <th>Giờ miễn giảm</th>
+        <td>{{ gioMienGiam }}</td>
+      </tr>
+      <tr>
+        <th>Giờ vượt mức</th>
+        <td>{{ gioVuotMuc }}</td>
+      </tr>
+      <tr>
+        <th>Giờ chưa hoàn thành</th>
+        <td>{{ gioThieu }}</td>
       </tr>
     </table>
   </div>

@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddLecturerComponent } from './add-lecturer/add-lecturer.component';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { UpdateGioGiamComponent } from './update-gio-giam/update-gio-giam.component';
 
 @Component({
   selector: 'app-list-lecturer',
@@ -109,6 +110,17 @@ export class ListLecturerComponent implements OnInit {
         exitAnimationDuration: '300ms',
       });
     }
+  }
+  upDateGioMienGiam(lecturer: any): void {
+      var popup = this.dialog.open(UpdateGioGiamComponent, {
+        data: {
+          lecturer: lecturer,
+        },
+        width: '40%',
+        enterAnimationDuration: '300ms',
+        exitAnimationDuration: '300ms',
+      });
+
   }
   updateUserStatus(status: string, tenDangNhap: string): void {
     const body = {

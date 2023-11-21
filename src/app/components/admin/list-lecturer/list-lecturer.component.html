@@ -74,6 +74,7 @@
       <mat-cell *matCellDef="let giaoVien"
        >
         <mat-icon color="primary"  (click)="detail(giaoVien)" matTooltip="Chi tiết tài khoản">infor </mat-icon>
+        <mat-icon color="primary"  (click)="upDateGioMienGiam(giaoVien)" matTooltip="Cập nhật giờ miễn giảm">update </mat-icon>
         <mat-icon color="primary"  (click)="chiTietThamGiaHoatDong(giaoVien.maTaiKhoan)" matTooltip="Chi tiết tham gia hoạt động">event_note </mat-icon>
       </mat-cell>
     </ng-container>

@@ -140,6 +140,7 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
     );
   }
   refresh() {
+    this.selectedHoatDong = null
     this.searchTerm = '';
     this.status = 'Chua_Duyet';
     this.startTime = null;

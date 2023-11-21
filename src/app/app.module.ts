@@ -83,6 +83,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { XuatDuLieuComponent } from './components/xuat-du-lieu/xuat-du-lieu.component';
 import { HoatDongCuaGiangVienComponent } from './components/admin/hoat-dong-cua-giang-vien/hoat-dong-cua-giang-vien.component';
 import { ChiTietHoatDongGvComponent } from './components/admin/hoat-dong-cua-giang-vien/chi-tiet-hoat-dong-gv/chi-tiet-hoat-dong-gv.component';
+import { UpdateGioGiamComponent } from './components/admin/list-lecturer/update-gio-giam/update-gio-giam.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -155,7 +156,8 @@ import { ChiTietHoatDongGvComponent } from './components/admin/hoat-dong-cua-gia
     UserInfoComponent,
     XuatDuLieuComponent,
     HoatDongCuaGiangVienComponent,
-    ChiTietHoatDongGvComponent
+    ChiTietHoatDongGvComponent,
+    UpdateGioGiamComponent
   ],
   imports: [
     BrowserModule,

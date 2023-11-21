@@ -9,9 +9,12 @@
         </mat-select>
       </mat-form-field>
       <div class="stats">
+        <p><strong>Giờ quy định:</strong> {{ requiredHours }}</p>
+        <p><strong>Giờ cần hoàn thành:</strong> {{ requiredHours - exemptionHours }}</p>
         <p><strong>Tổng giờ đã hoàn thành:</strong> {{ totalHours }}</p>
         <p><strong>Giờ chưa hoàn thành:</strong> {{ missHours }}</p>
-        <p><strong>Giờ bắt buộc:</strong> {{ requiredHours }}</p>
+        <p><strong>Giờ miễn giảm:</strong> {{ exemptionHours }}</p>
+        <p><strong>Giờ vượt mức:</strong> {{ overtakingHours }}</p>
         <button mat-raised-button color="primary" (click)="dsHoatDong()" >Chi tiết</button>
       </div>
     </div>
