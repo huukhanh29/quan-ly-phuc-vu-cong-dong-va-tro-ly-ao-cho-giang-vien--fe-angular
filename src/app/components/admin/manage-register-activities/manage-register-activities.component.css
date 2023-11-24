@@ -15,7 +15,10 @@ mat-card {
   align-items: flex-end;
   max-width: 350px;
 }
-
+.mat-excel{
+  background-color: #724AE8;
+  color:white;
+}
 
 .example-full-width {
   width: 100%;

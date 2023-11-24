@@ -4,16 +4,19 @@
     <hr />
   </h1>
   <mat-form-field appearance="outline">
+    <mat-label>Nội dung</mat-label>
     <textarea disabled="true" class="noi-dung" matInput>{{
       data.phanHoi?.noiDung
     }}</textarea>
   </mat-form-field>
   <mat-form-field appearance="outline">
+    <mat-label>Từ khóa</mat-label>
     <textarea disabled="true" matInput class="cau-hoi">{{
       data.phanHoi?.cauHoi?.cauHoi
     }}</textarea>
   </mat-form-field>
   <mat-form-field appearance="outline">
+    <mat-label>Câu trả lời</mat-label>
     <textarea disabled="true" matInput class="tra-loi">{{
       data.phanHoi?.cauHoi?.traLoi
     }}</textarea>

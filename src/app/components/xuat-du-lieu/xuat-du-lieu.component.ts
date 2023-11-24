@@ -34,11 +34,8 @@ export class XuatDuLieuComponent {
   danhSachNam: string[] = [];
   selectedNam: string = '';
   selectedLoai: string = 'Chưa hoàn thành';
-  danhSachTruong: any[] = [];
   danhSachKhoa: any[] = [];
-  selectedTruong!: number;
   selectedKhoa!: number;
-  selectedTruongTen: string = '';
   selectedKhoaTen: string = '';
   dataExel: any;
   nameFile = '';
@@ -63,7 +60,6 @@ export class XuatDuLieuComponent {
     this.user = this.storageService.getUser();
     this.layDanhSachNam();
     this.loadDanhSachKhoa()
-    //this.loadDanhSachTruong();
     if (this.selectedKhoa !== undefined) {
       this.loadDanhSachGiangVien();
     }
@@ -77,32 +73,13 @@ export class XuatDuLieuComponent {
       }
     });
   }
-  // loadDanhSachTruong() {
-  //   this.truongService.layTatCaTruong().subscribe((data) => {
-  //     this.danhSachTruong = data;
-  //   });
-  // }
 
-  // Hàm gửi yêu cầu để lấy danh sách khoa theo trường đã chọn
-  // loadDanhSachKhoa() {
-  //   if (this.selectedTruong !== undefined) {
-  //     this.khoaService
-  //       .layKhoaTheoTruong(this.selectedTruong)
-  //       .subscribe((data) => {
-  //         this.danhSachKhoa = data;
-  //       });
-  //   } else {
-  //     this.danhSachKhoa = [];
-  //   }
-  // }
   loadDanhSachKhoa() {
-
       this.khoaService
         .layTatCaKhoa()
         .subscribe((data) => {
           this.danhSachKhoa = data;
         });
-
   }
   loadDanhSachGiangVien() {
     this.taiKhoanService
@@ -116,8 +93,7 @@ export class XuatDuLieuComponent {
         this.danhSachGiangVien.sort = this.sort;
         this.danhSachGiangVien.paginator = this.paginator;
         this.dataExel = data;
-        this.nameFile = `Danh sách giảng viên ${this.selectedLoai} tích lũy giờ cộng đồng ${this.selectedNam} của trường ${this.selectedTruongTen} - khoa ${this.selectedKhoaTen}`;
-
+        this.nameFile = `Danh sách giảng viên ${this.selectedLoai} tích lũy giờ cộng đồng ${this.selectedNam} của khoa ${this.selectedKhoaTen}`;
       });
   }
 
@@ -135,13 +111,7 @@ export class XuatDuLieuComponent {
     this.loadDanhSachGiangVien();
   }
   filter() {
-    const truongSelected = this.danhSachTruong.find(
-      (truong) => truong.maTruong === this.selectedTruong
-    );
-    // if (truongSelected) {
-    //   this.selectedTruongTen = truongSelected.tenTruong;
-    //   this.loadDanhSachKhoa()
-    // }
+
     const khoaSelected = this.danhSachKhoa.find(
       (khoa) => khoa.maKhoa === this.selectedKhoa
     );

@@ -45,3 +45,7 @@ mat-card {
     margin: 0;
   }
 }
+.mat-detail{
+  background-color: #724AE8;
+  color:white;
+}

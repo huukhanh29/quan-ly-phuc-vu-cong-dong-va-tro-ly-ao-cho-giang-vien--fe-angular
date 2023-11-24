@@ -21,7 +21,7 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
   TBDaDoc: ThongBao[] = [];
   selectedNotification!: ThongBao | null;
   isLinear = false;
-
+  user: any;
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
@@ -38,12 +38,13 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.user = this.storageService.getUser();
     this.loadNotifications();
     this.connectWebsocket();
   }
   connectWebsocket(){
-    const user = this.storageService.getUser();
-    this.webSocketService.connect(user.tenTaiKhoan);
+
+    this.webSocketService.connect(this.user.tenTaiKhoan);
 
     this.webSocketService.messageEvent.subscribe((data) => {
       if(data==='reply-feedback' || data==='approve-activity'
@@ -111,20 +112,21 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
         exitAnimationDuration: '300ms',
       });
       popup.afterClosed().subscribe((item) => {
-        this.loadNotifications();
+        if (notification.trangThai === 'ChuaDoc') {
+          this.thongBaoService
+            .datTrangThaiThongBao(notification.maThongBao)
+            .subscribe({
+              next: (data) => {
+                this.loadNotifications();
+              },
+              error: (err) => {
+                console.error('Error:', err);
+              },
+            });
+        }
+
       });
-      if (notification.trangThai === 'ChuaDoc') {
-        this.thongBaoService
-          .datTrangThaiThongBao(notification.maThongBao)
-          .subscribe({
-            next: (data) => {
-              this.loadNotifications();
-            },
-            error: (err) => {
-              console.error('Error:', err);
-            },
-          });
-      }
+
     }
   }
   disconnectWebSocket(): void {

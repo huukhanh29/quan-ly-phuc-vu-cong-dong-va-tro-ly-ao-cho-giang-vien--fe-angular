@@ -67,12 +67,6 @@
         <mat-option value="Hoàn thành">Hoàn thành</mat-option>
       </mat-select>
     </mat-form-field>
-    <!-- <mat-form-field appearance="outline">
-      <mat-label>Chọn trường</mat-label>
-      <mat-select [(value)]="selectedTruong" (valueChange)="filter()">
-        <mat-option *ngFor="let truong of danhSachTruong" [value]="truong.maTruong">{{ truong.tenTruong }}</mat-option>
-      </mat-select>
-    </mat-form-field> -->
 
     <mat-form-field appearance="outline">
       <mat-label>Chọn khoa</mat-label>
@@ -81,8 +75,8 @@
       </mat-select>
     </mat-form-field>
 
-    <button [disabled]="selectedKhoa===undefined"
-    (click)="exportToExcel()" mat-raised-button color="accent">
+    <button
+    (click)="exportToExcel()" mat-raised-button color="excel">
       Xuất excel
     </button>
   </div>

@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="page-header" *ngIf="user.quyen === 'SinhVien'" >
   <h1>Thông Báo</h1>
 </div>
 <div *ngIf="!ThongBaos; else notificationsList"></div>

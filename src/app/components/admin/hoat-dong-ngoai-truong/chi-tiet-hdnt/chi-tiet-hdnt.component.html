@@ -34,6 +34,10 @@
         >file_download</mat-icon>
       </div>
     </div>
+    <div class="table-row">
+      <div class="table-cell"><strong>Ngày gửi:</strong></div>
+      <div class="table-cell">{{ data.item.ngayTao | date : "HH:mm:ss dd/MM/yyyy" }}</div>
+    </div>
   </mat-card>
 </div>
 <div mat-dialog-actions>
