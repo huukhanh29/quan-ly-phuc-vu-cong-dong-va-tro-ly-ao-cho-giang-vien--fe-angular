@@ -9,10 +9,8 @@
             placeholder="Nhập thắc mắc của bạn ở đây..."
             formControlName="noiDung"
           ></textarea>
-          <mat-error *ngIf="formControls.noiDung.errors?.['required'] && formControls.noiDung.touched"
-            >Bạn chưa điền nội dung kìa!!!
-          </mat-error>
         </mat-form-field>
+
         <div class="submit-button">
           <button mat-raised-button type="submit" color="submit">
             Gửi Phản Hồi

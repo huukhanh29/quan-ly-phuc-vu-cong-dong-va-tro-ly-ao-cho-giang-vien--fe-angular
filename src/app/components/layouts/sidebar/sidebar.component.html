@@ -9,9 +9,14 @@
   <!-- <mat-icon class="dang-xuat" color="white" [matMenuTriggerFor]="menu">exit_to_app</mat-icon> -->
   <ng-content select="[notification]"></ng-content>
   <mat-menu #menu="matMenu">
-    <button (click)="info()" mat-menu-item>Thông tin cá nhân</button>
-    <button (click)="logout()" mat-menu-item>Đăng xuất</button>
+    <button (click)="info()" mat-menu-item>
+      <mat-icon>person</mat-icon> Thông tin cá nhân
+    </button>
+    <button (click)="logout()" mat-menu-item>
+      <mat-icon>exit_to_app</mat-icon> Đăng xuất
+    </button>
   </mat-menu>
+
 </mat-toolbar>
 <mat-drawer-container autosize>
   <mat-drawer #drawer opened="true" mode="side" position="start">

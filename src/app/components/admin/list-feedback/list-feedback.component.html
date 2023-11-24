@@ -35,7 +35,7 @@
     <ng-container matColumnDef="sinhVien.taiKhoan.tenDayDu">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Người gửi</mat-header-cell>
       <mat-cell *matCellDef="let item">
-        {{ item?.sinhVien?.taiKhoan.tenDayDu }}
+        {{ item?.sinhVien?.taiKhoan.tenDayDu }} - {{ item?.sinhVien?.taiKhoan.tenDangNhap }}
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="hanhdong">

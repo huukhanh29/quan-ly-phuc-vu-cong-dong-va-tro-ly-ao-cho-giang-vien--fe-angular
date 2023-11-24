@@ -8,7 +8,6 @@ import { PhanHoi } from 'src/app/models/PhanHoi';
 import { PhanHoiService } from 'src/app/services/phan-hoi.service';
 import { StorageService } from 'src/app/services/storage.service';
 
-
 @Component({
   selector: 'app-phan-hoi-chat',
   templateUrl: './phan-hoi-chat.component.html',
@@ -27,26 +26,24 @@ export class PhanHoiChatComponent implements OnInit {
     private formBuilder: FormBuilder,
     private phanHoiService: PhanHoiService,
     private storageService: StorageService,
-    private toastr: ToastrService,
-
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.initPhanHoiForm();
     this.loadDanhSachPhanHoi();
-
   }
   get formControls() {
     return this.phanHoiForm.controls;
   }
   initPhanHoiForm() {
     this.phanHoiForm = this.formBuilder.group({
-      noiDung: ['', Validators.required],
+      noiDung: [''],
     });
   }
 
   onSubmit() {
-    if (this.phanHoiForm.valid) {
+    if (this.phanHoiForm.value.noiDung.trim() !== '') {
       this.phanHoiService.createPhanHoi(this.phanHoiForm.value).subscribe({
         next: (data) => {
           if (data.message == 'exist') {
@@ -61,6 +58,10 @@ export class PhanHoiChatComponent implements OnInit {
           this.toastr.error('Lỗi rồi!');
         },
       });
+    } else {
+
+        this.toastr.warning('Bạn chưa điền nội dung kìa!!!');
+
     }
   }
 

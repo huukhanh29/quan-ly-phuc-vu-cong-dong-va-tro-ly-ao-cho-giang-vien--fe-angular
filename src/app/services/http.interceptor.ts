@@ -12,6 +12,7 @@ import { StorageService } from './storage.service';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { TaiKhoanService } from './tai-khoan.service';
+import { E } from '@angular/cdk/keycodes';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -59,6 +60,9 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error) => {
         console.error('Có lỗi xãy ra:', error);
+        if(error.status === 504){
+          this.router.navigate(['/bao-tri']);
+        }
         return throwError(() => error);
       })
     );

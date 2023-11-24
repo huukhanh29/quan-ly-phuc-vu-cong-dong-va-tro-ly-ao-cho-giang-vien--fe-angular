@@ -61,3 +61,11 @@ mat-table{
   min-height: 200px!important;
 }
 
+.input-content.ng-invalid.ng-touched,
+.input-contenth.ng-invalid.ng-dirty {
+  border-color: #ced4da;
+  box-shadow: none;
+}
+.mat-column-stt{
+  max-width: 64px;
+}

@@ -8,6 +8,7 @@
       <th>Email</th>
       <th>Giờ hoàn thành</th>
       <th>Giờ bắt buộc</th>
+      <th>Giờ miễn giảm</th>
     </tr>
     <tr *ngFor="let data of dataExel; let i = index">
       <td>{{ i + 1 }}</td>
@@ -17,6 +18,7 @@
       <td>{{ data.email }}</td>
       <td>{{ data.tongSoGio }}</td>
       <td>{{ data.soGioBatBuoc }}</td>
+      <td>{{ data.gioMienGiam }}</td>
     </tr>
   </table>
   <div class="search-container">
@@ -116,7 +118,7 @@
           >Tỉ lệ giờ</mat-header-cell
         >
         <mat-cell *matCellDef="let giangVien">
-          {{ giangVien.tongSoGio??0 }}/{{ giangVien.soGioBatBuoc??0 }}
+          {{ giangVien.tongSoGio??0 }}/{{ giangVien.soGioBatBuoc - giangVien.gioMienGiam }}
         </mat-cell>
       </ng-container>
 

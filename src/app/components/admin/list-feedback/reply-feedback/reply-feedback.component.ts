@@ -45,9 +45,10 @@ export class ReplyFeedbackComponent implements OnInit {
         next: data=>{
           if(data.message && data.message === 'cauhoi-exist'){
             this.toastr.warning("Từ khóa đã tồn tại! Đã gán cho phản hồi!");
+            this.dialogRef.close('Closed');
           }else{
             this.dialogRef.close('Closed');
-            this.toastr.success("Thêm câu hỏi thành công!");
+            this.toastr.success("Thêm câu hỏi thành công!");  
           }
 
         },

@@ -39,6 +39,7 @@ import { MatDatetimepickerModule, MatNativeDatetimeModule } from '@mat-datetimep
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatStepperModule } from '@angular/material/stepper';
 @NgModule({
   declarations: [],
   imports: [
@@ -76,7 +77,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatNativeDatetimeModule,
     MatSnackBarModule,
     MatProgressBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatStepperModule
+
   ],
   exports: [
     MatToolbarModule,
@@ -112,7 +115,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatNativeDatetimeModule,
     MatSnackBarModule,
     MatProgressBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatStepperModule
   ]
 })
 export class MaterialModule { }

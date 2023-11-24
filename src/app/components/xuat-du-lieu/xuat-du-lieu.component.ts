@@ -167,7 +167,7 @@ export class XuatDuLieuComponent {
     const element = document.getElementById('season-tble');
     const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
     //gộp ô
-    worksheet['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: 5 } }];
+    worksheet['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: 6 } }];
     //custom style
     worksheet['A1'] = {
       t: 's',
@@ -175,7 +175,7 @@ export class XuatDuLieuComponent {
       s: { alignment: { horizontal: 'center' }, font: { bold: true } },
     };
 
-    for (let col = 0; col <= 5; col++) {
+    for (let col = 0; col <= 6; col++) {
       const cell = XLSX.utils.encode_cell({ r: 1, c: col });
       worksheet[cell].s = { font: { bold: true } };
     }
@@ -186,6 +186,7 @@ export class XuatDuLieuComponent {
       { wch: 20 }, // D
       { wch: 20 }, // E
       { wch: 15 }, // F
+      { wch: 15 }, // E
     ];
     worksheet['!cols'] = columnWidths;
 

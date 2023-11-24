@@ -3,10 +3,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ThongBaoService } from 'src/app/services/thong-bao.service';
 import { ThongBao } from 'src/app/models//ThongBao';
 import { MatDialog } from '@angular/material/dialog';
-import { ThongBaoDialogComponent } from './thong-bao-dialog/thong-bao-dialog.component';
-import { WebSocketService } from 'src/app/services/web-socket.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { ToastrService } from 'ngx-toastr';
+
+import { Validators, FormBuilder } from '@angular/forms';
+import { ThongBaoDialogComponent } from './thong-bao-dialog/thong-bao-dialog.component';
+import { WebSocketService } from 'src/app/services/web-socket.service';
 
 @Component({
   selector: 'app-thong-bao',
@@ -18,13 +20,21 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
   TBChuaDoc: ThongBao[] = [];
   TBDaDoc: ThongBao[] = [];
   selectedNotification!: ThongBao | null;
-  displayedColumns: string[] = ['tieuDe','ngayTao'];
+  isLinear = false;
+
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
   constructor(
     private thongBaoService: ThongBaoService,
     private dialog: MatDialog,
-    private webSocketService: WebSocketService,
     private storageService: StorageService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _formBuilder: FormBuilder,
+    private webSocketService: WebSocketService,
   ) {}
 
   ngOnInit(): void {
@@ -42,11 +52,9 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
       }
     });
   }
-
   loadNotifications(): void {
     this.thongBaoService.layThongBaoTheoNguoiDungId().subscribe({
       next: (data) => {
-
         this.ThongBaos = data;
         this.TBChuaDoc = data.filter(
           (item: { trangThai: string }) => item.trangThai === 'ChuaDoc'
@@ -55,7 +63,9 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
           (item: { trangThai: string }) => item.trangThai === 'DaDoc'
         );
         // Cập nhật số thông báo chưa đọc
-        const chuaDoc = data.filter((item: { trangThai: string; }) => item.trangThai === 'ChuaDoc');
+        const chuaDoc = data.filter(
+          (item: { trangThai: string }) => item.trangThai === 'ChuaDoc'
+        );
       },
       error: (error) => {
         console.error('Error:', error);
@@ -67,11 +77,11 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
     this.thongBaoService.xoaTatCaThongBaoTheoNguoiDungId().subscribe({
       next: (data) => {
         this.loadNotifications();
-        this.toastr.success("Đã xóa tất cả thông báo đã đọc!")
+        this.toastr.success('Đã xóa tất cả thông báo đã đọc!');
       },
       error: (error) => {
-        if(error.error.message === 'Not_Found'){
-          this.toastr.warning("Không có thông báo đã đọc!")
+        if (error.error.message === 'Not_Found') {
+          this.toastr.warning('Không có thông báo đã đọc!');
         }
       },
     });
@@ -90,7 +100,6 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
   }
 
   handleNotificationClick(notification: ThongBao | null): void {
-    // Bước 4: Mở dialog thay vì đặt selectedNotification
     if (notification) {
       var popup = this.dialog.open(ThongBaoDialogComponent, {
         data: {
@@ -102,7 +111,6 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
         exitAnimationDuration: '300ms',
       });
       popup.afterClosed().subscribe((item) => {
-        // console.log(item)
         this.loadNotifications();
       });
       if (notification.trangThai === 'ChuaDoc') {

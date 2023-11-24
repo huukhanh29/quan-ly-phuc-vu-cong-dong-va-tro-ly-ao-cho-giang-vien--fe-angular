@@ -198,7 +198,7 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
     const newRowStart = this.dataExel.length + 3; // Bắt đầu từ hàng thứ 2, ngay sau hàng tiêu đề
 
     // Gộp ô cho các hàng mới
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 9; i++) {
       worksheet['!merges'].push({
         s: { r: newRowStart + i, c: 0 },
         e: { r: newRowStart + i, c: 6 },
@@ -206,7 +206,7 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
     }
 
     // Đặt các hàng mới thành in đậm
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 9; i++) {
       const cell = XLSX.utils.encode_cell({ r: newRowStart + i, c: 7 });
       worksheet[cell].s = { font: { bold: true } };
     }
