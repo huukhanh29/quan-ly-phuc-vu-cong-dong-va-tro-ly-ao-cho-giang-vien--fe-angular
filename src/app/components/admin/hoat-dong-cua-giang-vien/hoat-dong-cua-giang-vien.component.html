@@ -81,7 +81,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <mat-form-field appearance="outline" class="search-input">
+    <mat-form-field appearance="outline" class="search-input" class="hidden">
       <mat-label>Tìm kiếm</mat-label>
       <input
         matInput
@@ -105,15 +105,15 @@
 
       <tr>
         <th>Tên giảng viên</th>
-        <td>{{ giangVien.taiKhoan.tenDayDu }}</td>
+        <td>{{ giangVien?.taiKhoan?.tenDayDu }}</td>
       </tr>
       <tr>
         <th>Mã giảng viên</th>
-        <td>{{ giangVien.taiKhoan.tenDangNhap }}</td>
+        <td>{{ giangVien?.taiKhoan?.tenDangNhap }}</td>
       </tr>
       <tr>
         <th>Email</th>
-        <td>{{ giangVien.taiKhoan.email }}</td>
+        <td>{{ giangVien?.taiKhoan?.email }}</td>
       </tr>
       <tr>
         <th>Giờ HK1</th>

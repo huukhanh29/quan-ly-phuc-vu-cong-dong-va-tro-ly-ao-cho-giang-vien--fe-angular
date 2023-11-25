@@ -54,7 +54,7 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
   maGiangVien!: number;
   dataExel: any;
   nameFile = '';
-  giangVien!: GiangVien;
+  giangVien!: GiangVien | null;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
@@ -70,19 +70,19 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
     this.selectedNam = currentYear.toString();
   }
   ngOnInit(): void {
-    this.layDanhSachNam();
+
     this.activatedRoute.params.subscribe((params: Params) => {
       if (
         !isNaN(params['maGiangVien']) &&
         params['maGiangVien'] !== undefined
       ) {
         this.maGiangVien = +params['maGiangVien'];
-        this.loadThongTinGiangVien();
       } else {
         this.maGiangVien = -1;
-        this.loadThongTinGiangVien();
       }
+      this.loadThongTinGiangVien();
     });
+    this.layDanhSachNam();
     console.log(this.maGiangVien);
   }
 
@@ -91,7 +91,7 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
     if (this.maGiangVien === -1) {
       this.taiKhoanService.layThongTinNguoiDung().subscribe((data) => {
         this.giangVien = data;
-        this.nameFile = `Chi tiết tham gia hoạt động của ${this.giangVien.taiKhoan.tenDayDu} (${this.giangVien.taiKhoan.tenDangNhap}) năm ${this.selectedNam}`;
+        this.nameFile = `Chi tiết tham gia hoạt động của ${this.giangVien?.taiKhoan.tenDayDu} (${this.giangVien?.taiKhoan.tenDangNhap}) năm ${this.selectedNam}`;
         console.log(this.nameFile);
       });
     } else {
@@ -99,7 +99,7 @@ export class HoatDongCuaGiangVienComponent implements OnInit {
         .layThongTinGvByMa(this.maGiangVien)
         .subscribe((data) => {
           this.giangVien = data;
-          this.nameFile = `Chi tiết tham gia hoạt động của ${this.giangVien.taiKhoan.tenDayDu} (${this.giangVien.taiKhoan.tenDangNhap}) năm ${this.selectedNam}`;
+          this.nameFile = `Chi tiết tham gia hoạt động của ${this.giangVien?.taiKhoan.tenDayDu} (${this.giangVien?.taiKhoan.tenDangNhap}) năm ${this.selectedNam}`;
           console.log(this.nameFile);
         });
     }

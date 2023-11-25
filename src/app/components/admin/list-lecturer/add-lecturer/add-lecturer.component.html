@@ -96,7 +96,12 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
+    <mat-form-field appearance="outline">
+      <mat-label>Chọn khoa</mat-label>
+      <mat-select formControlName="maKhoa">
+        <mat-option *ngFor="let khoa of danhSachKhoa" [value]="khoa.maKhoa">{{ khoa.tenKhoa }}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button mat-raised-button type="submit" color="primary">Lưu</button>

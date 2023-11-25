@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TaiKhoanService } from 'src/app/services/tai-khoan.service';
 import { ChucDanhService } from 'src/app/services/chuc-danh.service';
 import { ChucDanh } from 'src/app/models/ChucDanh';
+import { KhoaService } from './../../../../services/khoa.service';
 
 @Component({
   selector: 'app-add-lecturer',
@@ -14,6 +15,8 @@ import { ChucDanh } from 'src/app/models/ChucDanh';
 })
 export class AddLecturerComponent implements OnInit {
   public chucDanhs: ChucDanh[] = [];
+  danhSachKhoa: any[] = [];
+  selectedKhoa!: number;
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
@@ -23,7 +26,8 @@ export class AddLecturerComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private taiKhoanService: TaiKhoanService,
-    private chucDanhService: ChucDanhService
+    private chucDanhService: ChucDanhService,
+    private khoaService: KhoaService
   ) {}
 
   get formControls() {
@@ -32,7 +36,15 @@ export class AddLecturerComponent implements OnInit {
 
   ngOnInit(): void {
     this.listChucDanh()
+    this.loadDanhSachKhoa()
   }
+  loadDanhSachKhoa() {
+    this.khoaService
+      .layTatCaKhoa()
+      .subscribe((data) => {
+        this.danhSachKhoa = data;
+      });
+}
   listChucDanh(){
     this.chucDanhService.getAllChucDanhs().subscribe({
       next: data=>{
@@ -60,7 +72,8 @@ export class AddLecturerComponent implements OnInit {
     gioiTinh: ['Nam', Validators.required],
     soDienThoai: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
     ngaySinh: ['', Validators.required],
-    maChucDanh:[]
+    maChucDanh:[],
+    maKhoa:[]
   });
 
   savelecturer() {

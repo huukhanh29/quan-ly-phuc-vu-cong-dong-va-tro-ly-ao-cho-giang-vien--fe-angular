@@ -22,7 +22,7 @@ export class ListLecturerComponent implements OnInit {
   danhSachGiangVien: MatTableDataSource<GiangVien> = new MatTableDataSource();
   displayedColumns: string[] = [
     'stt',
-    'maTaiKhoan',
+    'taiKhoan.tenDangNhap',
     'taiKhoan.tenDayDu',
     'taiKhoan.email',
     'taiKhoan.trangThai',

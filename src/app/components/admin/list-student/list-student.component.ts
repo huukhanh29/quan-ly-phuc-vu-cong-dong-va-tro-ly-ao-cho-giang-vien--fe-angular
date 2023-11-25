@@ -17,8 +17,8 @@ import { AddStudentComponent } from './add-student/add-student.component';
 })
 export class ListStudentComponent implements OnInit {
   danhSachSinhVien: MatTableDataSource<SinhVien> = new MatTableDataSource();
-  displayedColumns: string[] = ['stt', 'maTaiKhoan',  'taiKhoan.tenDayDu', 'taiKhoan.email', 'taiKhoan.trangThai', 'hanhdong'];
-  length: number = 0;   
+  displayedColumns: string[] = ['stt', 'taiKhoan.tenDangNhap',  'taiKhoan.tenDayDu', 'taiKhoan.email', 'taiKhoan.trangThai', 'hanhdong'];
+  length: number = 0;
   searchTerm: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
