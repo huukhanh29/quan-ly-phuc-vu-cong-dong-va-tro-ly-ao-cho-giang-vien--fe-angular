@@ -15,8 +15,8 @@ export class ChucDanhService {
     return this.httpClient.get(`${this.baseUrl}/lay-danh-sach`);
   }
 
-  updateGiangVien(maChucDanh: number): Observable<any> {
-    return this.httpClient.put(`${this.baseUrl}/cap-nhat/${maChucDanh}`, null);
+  updateGiangVien(maChucDanh: number, maGv: number): Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}/cap-nhat/${maChucDanh}/${maGv}`, null);
   }
 
   getChartData(academic: string): Observable<any> {

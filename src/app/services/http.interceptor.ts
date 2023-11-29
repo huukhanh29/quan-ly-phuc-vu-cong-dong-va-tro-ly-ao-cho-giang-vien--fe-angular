@@ -51,7 +51,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
           }),
           catchError((error: any) => {
             this.storageService.xoaCookie();
-            this.router.navigate(['/dang-nhap']);
+            this.router.navigate(['/trang-chu/dang-nhap']);
             return throwError(() => error);
           })
         );

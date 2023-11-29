@@ -41,9 +41,9 @@
     <ng-container matColumnDef="hanhdong">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let item">
-          <mat-icon class="icon-detail" (click)="detail(item)">info</mat-icon>
-          <mat-icon class="icon-delete" (click)="deleteFeedback(item.maPhanHoi)">delete</mat-icon>
-          <mat-icon class="icon-reply" (click)="replyFeedback(item)">reply</mat-icon>
+          <mat-icon color="primary" matTooltip="Chi tiết" (click)="detail(item)">info</mat-icon>
+          <mat-icon color="accent" matTooltip="Xóa" (click)="deleteFeedback(item.maPhanHoi)">delete</mat-icon>
+          <mat-icon class="icon-reply" matTooltip="Trả lời" (click)="replyFeedback(item)">reply</mat-icon>
       </mat-cell>
 
     </ng-container>

@@ -1,0 +1,18 @@
+<form [formGroup]="myform" (ngSubmit)="save()">
+  <h1 mat-dialog-title>{{ 'Cập nhật Chức danh' }}</h1>
+  <div mat-dialog-content>
+    <!-- Trường chọn năm -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Chức Danh</mat-label>
+      <mat-select formControlName="maChucDanh">
+        <mat-option *ngFor="let chucDanh of chucDanhs" [value]="chucDanh.maChucDanh">
+          {{ chucDanh?.tenChucDanh }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button type="submit" color="primary">Lưu</button>
+    <button (click)="closePopup($event)" mat-raised-button color="warn">Đóng</button>
+  </div>
+</form>

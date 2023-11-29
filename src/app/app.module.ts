@@ -84,6 +84,8 @@ import { XuatDuLieuComponent } from './components/xuat-du-lieu/xuat-du-lieu.comp
 import { HoatDongCuaGiangVienComponent } from './components/admin/hoat-dong-cua-giang-vien/hoat-dong-cua-giang-vien.component';
 import { ChiTietHoatDongGvComponent } from './components/admin/hoat-dong-cua-giang-vien/chi-tiet-hoat-dong-gv/chi-tiet-hoat-dong-gv.component';
 import { UpdateGioGiamComponent } from './components/admin/list-lecturer/update-gio-giam/update-gio-giam.component';
+import { HuyHdntComponent } from './components/admin/hoat-dong-ngoai-truong/huy-hdnt/huy-hdnt.component';
+import { UpdateJobComponent } from './components/admin/list-lecturer/update-job/update-job.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -157,7 +159,9 @@ import { UpdateGioGiamComponent } from './components/admin/list-lecturer/update-
     XuatDuLieuComponent,
     HoatDongCuaGiangVienComponent,
     ChiTietHoatDongGvComponent,
-    UpdateGioGiamComponent
+    UpdateGioGiamComponent,
+    HuyHdntComponent,
+    UpdateJobComponent
   ],
   imports: [
     BrowserModule,

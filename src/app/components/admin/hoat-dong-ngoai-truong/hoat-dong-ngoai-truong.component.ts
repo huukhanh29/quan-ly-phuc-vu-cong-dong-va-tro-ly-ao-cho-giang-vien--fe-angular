@@ -14,6 +14,7 @@ import { ChiTietHdntComponent } from './chi-tiet-hdnt/chi-tiet-hdnt.component';
 import { StorageService } from 'src/app/services/storage.service';
 import { DuyetHdntComponent } from './duyet-hdnt/duyet-hdnt.component';
 import { DetailLecturerComponent } from '../list-lecturer/detail-lecturer/detail-lecturer.component';
+import { HuyHdntComponent } from './huy-hdnt/huy-hdnt.component';
 
 @Component({
   selector: 'app-hoat-dong-ngoai-truong',
@@ -218,7 +219,7 @@ export class HoatDongNgoaiTruongComponent implements OnInit {
     });
   }
   huyHoatDong(id: any): void {
-    var popup = this.dialog.open(DeleteComponent, {
+    var popup = this.dialog.open(HuyHdntComponent, {
       width: '40%',
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',

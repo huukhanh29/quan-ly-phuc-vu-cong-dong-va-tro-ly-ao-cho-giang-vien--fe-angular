@@ -12,6 +12,7 @@ import { AddLecturerComponent } from './add-lecturer/add-lecturer.component';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { UpdateGioGiamComponent } from './update-gio-giam/update-gio-giam.component';
+import { UpdateJobComponent } from './update-job/update-job.component';
 
 @Component({
   selector: 'app-list-lecturer',
@@ -120,8 +121,25 @@ export class ListLecturerComponent implements OnInit {
         enterAnimationDuration: '300ms',
         exitAnimationDuration: '300ms',
       });
+      popup.afterClosed().subscribe((item) => {
+        this.loadDanhSachGiangVien();
+      });
 
   }
+  upDateJob(lecturer: any): void {
+    var popup = this.dialog.open(UpdateJobComponent, {
+      data: {
+        lecturer: lecturer,
+      },
+      width: '40%',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+    });
+    popup.afterClosed().subscribe((item) => {
+      this.loadDanhSachGiangVien();
+    });
+
+}
   updateUserStatus(status: string, tenDangNhap: string): void {
     const body = {
       tenDangNhap: tenDangNhap,
