@@ -1,7 +1,35 @@
+/* Thêm một lớp cho background */
+.background {
+  position: fixed; /* Định vị cố định để nền không cuộn theo nội dung */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:url('../../../../assets//images/hinhnen.jpg'); /* Thay 'đường_dẫn_ảnh_nền' bằng URL của ảnh bạn muốn sử dụng */
+  background-size: cover; /* Đảm bảo ảnh nền phủ kín màn hình */
+  filter: blur(1px); /* Hiệu ứng mờ cho ảnh nền */
+  z-index: -1; /* Đảm bảo lớp nền nằm dưới tất cả các nội dung khác */
+}
+
+/* Áp dụng lại cho :host để không làm ảnh hưởng đến mat-card */
 :host {
   display: flex;
   justify-content: center;
-  margin: 100px 0px;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  height: 100vh; /* Đặt chiều cao tối đa */
+  margin: 0; /* Xóa margin mặc định */
+  position: relative; /* Đặt vị trí tương đối để căn chỉnh các thành phần con */
+  overflow: hidden; /* Ẩn các phần tử ngoài khung */
+}
+
+/* Các style khác cho mat-card và các thành phần con giữ nguyên */
+
+
+.login-logo {
+  width: 80px;
+  margin: 0 auto;
+  margin-top: 15px;
+  display: block;
 }
 
 .mat-form-field {
