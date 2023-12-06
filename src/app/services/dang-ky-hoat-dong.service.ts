@@ -54,7 +54,7 @@ export class DangKyHoatDongService {
     return this.http.get(`${this.baseUrl}/lay-danh-sach`, { params });
   }
   getAllHoatDongSapDienRa(): Observable<HoatDong[]> {
-    return this.http.get<HoatDong[]>(`${this.baseUrl}/hoat-dong-sap-dien-ra`);
+    return this.http.get<HoatDong[]>(`${this.baseUrl}/hoat-dong-da-dien-ra`);
   }
   dangKyHoatDong(maHoatDong: number): Observable<any> {
     return this.http.post(`${this.baseUrl}/${maHoatDong}`, {});

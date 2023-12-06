@@ -7,7 +7,7 @@
   bottom: 0;
   background-image:url('../../../../assets//images/hinhnen.jpg'); /* Thay 'đường_dẫn_ảnh_nền' bằng URL của ảnh bạn muốn sử dụng */
   background-size: cover; /* Đảm bảo ảnh nền phủ kín màn hình */
-  filter: blur(1px); /* Hiệu ứng mờ cho ảnh nền */
+  filter:  grayscale(10%); /* Hiệu ứng mờ cho ảnh nền */
   z-index: -1; /* Đảm bảo lớp nền nằm dưới tất cả các nội dung khác */
 }
 

@@ -112,18 +112,24 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
         exitAnimationDuration: '300ms',
       });
       popup.afterClosed().subscribe((item) => {
-        if (notification.trangThai === 'ChuaDoc') {
-          this.thongBaoService
-            .datTrangThaiThongBao(notification.maThongBao)
-            .subscribe({
-              next: (data) => {
-                this.loadNotifications();
-              },
-              error: (err) => {
-                console.error('Error:', err);
-              },
-            });
+        if(item==='xoa'){
+          this.toastr.success("Xóa thành công!")
+          this.loadNotifications();
+        }else{
+          if (notification.trangThai === 'ChuaDoc') {
+            this.thongBaoService
+              .datTrangThaiThongBao(notification.maThongBao)
+              .subscribe({
+                next: (data) => {
+                  this.loadNotifications();
+                },
+                error: (err) => {
+                  console.error('Error:', err);
+                },
+              });
+          }
         }
+
 
       });
 
@@ -133,6 +139,6 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
     this.webSocketService.disconnect();
   }
   ngOnDestroy(): void {
-    this.disconnectWebSocket();
+    //this.disconnectWebSocket();
   }
 }

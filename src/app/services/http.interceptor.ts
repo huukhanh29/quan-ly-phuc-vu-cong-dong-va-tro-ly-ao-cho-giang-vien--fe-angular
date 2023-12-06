@@ -50,8 +50,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
             return next.handle(newReq);
           }),
           catchError((error: any) => {
+            this.router.navigate(['/dang-nhap']);
             this.storageService.xoaCookie();
-            this.router.navigate(['/trang-chu/dang-nhap']);
             return throwError(() => error);
           })
         );

@@ -187,16 +187,27 @@ export class ManageActivityLecturerComponent implements OnInit {
   }
 
   detail(item: any | null): void {
-    console.log(item);
+   
     if (item) {
-      var popup = this.dialog.open(DetailActivityComponent, {
-        data: {
-          item: item,
+      this.hoatDongService.getFileName(item.maHoatDong).subscribe({
+        next: data=>{
+
+          var popup = this.dialog.open(DetailActivityComponent, {
+            data: {
+              item: item,
+              tenFile: data
+            },
+            width: '40%',
+            enterAnimationDuration: '300ms',
+            exitAnimationDuration: '300ms',
+          });
+
         },
-        width: '40%',
-        enterAnimationDuration: '300ms',
-        exitAnimationDuration: '300ms',
-      });
+        error: err=>{
+          console.log(err)
+        }
+
+       })
     }
   }
 }

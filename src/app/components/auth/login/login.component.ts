@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { TaiKhoanService } from 'src/app/services/tai-khoan.service';
+import { firstValueFrom } from 'rxjs';
 
 enum Messages {
   OK = 'ok',
@@ -45,13 +46,26 @@ export class LoginComponent implements OnInit {
     try {
       const user = this.storageService.getUser();
       const body = { token: user.token };
-      const data = await this.taiKhoanService.testLogin(body).toPromise();
+      const data = await firstValueFrom(this.taiKhoanService.testLogin(body));
 
       this.handleTestLoginSuccess(data);
     } catch (error) {
+      this.storageService.xoaCookie();
       console.error("Test login failed", error);
     }
   }
+
+  async submit(): Promise<void> {
+    try {
+      const { username, password } = this.form;
+      const data = await firstValueFrom(this.authService.login(username, password));
+
+      this.handleLoginSuccess(data);
+    } catch (error) {
+      this.handleLoginError(error);
+    }
+  }
+
 
   private handleTestLoginSuccess(data: any): void {
     switch (data.message) {
@@ -69,16 +83,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  async submit(): Promise<void> {
-    try {
-      const { username, password } = this.form;
-      const data = await this.authService.login(username, password).toPromise();
-
-      this.handleLoginSuccess(data);
-    } catch (error) {
-      this.handleLoginError(error);
-    }
-  }
 
   private handleLoginSuccess(data: any): void {
     switch (data.message) {
@@ -107,4 +111,5 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/bao-tri']);
     }
   }
+
 }

@@ -18,7 +18,7 @@ export class SidebarLecturerComponent implements OnInit{
 
     ngOnInit(): void {
       this.laySoThongBao();
-      this.connectWebsocket();
+      this,this.connectWebsocket()
     }
 
     laySoThongBao(){
@@ -34,14 +34,20 @@ export class SidebarLecturerComponent implements OnInit{
 
     connectWebsocket(){
       const user = this.storageService.getUser();
-      this.webSocketService.connect(user.tenTaiKhoan);
-      this.webSocketService.messageEvent.subscribe((data) => {
-        console.log("xxxx")
-        if(data==="approve-activity" || data==="destroy-activity" || "update-status"){
-          this.laySoThongBao();
-        }
-      });
+      if(user && user.tenTaiKhoan) {
+        this.webSocketService.connect(user.tenTaiKhoan);
+
+        this.webSocketService.messageEvent.subscribe((data) => {
+          console.log(data)
+          if(data==="approve-activity" || data==="destroy-activity" || "update-status"){
+            this.laySoThongBao();
+          }
+        });
+      } else {
+        console.log("Người dùng không tồn tại hoặc tên tài khoản không hợp lệ");
+      }
     }
+
 
     ngOnDestroy(): void {
       this.webSocketService.disconnect()

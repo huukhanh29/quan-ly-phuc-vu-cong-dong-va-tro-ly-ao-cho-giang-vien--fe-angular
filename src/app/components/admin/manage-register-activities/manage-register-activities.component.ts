@@ -14,6 +14,7 @@ import { DetailLecturerComponent } from '../list-lecturer/detail-lecturer/detail
 import { HoatDongService } from 'src/app/services/hoat-dong.service';
 import { subMonths } from 'date-fns';
 
+
 @Component({
   selector: 'app-manage-register-activities',
   templateUrl: './manage-register-activities.component.html',
@@ -39,6 +40,7 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
 
   constructor(
     private dangKyHoatDongService: DangKyHoatDongService,
+    private hoatDongService: HoatDongService,
     private toastr: ToastrService,
     private dialog: MatDialog,
     private webSocketService: WebSocketService
@@ -175,14 +177,25 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
   }
   chiTietHoatDong(item: any | null): void {
     if (item) {
-      var popup = this.dialog.open(DetailActivityComponent, {
-        data: {
-          item: item,
+      this.hoatDongService.getFileName(item.maHoatDong).subscribe({
+        next: data=>{
+         
+          var popup = this.dialog.open(DetailActivityComponent, {
+            data: {
+              item: item,
+              tenFile: data
+            },
+            width: '40%',
+            enterAnimationDuration: '300ms',
+            exitAnimationDuration: '300ms',
+          });
+
         },
-        width: '40%',
-        enterAnimationDuration: '300ms',
-        exitAnimationDuration: '300ms',
-      });
+        error: err=>{
+          console.log(err)
+        }
+
+       })
     }
   }
   chiTietGiangVien(lecturer: any | null): void {

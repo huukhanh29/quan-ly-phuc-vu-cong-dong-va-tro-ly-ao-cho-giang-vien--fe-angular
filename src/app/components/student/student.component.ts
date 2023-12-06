@@ -19,8 +19,13 @@ export class StudentComponent {
     this.isLoggedIn = this.storageService.isLoggedIn();
     const user = this.storageService.getUser();
     this.roles = user.quyen;
-    if (!this.isLoggedIn || this.roles !== 'SinhVien') {
-      this.router.navigate(['/403']);
+    // if (!this.isLoggedIn || this.roles !== 'SinhVien') {
+    //   this.router.navigate(['/403']);
+    // }
+    if(!this.isLoggedIn){
+      this.router.navigate(['/dang-nhap']);
+    }else if (this.roles !== 'SinhVien') {
+       this.router.navigate(['/403']);
     }
   }
 }

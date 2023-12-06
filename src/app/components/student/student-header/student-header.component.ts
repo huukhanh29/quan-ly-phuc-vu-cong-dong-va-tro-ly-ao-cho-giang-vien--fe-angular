@@ -27,6 +27,7 @@ export class StudentHeaderComponent implements OnInit{
       this.thongBaoService.laySoThongBaoChuaDocTheoNguoiDungId().subscribe({
         next: data =>{
           this.soThongBao = data;
+
         },
         error: error =>{
           console.log(error);
@@ -35,19 +36,24 @@ export class StudentHeaderComponent implements OnInit{
     }
     connectWebsocket(){
       const user = this.storageService.getUser();
-      this.webSocketService.connect(user.tenTaiKhoan);
+      if(user && user.tenTaiKhoan) {
+        this.webSocketService.connect(user.tenTaiKhoan);
 
-      this.webSocketService.messageEvent.subscribe((data) => {
-        if(data==="update-status" || data==="reply-feedback"){
-          this.laySoThongBao();
-          console.log("cap nhat")
-        }
-      });
+        this.webSocketService.messageEvent.subscribe((data) => {
+          if(data === "update-status" || data === "reply-feedback"){
+            this.laySoThongBao();
+            console.log("cap nhat");
+          }
+        });
+      } else {
+        console.log("Người dùng không tồn tại hoặc tên tài khoản không hợp lệ");
+      }
     }
 
-    ngOnDestroy(): void {
-      this.webSocketService.disconnect()
-    }
+
+    // ngOnDestroy(): void {
+    //   this.webSocketService.disconnect()
+    // }
     dangXuat(): void {
       this.dialog.open(LogoutComponent, {
         width: '350px',

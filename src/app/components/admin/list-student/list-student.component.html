@@ -52,7 +52,7 @@
           >Trạng thái</mat-header-cell
         >
         <mat-cell *matCellDef="let giangVien" [matMenuTriggerFor]="menu">
-          {{ giangVien.taiKhoan?.trangThai }}
+          {{ giangVien.taiKhoan?.trangThai === 'Mo' ? 'Mở' : 'Khóa' }}
           <mat-icon>arrow_drop_down</mat-icon>
           <mat-menu #menu="matMenu">
             <button

@@ -15,9 +15,9 @@ export class ThongBaoDialogComponent {
 
   handleDelete() {
     this.data.deleteHandler(this.data.notification.maThongBao);
-    this.closePopup()
+    this.dialogRef.close('xoa');
   }
   closePopup() {
-    this.dialogRef.close();
+    this.dialogRef.close('dong');
   }
 }

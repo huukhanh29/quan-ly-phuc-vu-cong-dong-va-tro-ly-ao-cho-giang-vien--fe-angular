@@ -68,10 +68,25 @@ export class LichHoatDongComponent implements OnInit {
 
   handleEventClick(event: CalendarEvent): void {
     console.log(event.meta)
-    this.dialog.open(DetailActivityComponent, {
-      data: { item: event.meta },
-      width: '400px',
-    });
+   this.hoatDongService.getFileName(event.meta.maHoatDong).subscribe({
+      next: data=>{
+        console.log(data)
+        var popup = this.dialog.open(DetailActivityComponent, {
+          data: {
+            item: event.meta,
+            tenFile: data
+          },
+          width: '40%',
+          enterAnimationDuration: '300ms',
+          exitAnimationDuration: '300ms',
+        });
+
+      },
+      error: err=>{
+        console.log(err)
+      }
+
+     })
   }
   nextMonth(): void {
     this.viewDate = addMonths(this.viewDate, 1);

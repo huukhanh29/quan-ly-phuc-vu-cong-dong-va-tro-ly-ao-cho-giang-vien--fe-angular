@@ -259,9 +259,13 @@ export class AddActivityComponent implements OnInit {
               }
             },
             error: (err) => {
-              if(err.error.message ==="hoatdong-exist"){
-                this.toastr.warning('Tên hoạt động bị trùng!');
-              }else{
+              if (err.error.message.startsWith("gv-exists")) {
+                let gvExistsMessage = err.error.message.substring("gv-exists".length).trim();
+                if (gvExistsMessage) {
+                    this.toastr.warning(`Giảng viên đã đăng ký tham gia hoạt động: ${gvExistsMessage}`);
+                }
+            }
+            else{
                 this.toastr.error('Thêm hoạt động không thành công!');
                 console.error('Error adding activity:', err);
               }
