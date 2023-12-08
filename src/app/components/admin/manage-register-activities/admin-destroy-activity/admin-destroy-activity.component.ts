@@ -6,12 +6,14 @@ import { ToastrService } from 'ngx-toastr';
 import { TaiKhoanService } from 'src/app/services/tai-khoan.service';
 import { CauHoiService } from 'src/app/services/cau-hoi.service';
 import { DangKyHoatDongService } from 'src/app/services/dang-ky-hoat-dong.service';
+import { StorageService } from './../../../../services/storage.service';
 @Component({
   selector: 'app-admin-destroy-activity',
   templateUrl: './admin-destroy-activity.component.html',
   styleUrls: ['./admin-destroy-activity.component.css']
 })
 export class AdminDestroyActivityComponent {
+  role: any;
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
@@ -21,7 +23,8 @@ export class AdminDestroyActivityComponent {
     private dialogRef: MatDialogRef<AdminDestroyActivityComponent>,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
-    private dangKyHoatDongService: DangKyHoatDongService
+    private dangKyHoatDongService: DangKyHoatDongService,
+    private storageService: StorageService
   ) {}
 
   get formControls() {
@@ -29,6 +32,8 @@ export class AdminDestroyActivityComponent {
   }
 
   ngOnInit(): void {
+    const user = this.storageService.getUser()
+    this.role= user.quyen
     if(!this.data.isEditable) {
       this.myform.get('lyDoHuy')?.setValue(this.data.item.lyDoHuy);
       this.myform.get('lyDoHuy')?.disable();

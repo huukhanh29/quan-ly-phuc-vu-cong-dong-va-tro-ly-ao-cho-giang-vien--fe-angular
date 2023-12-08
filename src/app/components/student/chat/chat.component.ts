@@ -229,7 +229,8 @@ export class ChatComponent implements OnInit {
       this.combinedMessages.push({ content: this.userMessage, isOutgoing: true });
       this.combinedMessages.push({ content: response, isOutgoing: false });
     } else {
-      responseCauHoi = `Bạn muốn hỏi về ${data.cauHoi} đúng không?`;
+      responseCauHoi = `Bạn muốn hỏi về "${data.cauHoi}" đúng không?`;
+
       response = data.traLoi;
       this.combinedMessages.push({ content: this.userMessage, isOutgoing: true });
       this.combinedMessages.push({ content: responseCauHoi, isOutgoing: false });

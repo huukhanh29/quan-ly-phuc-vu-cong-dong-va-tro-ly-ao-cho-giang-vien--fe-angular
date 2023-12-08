@@ -9,10 +9,10 @@
       </mat-error>
 
     </mat-form-field>
-    <i>Nếu có thắc mắc vui lòng liên hệ phòng quản lý!</i>
+    <i *ngIf="role ==='GiangVien'">Nếu có thắc mắc vui lòng liên hệ phòng quản lý!</i>
   </div>
   <div mat-dialog-actions>
-    <button *ngIf="data.isEditable" mat-raised-button type="submit" color="primary">Lưu</button>
+    <button *ngIf="data.isEditable " mat-raised-button type="submit" color="primary">Lưu</button>
     <button (click)="closePopup($event)" mat-raised-button color="warn">Đóng</button>
 
   </div>

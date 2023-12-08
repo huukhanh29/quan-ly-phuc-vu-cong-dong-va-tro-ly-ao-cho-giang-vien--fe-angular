@@ -19,7 +19,7 @@
     </li>
   </ul>
   <div class="chat-input">
-    <textarea placeholder="Enter a message..." [(ngModel)]="userMessage" (keydown.enter)="sendMessage($event)" spellcheck="false" required></textarea>
+    <textarea placeholder="Nhập tin nhắn vào đây..." [(ngModel)]="userMessage" (keydown.enter)="sendMessage($event)" spellcheck="false" required></textarea>
     <button mat-raised-button color="purple" (click)="sendMessage($event)">
       Gửi
     </button>

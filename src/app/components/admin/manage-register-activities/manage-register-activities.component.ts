@@ -159,7 +159,7 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
           this.toastr.warning('Bạn đã duyệt đăng ký hoạt động này rồi!');
         } else {
           this.loadDanhSachDangKy()
-          this.toastr.success('Đăng ký thành công!');
+          this.toastr.success('Duyệt thành công!');
         }
       },
       error: (err) => {
@@ -179,7 +179,7 @@ export class ManageRegisterActivitiesComponent implements OnInit, OnDestroy{
     if (item) {
       this.hoatDongService.getFileName(item.maHoatDong).subscribe({
         next: data=>{
-         
+
           var popup = this.dialog.open(DetailActivityComponent, {
             data: {
               item: item,

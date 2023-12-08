@@ -12,5 +12,5 @@
 #toast-container > .toast-warning {
   background-image: url("../src/assets/icon/warning.png");
   background-color: #ffffff;
-  color: rgb(219, 186, 26);
+  color: rgb(255, 166, 0)
 }
