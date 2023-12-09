@@ -206,8 +206,8 @@ export class ListActivitiesComponent implements OnInit{
       if (result === 'ok') {
        this.hoatDongService.deleteHoatDong(id).subscribe({
         next: data=>{
-          if (data.message && data.message === 'cant-delete') {
-            this.toastr.warning("Không thể xóa!")
+          if (data.message && data.message === 'notfound') {
+            this.toastr.warning("Mã hoạt động không tồn tại!")
           } else {
             this.toastr.success("Xóa thành công!")
             this.loadDanhSachHoatDong()

@@ -20,7 +20,9 @@ export class ThongBaoService {
   datTrangThaiThongBao(maThongBao: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/trang-thai/${maThongBao}`, {}, { responseType: 'text' });
   }
-
+  datTrangThaiAllThongBao(tenDangNhap: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/trang-thai-tat-ca/${tenDangNhap}`, {}, { responseType: 'text' });
+  }
   // Xóa một thông báo theo mã
   xoaThongBao(maThongBao: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/xoa/${maThongBao}`, { responseType: 'text' });

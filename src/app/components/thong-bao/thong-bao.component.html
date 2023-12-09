@@ -1,55 +1,80 @@
-<div class="page-header" *ngIf="user.quyen === 'SinhVien'" >
+<div class="page-header" *ngIf="user.quyen === 'SinhVien'">
   <h1>Thông Báo</h1>
 </div>
 <div *ngIf="!ThongBaos; else notificationsList"></div>
 
 <mat-tab-group>
   <ng-template #notificationsList>
-
     <mat-tab label="Chưa đọc">
-      <div class="form-box mat-elevation-z4" *ngIf="TBChuaDoc && TBChuaDoc.length > 0; else noUnreadNotifications">
-      <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
-        <mat-step *ngFor="let thongBao of TBChuaDoc">
-          <ng-template matStepLabel>
-          <span class="text">{{ thongBao.tieuDe }}</span>
-          </ng-template>
-          <form [formGroup]="firstFormGroup">
-           <span class="green-text">{{ thongBao.ngayTao | date : "HH:mm:ss dd/MM/yyyy" }}</span>
-            <div>
-              <button  mat-button  color="accent"  (click)="handleNotificationClick(thongBao)">
-                Xem chi tiết...
-              </button>
-            </div>
-          </form>
-        </mat-step>
-      </mat-stepper>
+      <div
+        class="form-box mat-elevation-z4"
+        *ngIf="TBChuaDoc && TBChuaDoc.length > 0; else noUnreadNotifications"
+      >
+        <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+          <mat-step *ngFor="let thongBao of TBChuaDoc">
+            <ng-template matStepLabel>
+              <span class="text">{{ thongBao.tieuDe }}</span>
+            </ng-template>
+            <form [formGroup]="firstFormGroup">
+              <span class="green-text">{{
+                thongBao.ngayTao | date : "HH:mm:ss dd/MM/yyyy"
+              }}</span>
+              <div>
+                <button
+                  mat-button
+                  color="accent"
+                  (click)="handleNotificationClick(thongBao)"
+                >
+                  Xem chi tiết...
+                </button>
+              </div>
+            </form>
+          </mat-step>
+        </mat-stepper>
+        <div class="button-container">
+          <button mat-stroked-button color="primary" (click)="handleUpdateAll()">
+            <mat-icon>delete</mat-icon>
+            Đặt tất cả thành đã đọc
+          </button>
+        </div>
       </div>
+
     </mat-tab>
 
     <mat-tab label="Đã đọc">
-      <div class="form-box mat-elevation-z4" *ngIf="TBDaDoc && TBDaDoc.length > 0; else noReadNotifications">
-      <mat-stepper orientation="vertical" [linear]="isLinear" #stepper2>
-        <mat-step *ngFor="let thongBao of TBDaDoc">
-          <ng-template matStepLabel>
-           <span class="text">{{ thongBao.tieuDe }}</span>
-          </ng-template>
-          <form [formGroup]="secondFormGroup">
-          <span class="green-text">{{ thongBao.ngayTao | date : "HH:mm:ss dd/MM/yyyy" }}</span>
-            <div>
-              <button  mat-button  color="accent"   (click)="handleNotificationClick(thongBao)">
-                Xem chi tiết...
-              </button>
-            </div>
-          </form>
-        </mat-step>
-      </mat-stepper>
+      <div
+        class="form-box mat-elevation-z4"
+        *ngIf="TBDaDoc && TBDaDoc.length > 0; else noReadNotifications"
+      >
+        <mat-stepper orientation="vertical" [linear]="isLinear" #stepper2>
+          <mat-step *ngFor="let thongBao of TBDaDoc">
+            <ng-template matStepLabel>
+              <span class="text">{{ thongBao.tieuDe }}</span>
+            </ng-template>
+            <form [formGroup]="secondFormGroup">
+              <span class="green-text">{{
+                thongBao.ngayTao | date : "HH:mm:ss dd/MM/yyyy"
+              }}</span>
+              <div>
+                <button
+                  mat-button
+                  color="accent"
+                  (click)="handleNotificationClick(thongBao)"
+                >
+                  Xem chi tiết...
+                </button>
+              </div>
+            </form>
+          </mat-step>
+        </mat-stepper>
+        <div class="button-container">
+          <button mat-stroked-button color="warn" (click)="handleDeleteAll()">
+            <mat-icon>delete</mat-icon>
+            Xóa tất cả
+          </button>
+        </div>
       </div>
-      <div class="button-container">
-        <button mat-stroked-button  color="warn" (click)="handleDeleteAll()">
-          <mat-icon>delete</mat-icon>
-          Xóa tất cả
-        </button>
-      </div>
+
     </mat-tab>
   </ng-template>
 </mat-tab-group>

@@ -1,6 +1,6 @@
 /* Set a maximum height for the mat-tab-group */
 mat-tab-group {
-  max-height: 400px;
+  
   overflow-y: auto;
   margin: 40px;
   text-align: left;

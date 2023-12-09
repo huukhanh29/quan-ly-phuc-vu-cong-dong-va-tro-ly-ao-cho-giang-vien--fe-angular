@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ThongBaoDialogComponent } from './thong-bao-dialog/thong-bao-dialog.component';
 import { WebSocketService } from 'src/app/services/web-socket.service';
+import { DeleteComponent } from '../delete/delete.component';
 
 @Component({
   selector: 'app-thong-bao',
@@ -48,7 +49,7 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
 
     this.webSocketService.messageEvent.subscribe((data) => {
       if(data==='reply-feedback' || data==='approve-activity'
-      || data==='destroy-activity'){
+      || data==='destroy-activity' || data==='delete-activity'){
         this.loadNotifications();
       }
     });
@@ -75,16 +76,26 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
   }
 
   handleDeleteAll(): void {
-    this.thongBaoService.xoaTatCaThongBaoTheoNguoiDungId().subscribe({
-      next: (data) => {
-        this.loadNotifications();
-        this.toastr.success('Đã xóa tất cả thông báo đã đọc!');
-      },
-      error: (error) => {
-        if (error.error.message === 'Not_Found') {
-          this.toastr.warning('Không có thông báo đã đọc!');
-        }
-      },
+    var popup = this.dialog.open(DeleteComponent, {
+      width: '50%',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+    });
+    popup.afterClosed().subscribe((item) => {
+      if (item === 'ok') {
+        this.thongBaoService.xoaTatCaThongBaoTheoNguoiDungId().subscribe({
+          next: (data) => {
+            this.loadNotifications();
+            this.toastr.success('Đã xóa tất cả thông báo đã đọc!');
+          },
+          error: (error) => {
+            if (error.error.message === 'Not_Found') {
+              this.toastr.warning('Không có thông báo đã đọc!');
+            }
+          },
+        });
+
+      }
     });
   }
 
@@ -99,7 +110,18 @@ export class ThongBaoComponent implements OnInit, OnDestroy {
       },
     });
   }
-
+  handleUpdateAll(): void {
+    this.thongBaoService.datTrangThaiAllThongBao(this.user.tenTaiKhoan).subscribe({
+      next: (data) => {
+        this.toastr.success("Đã cập nhật tất cả thông báo thành đã đọc!")
+        this.loadNotifications();
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error:', error);
+      },
+    });
+  }
   handleNotificationClick(notification: ThongBao | null): void {
     if (notification) {
       var popup = this.dialog.open(ThongBaoDialogComponent, {
