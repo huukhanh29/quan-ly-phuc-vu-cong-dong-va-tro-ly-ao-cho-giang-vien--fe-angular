@@ -50,6 +50,7 @@ export class DanhSachGiangVienComponent implements OnInit {
   loadGVThamGia(){
     this.dangKyHoatDongService.getGiangViensByHoatDong(this.maHoatDong).subscribe({
       next: data=>{
+        console.log(data)
         this.danhSachGiangVienTG = new MatTableDataSource<GiangVien>(data);
         // Tùy chỉnh hàm lọc
         this.danhSachGiangVienTG.filterPredicate = this.customFilterPredicate;
@@ -128,4 +129,16 @@ export class DanhSachGiangVienComponent implements OnInit {
   quayLai(){
     this.router.navigate(['/quan-tri-vien/danh-sach-hoat-dong']);
   }
+  getClassByTrangThai(trangThai: string): string {
+    switch (trangThai) {
+      case 'Da_Duyet':
+        return 'da-duyet';
+      case 'Chua_Duyet':
+        return 'chua-duyet';
+      // Thêm các trường hợp khác nếu cần
+      default:
+        return '';
+    }
+  }
+
 }

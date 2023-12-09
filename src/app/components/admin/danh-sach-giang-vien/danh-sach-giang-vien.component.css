@@ -111,3 +111,12 @@ mat-table{
   min-height: 200px!important;
 }
 
+.da-duyet {
+  background-color: rgb(236, 254, 235);
+
+}
+
+.chua-duyet {
+  background-color: rgb(253, 236, 235);
+
+}
