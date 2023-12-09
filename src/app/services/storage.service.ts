@@ -3,7 +3,7 @@ import { CookieOptions, CookieService } from 'ngx-cookie-service';
 import * as CryptoJS from 'crypto-js';
 import { Router } from '@angular/router';
 
-const SECRET_KEY = 'frontend-duonghuukhanh-prolaydo';
+const SECRET_KEY = 'frontend-duonghuukhanh';
 
 @Injectable({
   providedIn: 'root',
