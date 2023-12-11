@@ -86,6 +86,7 @@ import { ChiTietHoatDongGvComponent } from './components/admin/hoat-dong-cua-gia
 import { UpdateGioGiamComponent } from './components/admin/list-lecturer/update-gio-giam/update-gio-giam.component';
 import { HuyHdntComponent } from './components/admin/hoat-dong-ngoai-truong/huy-hdnt/huy-hdnt.component';
 import { UpdateJobComponent } from './components/admin/list-lecturer/update-job/update-job.component';
+import { XacNhanDangKyComponent } from './components/lecturer/activity-lecturer/xac-nhan-dang-ky/xac-nhan-dang-ky.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -161,7 +162,8 @@ import { UpdateJobComponent } from './components/admin/list-lecturer/update-job/
     ChiTietHoatDongGvComponent,
     UpdateGioGiamComponent,
     HuyHdntComponent,
-    UpdateJobComponent
+    UpdateJobComponent,
+    XacNhanDangKyComponent
   ],
   imports: [
     BrowserModule,
