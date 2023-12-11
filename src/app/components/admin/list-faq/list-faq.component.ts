@@ -171,7 +171,7 @@ export class ListFaqComponent implements OnInit {
       }
 
       if (!['doc', 'docx'].includes(fileExtension)) {
-        this.toastr.error('Định dạng file phải là .doc, .docx, hoặc .txt!');
+        this.toastr.error('Định dạng file phải là .doc, .docx!');
         return;
       }
 

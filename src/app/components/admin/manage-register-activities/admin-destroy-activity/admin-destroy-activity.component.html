@@ -1,5 +1,5 @@
 <form [formGroup]="myform" (ngSubmit)="data.isEditable ? huy() : closePopup($event)">
-  <h1 mat-dialog-title>{{data.isEditable ? 'Hủy Đăng Ký' : 'Xem Chi Tiết'}}</h1>
+  <h1 mat-dialog-title>{{data.isEditable ? 'Hủy Đăng Ký' : 'Lý do hủy'}}</h1>
   <div mat-dialog-content>
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Lý do</mat-label>
