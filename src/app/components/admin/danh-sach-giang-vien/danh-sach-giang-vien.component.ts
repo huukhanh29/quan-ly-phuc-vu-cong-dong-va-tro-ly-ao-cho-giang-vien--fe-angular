@@ -135,6 +135,8 @@ export class DanhSachGiangVienComponent implements OnInit {
         return 'da-duyet';
       case 'Chua_Duyet':
         return 'chua-duyet';
+        case 'Da_Huy':
+        return 'da-huy';
       // Thêm các trường hợp khác nếu cần
       default:
         return '';
