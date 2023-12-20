@@ -17,15 +17,21 @@ import { DangKyHoatDongService } from 'src/app/services/dang-ky-hoat-dong.servic
 @Component({
   selector: 'app-danh-sach-giang-vien',
   templateUrl: './danh-sach-giang-vien.component.html',
-  styleUrls: ['./danh-sach-giang-vien.component.css']
+  styleUrls: ['./danh-sach-giang-vien.component.css'],
 })
 export class DanhSachGiangVienComponent implements OnInit {
   danhSachGiangVienTC: MatTableDataSource<GiangVien> = new MatTableDataSource();
   danhSachGiangVienTG: MatTableDataSource<GiangVien> = new MatTableDataSource();
-  displayedColumns: string[] = ['stt', 'maTaiKhoan', 'taiKhoan.tenDayDu', 'taiKhoan.email', 'hanhdong'];
+  displayedColumns: string[] = [
+    'stt',
+    'maTaiKhoan',
+    'taiKhoan.tenDayDu',
+    'taiKhoan.email',
+    'hanhdong',
+  ];
   searchTerm: string = '';
   user: any;
-  maHoatDong!: number
+  maHoatDong!: number;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -44,26 +50,28 @@ export class DanhSachGiangVienComponent implements OnInit {
     this.setupDataSource();
     this.activatedRoute.params.subscribe((params: Params) => {
       this.maHoatDong = +params['maHoatDong'];
-      this.loadGVThamGia()
+      this.loadGVThamGia();
     });
   }
-  loadGVThamGia(){
-    this.dangKyHoatDongService.getGiangViensByHoatDong(this.maHoatDong).subscribe({
-      next: data=>{
-        console.log(data)
-        this.danhSachGiangVienTG = new MatTableDataSource<GiangVien>(data);
-        // Tùy chỉnh hàm lọc
-        this.danhSachGiangVienTG.filterPredicate = this.customFilterPredicate;
-        this.danhSachGiangVienTG.sort = this.sort;
-        this.danhSachGiangVienTG.paginator = this.paginator;
-      },
-      error: err=>{
-        console.log(err)
-      }
-    })
+  loadGVThamGia() {
+    this.dangKyHoatDongService
+      .getGiangViensByHoatDong(this.maHoatDong)
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+          this.danhSachGiangVienTG = new MatTableDataSource<GiangVien>(data);
+          // Tùy chỉnh hàm lọc
+          this.danhSachGiangVienTG.filterPredicate = this.customFilterPredicate;
+          this.danhSachGiangVienTG.sort = this.sort;
+          this.danhSachGiangVienTG.paginator = this.paginator;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
   setupDataSource(): void {
-    this.dataTransferService.currentData.subscribe(data => {
+    this.dataTransferService.currentData.subscribe((data) => {
       if (data) {
         this.danhSachGiangVienTC = new MatTableDataSource<GiangVien>(data);
 
@@ -78,12 +86,16 @@ export class DanhSachGiangVienComponent implements OnInit {
 
   customFilterPredicate(data: GiangVien, filter: string): boolean {
     const accumulator = (currentTerm: any, key: string) => {
-      return key === 'taiKhoan' ? currentTerm.tenDayDu + currentTerm.tenDangNhap : currentTerm;
+      return key === 'taiKhoan'
+        ? currentTerm.tenDayDu + currentTerm.tenDangNhap
+        : currentTerm;
     };
 
-    const dataStr = Object.keys(data).reduce((acc, key) => {
-      return acc + accumulator((data as any)[key], key);
-    }, '').toLowerCase();
+    const dataStr = Object.keys(data)
+      .reduce((acc, key) => {
+        return acc + accumulator((data as any)[key], key);
+      }, '')
+      .toLowerCase();
 
     return dataStr.indexOf(filter) !== -1;
   }
@@ -126,7 +138,7 @@ export class DanhSachGiangVienComponent implements OnInit {
       });
     }
   }
-  quayLai(){
+  quayLai() {
     this.router.navigate(['/quan-tri-vien/danh-sach-hoat-dong']);
   }
   getClassByTrangThai(trangThai: string): string {
@@ -135,12 +147,11 @@ export class DanhSachGiangVienComponent implements OnInit {
         return 'da-duyet';
       case 'Chua_Duyet':
         return 'chua-duyet';
-        case 'Da_Huy':
+      case 'Da_Huy':
         return 'da-huy';
       // Thêm các trường hợp khác nếu cần
       default:
         return '';
     }
   }
-
 }
